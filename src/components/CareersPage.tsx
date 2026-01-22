@@ -1,83 +1,92 @@
-import { useState, useEffect } from 'react';
-import { createClient } from '@supabase/supabase-js';
-import { Send, MapPin, Briefcase, Users, ChevronDown, ChevronUp } from 'lucide-react';
+// import { useState, useEffect } from 'react';
+// import { createClient } from '@supabase/supabase-js';
+// import { Send, MapPin, Briefcase, Users, ChevronDown, ChevronUp } from 'lucide-react';
 
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY
-);
+// const supabase = createClient(
+//   import.meta.env.VITE_SUPABASE_URL,
+//   import.meta.env.VITE_SUPABASE_ANON_KEY
+// );
 
-interface Job {
-  id: string;
-  title: string;
-  department: string;
-  level: string;
-  location: string;
-  type: string;
-  description: string;
-  requirements: string[];
-  responsibilities: string[];
-  benefits: string[];
-  salary_range: string;
-  posted_at: string;
-}
+// interface Job {
+//   id: string;
+//   title: string;
+//   department: string;
+//   level: string;
+//   location: string;
+//   type: string;
+//   description: string;
+//   requirements: string[];
+//   responsibilities: string[];
+//   benefits: string[];
+//   salary_range: string;
+//   posted_at: string;
+// }
 
 export default function CareersPage() {
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
-  const [selectedDepartment, setSelectedDepartment] = useState('all');
-  const [selectedLevel, setSelectedLevel] = useState('all');
-  const [expandedJob, setExpandedJob] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  // const [jobs, setJobs] = useState<Job[]>([]);
+  // const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
+  // const [selectedDepartment, setSelectedDepartment] = useState('all');
+  // const [selectedLevel, setSelectedLevel] = useState('all');
+  // const [expandedJob, setExpandedJob] = useState<string | null>(null);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchJobs();
-  }, []);
+  // useEffect(() => {
+  //   fetchJobs();
+  // }, []);
 
-  useEffect(() => {
-    filterJobs();
-  }, [jobs, selectedDepartment, selectedLevel]);
+  // useEffect(() => {
+  //   filterJobs();
+  // }, [jobs, selectedDepartment, selectedLevel]);
 
-  const fetchJobs = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('jobs')
-        .select('*')
-        .order('posted_at', { ascending: false });
+  // const fetchJobs = async () => {
+  //   try {
+  //     const { data, error } = await supabase
+  //       .from('jobs')
+  //       .select('*')
+  //       .order('posted_at', { ascending: false });
 
-      if (error) throw error;
-      setJobs(data || []);
-    } catch (error) {
-      console.error('Error fetching jobs:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     if (error) throw error;
+  //     setJobs(data || []);
+  //   } catch (error) {
+  //     console.error('Error fetching jobs:', error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
-  const filterJobs = () => {
-    let filtered = jobs;
+  // const filterJobs = () => {
+  //   let filtered = jobs;
 
-    if (selectedDepartment !== 'all') {
-      filtered = filtered.filter((job) => job.department === selectedDepartment);
-    }
+  //   if (selectedDepartment !== 'all') {
+  //     filtered = filtered.filter((job) => job.department === selectedDepartment);
+  //   }
 
-    if (selectedLevel !== 'all') {
-      filtered = filtered.filter((job) => job.level === selectedLevel);
-    }
+  //   if (selectedLevel !== 'all') {
+  //     filtered = filtered.filter((job) => job.level === selectedLevel);
+  //   }
 
-    setFilteredJobs(filtered);
-  };
+  //   setFilteredJobs(filtered);
+  // };
 
-  const departments = ['all', ...new Set(jobs.map((job) => job.department))];
-  const levels = ['all', ...new Set(jobs.map((job) => job.level))];
+  // const departments = ['all', ...new Set(jobs.map((job) => job.department))];
+  // const levels = ['all', ...new Set(jobs.map((job) => job.level))];
 
-  const handleApply = (jobTitle: string) => {
-    const message = encodeURIComponent(
-      `Hello, I am interested in applying for the position: ${jobTitle}`
-    );
-    window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
-  };
+  // const handleApply = (jobTitle: string) => {
+  //   const message = encodeURIComponent(
+  //     `Hello, I am interested in applying for the position: ${jobTitle}`
+  //   );
+  //   window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+  // };
 
+  return (
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-4xl text-white font-light mb-4">Careers</h1>
+        <p className="text-gray-400">Coming Soon</p>
+      </div>
+    </div>
+  );
+  /*
   return (
     <div className="min-h-screen bg-slate-900">
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden pt-32">
@@ -362,5 +371,5 @@ export default function CareersPage() {
         </div>
       </section>
     </div>
-  );
+  );*/
 }

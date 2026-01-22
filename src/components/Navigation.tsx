@@ -1,4 +1,4 @@
-import  { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Menu, X } from "lucide-react";
 
 interface NavigationProps {
@@ -27,7 +27,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
     { label: "Home", value: "home" },
     { label: "Products", value: "products" },
     { label: "About Us", value: "about" },
-    { label: "Careers", value: "careers" },
+    // { label: "Careers", value: "careers" },
     { label: "Contact", value: "contact" },
   ];
 
@@ -146,9 +146,8 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                   <button
                     key={item.value}
                     onClick={() => onNavigate(item.value)}
-                    className={`relative px-1 py-2 text-sm tracking-wider transition-colors duration-250 focus:outline-none ${
-                      active ? "text-amber-300" : "text-gray-300 hover:text-white"
-                    }`}
+                    className={`relative px-1 py-2 text-sm tracking-wider transition-colors duration-250 focus:outline-none ${active ? "text-amber-300" : "text-gray-300 hover:text-white"
+                      }`}
                     aria-current={active ? "page" : undefined}
                   >
                     <span className="relative z-10">{item.label}</span>
@@ -156,9 +155,8 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                     {/* animated golden underline */}
                     <span
                       aria-hidden
-                      className={`absolute left-0 -bottom-2 h-[3px] rounded-full transition-all duration-400 ${
-                        active ? "w-full shimmer-underline" : "w-0 group-hover:w-full"
-                      }`}
+                      className={`absolute left-0 -bottom-2 h-[3px] rounded-full transition-all duration-400 ${active ? "w-full shimmer-underline" : "w-0 group-hover:w-full"
+                        }`}
                       style={{ background: active ? "linear-gradient(90deg,#F9D976,#F39F23)" : undefined }}
                     />
                     {/* subtle shimmer bar for active */}
@@ -190,7 +188,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                 className="inline-flex items-center gap-2 bg-[#0B2E14] hover:bg-[#083014] px-3 py-2 rounded-full text-sm text-[#CFF7DC] shadow-sm transition"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                  <path d="M20.52 3.48A11.88 11.88 0 0012.005.04C5.694.04.653 5.081.653 11.392c0 2.052.536 4.052 1.552 5.81L.024 24l6.958-2.152a11.34 11.34 0 005.023 1.2h.002c6.311 0 11.352-5.041 11.352-11.353 0-3.035-1.183-5.892-3.339-8.015z"/>
+                  <path d="M20.52 3.48A11.88 11.88 0 0012.005.04C5.694.04.653 5.081.653 11.392c0 2.052.536 4.052 1.552 5.81L.024 24l6.958-2.152a11.34 11.34 0 005.023 1.2h.002c6.311 0 11.352-5.041 11.352-11.353 0-3.035-1.183-5.892-3.339-8.015z" />
                 </svg>
                 <span className="text-xs">WhatsApp</span>
               </a>
@@ -221,9 +219,8 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                     onNavigate(item.value);
                     setIsMenuOpen(false);
                   }}
-                  className={`w-full text-left px-3 py-3 rounded-lg transition-all duration-200 ${
-                    currentPage === item.value ? "bg-gradient-to-r from-amber-500/15 to-amber-600/15 text-amber-300" : "text-gray-300 hover:bg-white/5"
-                  }`}
+                  className={`w-full text-left px-3 py-3 rounded-lg transition-all duration-200 ${currentPage === item.value ? "bg-gradient-to-r from-amber-500/15 to-amber-600/15 text-amber-300" : "text-gray-300 hover:bg-white/5"
+                    }`}
                 >
                   {item.label}
                 </button>
@@ -237,7 +234,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                   className="inline-flex items-center gap-2 bg-[#0B2E14] hover:bg-[#083014] px-3 py-2 rounded-full text-sm text-[#CFF7DC] shadow-sm transition"
                 >
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                    <path d="M20.52 3.48A11.88 11.88 0 0012.005.04C5.694.04.653 5.081.653 11.392c0 2.052.536 4.052 1.552 5.81L.024 24l6.958-2.152a11.34 11.34 0 005.023 1.2h.002c6.311 0 11.352-5.041 11.352-11.353 0-3.035-1.183-5.892-3.339-8.015z"/>
+                    <path d="M20.52 3.48A11.88 11.88 0 0012.005.04C5.694.04.653 5.081.653 11.392c0 2.052.536 4.052 1.552 5.81L.024 24l6.958-2.152a11.34 11.34 0 005.023 1.2h.002c6.311 0 11.352-5.041 11.352-11.353 0-3.035-1.183-5.892-3.339-8.015z" />
                   </svg>
                   Contact on WhatsApp
                 </a>

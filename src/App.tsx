@@ -4,7 +4,7 @@ import HomePage from './components/HomePage';
 import ProductsPage from './components/ProductsPage';
 import AboutPage from './components/AboutPage';
 import ContactPage from './components/ContactPage';
-import CareersPage from './components/CareersPage';
+// import CareersPage from './components/CareersPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -19,8 +19,8 @@ function App() {
         return <AboutPage />;
       case 'contact':
         return <ContactPage />;
-      case 'careers':
-        return <CareersPage />;
+      // case 'careers':
+      //   return <CareersPage />;
       default:
         return <HomePage onNavigate={setCurrentPage} />;
     }
