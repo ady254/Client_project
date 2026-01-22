@@ -1,34 +1,24 @@
 import { useEffect, useState, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-
-interface NavigationProps {
-  currentPage: string;
-  onNavigate: (page: string) => void;
-}
 
 /**
  * Navigation v2.0 — Fully animated premium navbar (Option A: Tall Premium)
- *
- * Notes:
- * - Logo currently points to the uploaded file path:
- *   /mnt/data/4c32d762-eefd-4d53-b9ac-2ed97728b630.png
- *   Move this file to /public/logo.png and update src if you prefer.
- *
- * - Tailwind classes are used; a few custom keyframes/styles are embedded below.
  */
 
-export default function Navigation({ currentPage, onNavigate }: NavigationProps) {
+export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [logoHover, setLogoHover] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
+  const location = useLocation();
 
   const menuItems = [
-    { label: "Home", value: "home" },
-    { label: "Products", value: "products" },
-    { label: "About Us", value: "about" },
-    // { label: "Careers", value: "careers" },
-    { label: "Contact", value: "contact" },
+    { label: "Home", path: "/" },
+    { label: "Products", path: "/products" },
+    { label: "About Us", path: "/about" },
+    // { label: "Careers", path: "/careers" },
+    { label: "Contact", path: "/contact" },
   ];
 
   // Scroll listener -> shrink navbar after threshold
@@ -45,7 +35,12 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
   // Close menu on route change
   useEffect(() => {
     setIsMenuOpen(false);
-  }, [currentPage]);
+  }, [location]);
+
+  const isActive = (path: string) => {
+    if (path === "/" && location.pathname !== "/") return false;
+    return location.pathname.startsWith(path);
+  };
 
   return (
     <>
@@ -83,7 +78,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
       <nav
         ref={navRef}
         className={`fixed inset-x-0 top-0 z-50 transform-gpu transition-all duration-300 ease-out
-          ${scrolled ? "backdrop-blur-lg bg-[#071022]/85 shadow-[0_8px_30px_rgba(2,6,23,0.6)] h-[65px]" : "bg-transparent h-[80px]"}
+          ${scrolled ? "backdrop-blur-lg bg-[#071022]/85 shadow-[0_8px_30px_rgba(2,6,23,0.6)] h-16 md:h-[65px]" : "bg-transparent h-20 md:h-[80px]"}
           border-b border-white/6`}
         aria-label="Main navigation"
       >
@@ -91,8 +86,8 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
           <div className="flex items-center justify-between h-full">
             {/* LEFT: Logo + Brand */}
             <div className="flex items-center gap-4">
-              <button
-                onClick={() => onNavigate("home")}
+              <Link
+                to="/"
                 aria-label="Go to homepage"
                 onMouseEnter={() => setLogoHover(true)}
                 onMouseLeave={() => setLogoHover(false)}
@@ -106,9 +101,9 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                   style={{ perspective: 900 }}
                 >
                   <img
-                    src="/logo.png"
+                    src="/logo.webp"
                     alt="Metal Stickers India logo"
-                    className={`block h-14 md:h-16 lg:h-18 w-auto object-contain transition-all duration-500`}
+                    className={`block h-10 sm:h-14 md:h-16 lg:h-18 w-auto object-contain transition-all duration-500`}
                     style={{
                       filter: logoHover
                         ? "brightness(1.06) saturate(1.05) drop-shadow(0 10px 30px rgba(249,217,118,0.18))"
@@ -135,17 +130,17 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                   </div>
                   <div className="text-xs text-gray-300">GST: <span className="text-gray-100 font-medium">06ABZFM3928P1Z7</span></div>
                 </div>
-              </button>
+              </Link>
             </div>
 
             {/* CENTER / RIGHT: Desktop Menu */}
             <div className="hidden md:flex items-center space-x-10 lg:space-x-12">
               {menuItems.map((item) => {
-                const active = currentPage === item.value;
+                const active = isActive(item.path);
                 return (
-                  <button
-                    key={item.value}
-                    onClick={() => onNavigate(item.value)}
+                  <Link
+                    key={item.path}
+                    to={item.path}
                     className={`relative px-1 py-2 text-sm tracking-wider transition-colors duration-250 focus:outline-none ${active ? "text-amber-300" : "text-gray-300 hover:text-white"
                       }`}
                     aria-current={active ? "page" : undefined}
@@ -166,23 +161,23 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                         style={{ background: "linear-gradient(90deg, rgba(249,217,118,0), rgba(249,217,118,0.55), rgba(249,217,118,0))" }}
                       />
                     )}
-                  </button>
+                  </Link>
                 );
               })}
             </div>
 
             {/* RIGHT: actions (hidden on mobile) */}
             <div className="hidden md:flex items-center gap-4">
-              <button
-                onClick={() => onNavigate("contact")}
+              <Link
+                to="/contact"
                 className="text-sm text-gray-300 hover:text-white px-3 py-2 rounded-md transition"
                 aria-label="Contact"
               >
                 Contact
-              </button>
+              </Link>
 
               <a
-                href="https://wa.me/919876543210"
+                href="https://wa.me/919999865558"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 bg-[#0B2E14] hover:bg-[#083014] px-3 py-2 rounded-full text-sm text-[#CFF7DC] shadow-sm transition"
@@ -212,23 +207,24 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
         {isMenuOpen && (
           <div className="md:hidden bg-[#071022] border-t border-white/6">
             <div className="mobile-slide px-4 py-4 space-y-3">
-              {menuItems.map((item) => (
-                <button
-                  key={item.value}
-                  onClick={() => {
-                    onNavigate(item.value);
-                    setIsMenuOpen(false);
-                  }}
-                  className={`w-full text-left px-3 py-3 rounded-lg transition-all duration-200 ${currentPage === item.value ? "bg-gradient-to-r from-amber-500/15 to-amber-600/15 text-amber-300" : "text-gray-300 hover:bg-white/5"
-                    }`}
-                >
-                  {item.label}
-                </button>
-              ))}
+              {menuItems.map((item) => {
+                const active = isActive(item.path);
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`block w-full text-left px-3 py-3 rounded-lg transition-all duration-200 ${active ? "bg-gradient-to-r from-amber-500/15 to-amber-600/15 text-amber-300" : "text-gray-300 hover:bg-white/5"
+                      }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
 
               <div className="pt-2 border-t border-white/5">
                 <a
-                  href="https://wa.me/919876543210"
+                  href="https://wa.me/919999865558"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 bg-[#0B2E14] hover:bg-[#083014] px-3 py-2 rounded-full text-sm text-[#CFF7DC] shadow-sm transition"

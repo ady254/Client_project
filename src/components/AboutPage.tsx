@@ -1,14 +1,21 @@
 import { Award, Users, Zap } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 
 export default function AboutPage() {
   const stats = [
-    { icon: Award, value: '10+', label: 'Years Experience' },
-    { icon: Users, value: '500+', label: 'Business Clients' },
-    { icon: Zap, value: '1M+', label: 'Stickers Produced' },
+    { icon: Award, value: '5+', label: 'Years Experience' },
+    { icon: Users, value: '300+', label: 'Business Clients' },
+    { icon: Zap, value: '1L+', label: 'Stickers Produced' },
   ];
 
   return (
     <div className="min-h-screen bg-slate-900">
+      <Helmet>
+        <title>About Us | Metal Stickers India</title>
+        <meta name="description" content="Learn about Metal Stickers India, the leading manufacturer of premium electroplated metal labels since 2014. We deliver excellence in every detail." />
+        <meta property="og:title" content="About Us | Metal Stickers India" />
+        <meta property="og:description" content="Crafting excellence since 2014. We specialize in high-quality gold, silver, and chrome metal branding solutions." />
+      </Helmet>
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-amber-900/20" />
         <div className="absolute inset-0 opacity-10">
@@ -17,7 +24,7 @@ export default function AboutPage() {
         </div>
 
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto pt-32">
-          <h1 className="text-6xl md:text-8xl font-light text-white mb-8 leading-tight">
+          <h1 className="text-4xl md:text-6xl lg:text-8xl font-light text-white mb-8 leading-tight">
             Our Story.
             <br />
             <span className="bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent">
@@ -40,7 +47,7 @@ export default function AboutPage() {
             <div className="relative">
               <div className="aspect-square rounded-3xl overflow-hidden">
                 <img
-                  src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800"
+                  src="/logo.webp"
                   alt="Founder & CEO"
                   className="w-full h-full object-cover"
                 />
@@ -57,7 +64,7 @@ export default function AboutPage() {
                 <h2 className="text-4xl md:text-5xl font-light text-white mb-6">
                   Crafting Excellence
                   <br />
-                  Since 2013
+                  Since 2021
                 </h2>
               </div>
 

@@ -1,35 +1,30 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import HomePage from './components/HomePage';
 import ProductsPage from './components/ProductsPage';
 import AboutPage from './components/AboutPage';
 import ContactPage from './components/ContactPage';
-// import CareersPage from './components/CareersPage';
+import Footer from './components/Footer';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('home');
+  const location = useLocation();
 
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'home':
-        return <HomePage onNavigate={setCurrentPage} />;
-      case 'products':
-        return <ProductsPage />;
-      case 'about':
-        return <AboutPage />;
-      case 'contact':
-        return <ContactPage />;
-      // case 'careers':
-      //   return <CareersPage />;
-      default:
-        return <HomePage onNavigate={setCurrentPage} />;
-    }
-  };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   return (
     <div className="min-h-screen bg-slate-900">
-      <Navigation currentPage={currentPage} onNavigate={setCurrentPage} />
-      {renderPage()}
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        {/* <Route path="/careers" element={<CareersPage />} /> */}
+      </Routes>
+      <Footer />
     </div>
   );
 }

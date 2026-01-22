@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import { MessageCircle, ArrowRight, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
-interface HomePageProps {
-  onNavigate: (page: string) => void;
-}
-
-export default function HomePage({ onNavigate }: HomePageProps) {
+export default function HomePage() {
   // -----------------------
   // Data
   // -----------------------
@@ -13,17 +11,17 @@ export default function HomePage({ onNavigate }: HomePageProps) {
     {
       title: "Luxury Gold Finish Labels",
       description: "24K gold plating, premium finish, scratch resistant",
-      image: "/gold-finish.png",
+      image: "/gold-finish.webp",
     },
     {
       title: "Premium Nickel Chrome Stickers",
       description: "Mirror finish, corrosion resistant, outdoor life 5+ years",
-      image: "/chrome-finish.png",
+      image: "/chrome-finish.webp",
     },
     {
       title: "Stainless Steel Silver Labels",
       description: "Brushed steel finish, industrial grade",
-      image: "/silver-finish.png",
+      image: "/silver-finish.webp",
     },
   ];
 
@@ -43,16 +41,24 @@ export default function HomePage({ onNavigate }: HomePageProps) {
     { step: "04", title: "Secure Packaging & Delivery", desc: "Fast and secure shipping" },
   ];
 
-  const gallery = ["/12.png", "/13.png", "/11.png", "/gold-finish.png", "/rose-gold.png"];
+  const gallery = ["/12.webp", "/13.webp", "/11.webp", "/gold-finish.webp", "/rose-gold.webp"];
 
   // -----------------------
-  // Popup: show  logic (localStorage)
+  // Popup: show logic (localStorage)
   // -----------------------
-  const [showAlert, setShowAlert] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
 
-const closeAlert = () => {
-  setShowAlert(false);
-};
+  useEffect(() => {
+    const hasSeenAlert = localStorage.getItem("scamAlertSeen");
+    if (!hasSeenAlert) {
+      setShowAlert(true);
+    }
+  }, []);
+
+  const closeAlert = () => {
+    setShowAlert(false);
+    localStorage.setItem("scamAlertSeen", "true");
+  };
 
 
   // -----------------------
@@ -96,6 +102,16 @@ const closeAlert = () => {
   // -----------------------
   return (
     <div className="bg-[#0A0F1F] text-white min-h-screen">
+      <Helmet>
+        <title>Metal Stickers India | Premium Custom Electroplated Metal Labels</title>
+        <meta name="description" content="India's leading manufacturer of premium gold, silver, and nickel chrome metal stickers. Custom electroplated labels for luxury branding. 5+ years durability." />
+        <meta property="og:title" content="Metal Stickers India | Premium Custom Electroplated Metal Labels" />
+        <meta property="og:description" content="Elevate your brand with 24K gold, silver, and chrome finished metal stickers. Durable, scratch-resistant, and premium quality." />
+        <meta property="og:url" content="https://metalstickersindiaofficial.com/" />
+        {/* Update image later with a representative home page image if available */}
+        <meta property="og:image" content="/logo.webp" />
+      </Helmet>
+
       {/* ================= SCAM ALERT POPUP (shows only once) ================= */}
       {showAlert && (
         <div
@@ -142,56 +158,66 @@ const closeAlert = () => {
       )}
 
       {/* ================= HERO ================= */}
-      <section className="relative min-h-[80vh] md:min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         {/* Background gradients & glows */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0A0F1F] via-[#111827] to-[#1C1F27]" />
-        <div className="absolute inset-0 opacity-[0.12] pointer-events-none">
-          <div className="absolute top-1/3 left-1/4 w-[380px] h-[380px] bg-[#F9D976] rounded-full blur-[140px] hidden md:block" />
-          <div className="absolute bottom-1/4 right-1/6 w-[360px] h-[360px] bg-[#304FFE] rounded-full blur-[160px] hidden md:block" />
+        <div className="absolute inset-0 opacity-[0.15] pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] bg-[#F9D976] rounded-full blur-[120px] opacity-40 animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-[280px] h-[280px] sm:w-[500px] sm:h-[500px] bg-[#304FFE] rounded-full blur-[140px] opacity-30" />
         </div>
 
-        <div className="relative z-10 text-center px-6 w-full max-w-6xl mx-auto pt-12 pb-16">
-          {/* logo + name + gst (responsive) */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
-            <img src="/logo.png" alt="Metal Stickers India logo" className="h-20 sm:h-24" />
-            <div className="text-left">
-              <div className="flex items-center gap-2">
-                <span className="text-2xl sm:text-3xl font-semibold tracking-tight">Metal Stickers India</span>
-                <span className="text-amber-300 text-xl font-bold">®</span>
+        <div className="relative z-10 text-center px-6 w-full max-w-6xl mx-auto pt-16 sm:pt-0 pb-16">
+          {/* Logo Container with Glow */}
+          <div className="relative inline-block mb-8 group">
+            <div className="absolute -inset-4 bg-gradient-to-r from-amber-500/20 to-amber-300/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition duration-700" />
+            <div className="flex flex-col items-center justify-center gap-4">
+              <img
+                src="/logo.webp"
+                alt="Metal Stickers India logo"
+                className="h-24 sm:h-32 object-contain drop-shadow-2xl"
+              />
+              <div className="text-center">
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-white text-xl sm:text-2xl font-semibold tracking-wide">Metal Stickers India</span>
+                  <span className="text-amber-400 text-sm font-bold align-top">®</span>
+                </div>
+                <div className="text-[10px] sm:text-xs text-gray-400 mt-1 tracking-widest uppercase">GSTIN: <span className="text-gray-200 font-medium">06ABZFM3928P1Z7</span></div>
               </div>
-              <div className="text-xs text-gray-300 mt-1">GSTIN: <span className="text-gray-100 font-medium">06ABZFM3928P1Z7</span></div>
             </div>
           </div>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-white mb-4 leading-tight">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight text-white mb-6 leading-tight">
             Premium Electroplated
             <br />
-            <span className="bg-gradient-to-r from-[#F9D976] via-[#F6C453] to-[#F39F23] bg-clip-text text-transparent font-normal">
+            <span className="bg-gradient-to-r from-[#F9D976] via-[#F6C453] to-[#F39F23] bg-clip-text text-transparent font-medium drop-shadow-sm">
               Metal Stickers
             </span>
           </h1>
 
-          <p className="text-base md:text-lg text-gray-300 mb-4 max-w-3xl mx-auto font-light leading-relaxed">
+          <p className="text-base sm:text-lg text-gray-300 mb-8 max-w-2xl mx-auto font-light leading-relaxed">
             Custom Gold, Silver & Chrome Branding Solutions for Businesses & Products.
+            <span className="hidden sm:inline"> Elevate your brand identity with our exquisite craftsmanship.</span>
           </p>
 
           {/* Typing / Typewriter line */}
-          <p className="text-sm md:text-base text-[#F9D976] mt-1 h-8 md:h-9 font-medium tracking-wide">
-            {displayText}
-            <span className="inline-block ml-1 w-[8px] md:w-[10px] h-[20px] md:h-[22px] bg-white/90 animate-pulse align-middle" aria-hidden />
-          </p>
+          <div className="h-8 mb-10 flex items-center justify-center">
+            <p className="text-sm sm:text-base text-[#F9D976] font-medium tracking-wide">
+              {displayText}
+              <span className="inline-block ml-1 w-[2px] h-[16px] bg-[#F9D976] animate-blink align-middle" aria-hidden />
+            </p>
+          </div>
 
-          {/* Buttons Row */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+          {/* Buttons Row - Enhanced */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
             <a
               aria-label="Get quote on WhatsApp"
-              href="https://wa.me/919876543210?text=Hello,%20I%20want%20to%20get%20a%20quote%20for%20metal%20stickers"
+              href="https://wa.me/919999865558?text=Hello,%20I%20want%20to%20get%20a%20quote%20for%20metal%20stickers"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-3 bg-gradient-to-r from-[#22C55E] to-[#16A34A]
-                text-white px-6 sm:px-10 py-3 sm:py-4 rounded-full text-sm sm:text-lg font-medium transition-transform transform hover:scale-[1.03] shadow-lg"
+              className="w-full sm:w-auto inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-[#22C55E] to-[#15803d]
+                text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(34,197,94,0.4)] shadow-lg group"
             >
-              <MessageCircle size={20} />
+              <MessageCircle size={20} className="group-hover:animate-bounce" />
               <span>Get Quote on WhatsApp</span>
             </a>
 
@@ -200,16 +226,16 @@ const closeAlert = () => {
               href="/catalog.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-3 bg-gradient-to-r from-[#F9D976] to-[#F39F23]
-                text-[#071022] px-6 sm:px-10 py-3 sm:py-4 rounded-full text-sm sm:text-lg font-medium transition-transform transform hover:scale-[1.03] shadow-lg"
+              className="w-full sm:w-auto inline-flex items-center justify-center space-x-3 bg-white/5 backdrop-blur-sm border border-[#F9D976]/30
+                text-[#F9D976] px-8 py-4 rounded-full text-base font-medium transition-all duration-300 hover:bg-[#F9D976]/10 hover:border-[#F9D976] hover:shadow-[0_0_20px_rgba(249,217,118,0.2)] shadow-lg"
             >
-              <ArrowRight size={18} />
+              <ArrowRight size={20} />
               <span>View Catalogue</span>
             </a>
           </div>
 
-          <div className="mt-10">
-            <div className="w-px h-14 bg-gradient-to-b from-transparent via-[#F9D976] to-transparent mx-auto" />
+          <div className="mt-16 sm:mt-20">
+            <div className="w-px h-16 sm:h-24 bg-gradient-to-b from-transparent via-[#F9D976]/50 to-transparent mx-auto" />
           </div>
         </div>
       </section>
@@ -237,9 +263,9 @@ const closeAlert = () => {
 
           <div className="space-y-8 sm:space-y-10">
             {products.map((product, index) => (
-              <button
+              <Link
                 key={index}
-                onClick={() => onNavigate("products")}
+                to="/products"
                 className="group w-full block"
                 aria-label={`Open ${product.title}`}
               >
@@ -263,7 +289,7 @@ const closeAlert = () => {
                     </div>
                   </div>
                 </div>
-              </button>
+              </Link>
             ))}
           </div>
         </div>
@@ -321,7 +347,7 @@ const closeAlert = () => {
       {/* ================= CINEMATIC BANNER ================= */}
       <section className="relative min-h-[60vh] sm:min-h-[70vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src="/logo.png" alt="Premium Metal Sticker" className="w-full h-full object-cover opacity-10" />
+          <img src="/logo.webp" alt="Premium Metal Sticker" className="w-full h-full object-cover opacity-10" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1F] via-[#111827]/80 to-[#1C1F27]/40" />
         </div>
 
@@ -335,77 +361,7 @@ const closeAlert = () => {
         </div>
       </section>
 
-      {/* ================= FOOTER ================= */}
-      <footer className="relative bg-[#0A0F1F] border-t border-white/8 mt-10">
-        <div className="absolute inset-0 bg-gradient-to-t from-[#111827] via-transparent to-transparent opacity-30" aria-hidden />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Left: Logo + GST + short */}
-          <div>
-            <div className="flex items-center gap-3">
-              <img src="/logo.png" alt="logo" className="h-16" />
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="font-semibold text-lg">Metal Stickers India</span>
-                  <span className="text-amber-300 font-bold">®</span>
-                </div>
-                <div className="text-xs text-gray-300">GSTIN: <span className="text-gray-100">06ABZFM3928P1Z7</span></div>
-              </div>
-            </div>
-
-            <p className="text-sm text-gray-300 mt-4 max-w-sm">
-              Premium electroplated Gold, Silver, Chrome and custom metal stickers crafted with precision and durability for brands across India.
-            </p>
-          </div>
-
-          {/* Middle: Contact */}
-          <div>
-            <h4 className="text-white font-medium mb-3">Contact</h4>
-            <p className="text-gray-300 text-sm">📞 +91 99998 65558 +91 9717163149</p>
-            <p className="text-gray-300 text-sm">✉️ corporatemetalstickersindia@gmail.com</p>
-            <p className="text-gray-300 text-sm mt-2">📍 11/7 New Anangpur, Sector 37
-                              Badarpur, Faridabad, Haryana 121003, India</p>
-          </div>
-
-          {/* Right: Socials */}
-          <div>
-            <h4 className="text-white font-medium mb-3">Follow Us</h4>
-            <div className="flex items-center space-x-4">
-              <a href="https://www.instagram.com/metalstickersindia/" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-[#F9D976] transition">
-                {/* instagram svg */}
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9a4.5 4.5 0 0 1-4.5 4.5h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 7.5h.008v.008H16.5V7.5zM12 9.75A2.25 2.25 0 1 0 12 14.25A2.25 2.25 0 1 0 12 9.75z" />
-                </svg>
-              </a>
-
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-[#F9D976] transition">
-                {/* linkedin svg */}
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-6 h-6" viewBox="0 0 16 16">
-                  <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.52 1.248 1.327 1.248h.016zM13.458 13.394v-3.877c0-2.072-1.104-3.037-2.575-3.037-1.188 0-1.72.657-2.022 1.121v-.957H6.46c.03.633 0 7.225 0 7.225h2.401v-4.033c0-.216.016-.432.08-.586.175-.431.574-.878 1.243-.878 0 0 .983 0 .983 1.31v4.187h2.291z"/>
-                </svg>
-              </a>
-
-              <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer" className="text-gray-300 hover:text-[#22C55E] transition">
-                {/* whatsapp svg */}
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
-                  <path d="M20.52 3.48A11.88 11.88 0 0 0 12.005.04C5.694.04.653 5.081.653 11.392c0 2.052.536 4.052 1.552 5.81L.024 24l6.958-2.152a11.34 11.34 0 0 0 5.023 1.2h.002c6.311 0 11.352-5.041 11.352-11.353 0-3.035-1.183-5.892-3.339-8.015Zm-8.513 17.51h-.002a9.74 9.74 0 0 1-4.96-1.37l-.355-.21-4.13 1.278l1.31-4.02l-.23-.369a9.74 9.74 0 0 1-1.472-5.09c0-5.396 4.39-9.786 9.786-9.786a9.72 9.72 0 0 1 6.93 2.875a9.72 9.72 0 0 1 2.857 6.91c0 5.396-4.39 9.775-9.786 9.776Z"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* bottom line */}
-        <div className="relative z-10 border-t border-white/8 py-4 text-center text-gray-400 text-xs">
-          © {new Date().getFullYear()} Metal Stickers India. All Rights Reserved.
-          <br />
-         Built and  Maintained by{" "}
-          <a href="https://innvox.in" target="_blank" rel="noreferrer" className="text-[#F9D976] hover:underline">
-            innvox.in
-          </a>
-        </div>
-      </footer>
     </div>
   );
 }
