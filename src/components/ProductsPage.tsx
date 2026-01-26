@@ -1,10 +1,23 @@
-import { useState } from 'react';
-import { MessageCircle, X } from 'lucide-react';
+import { X } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useInView } from 'react-intersection-observer';
 
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const { ref: headerInViewRef, inView: headerInView } = useInView({
+    triggerOnce: false,
+    threshold: 0.1,
+  });
 
   const categories = [
     { id: 'all', label: 'All Products' },
@@ -100,48 +113,6 @@ export default function ProductsPage() {
         adhesive: 'Multiple options available',
       },
     },
-    {/* {
-      id: 7,
-      name: 'Rose Gold Badge',
-      category: 'gold',
-      description: 'Elegant rose gold finish for feminine luxury brands',
-      image: 'https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=800',
-      specs: {
-        size: 'A3 or A4 &Custom sizes available',
-        thickness: '0.3mm - 0.5mm',
-        finish: 'Rose gold electroplating',
-        durability: '5+ years outdoor',
-        adhesive: '6010 or 467h adhesive',
-      },
-    },
-    {
-      id: 8,
-      name: 'Brushed Silver Plate',
-      category: 'silver',
-      description: 'Sophisticated brushed silver for professional applications',
-      image: 'https://images.pexels.com/photos/163828/skate-board-skateboard-skateboarding-163828.jpeg?auto=compress&cs=tinysrgb&w=800',
-      specs: {
-        size: 'A3 or A4 &Custom sizes available',
-        thickness: '0.5mm - 0.8mm',
-        finish: 'Brushed silver texture',
-        durability: '6+ years outdoor',
-        adhesive: 'Industrial-grade adhesive',
-      },
-    }, 
-    {
-      id: 9,
-      name: '3D Chrome Emblem',
-      category: '3d',
-      description: 'Raised chrome design with dimensional depth',
-      image: 'https://images.pexels.com/photos/1549326/pexels-photo-1549326.jpeg?auto=compress&cs=tinysrgb&w=800',
-      specs: {
-        size: 'A3 or A4 &Custom sizes available',
-        thickness: '50 Sheets',
-        finish: 'Chrome with resin coating',
-        durability: '7+ years outdoor',
-        adhesive: '6010 or 467',
-      }, 
-    }, */}
   ];
 
   const filteredProducts =
@@ -149,15 +120,25 @@ export default function ProductsPage() {
       ? products
       : products.filter((p) => p.category === selectedCategory);
 
-  const handleWhatsAppOrder = (productName: string) => {
+  const handleWhatsAppOrder = (product: typeof products[0]) => {
     const message = encodeURIComponent(
-      `Hello, I want to order this metal sticker: ${productName}`
+      `New Order Inquiry\n\n` +
+      `Product: ${product.name}\n` +
+      `Category: ${product.category}\n` +
+      `Description: ${product.description}\n\n` +
+      `Specifications:\n` +
+      `• Size: ${product.specs.size}\n` +
+      `• Min Order: ${product.specs.MinOrder ?? product.specs.Minorder}\n` +
+      `• Finish: ${product.specs.finish}\n` +
+      `• Durability: ${product.specs.durability}\n` +
+      `• Adhesive: ${product.specs.adhesive}\n\n` +
+      `I am interested in this product. Please provide a quote.`
     );
     window.open(`https://wa.me/919999865558?text=${message}`, '_blank');
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 pt-32 pb-20 px-6">
+    <div className="min-h-screen bg-[#0A0F1F] pt-32 pb-20 px-6 font-sans">
       <Helmet>
         <title>Our Products | Metal Stickers India</title>
         <meta name="description" content="Browse our collection of 24K Gold, Silver, Nickel Chrome, and 3D metal stickers. Custom shapes and sizes available." />
@@ -165,24 +146,55 @@ export default function ProductsPage() {
         <meta property="og:description" content="Premium metal stickers collection: Gold, Silver, Chrome, and more." />
       </Helmet>
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-20">
-          <h1 className="text-5xl md:text-7xl font-light text-white mb-6">
-            Our Products
-          </h1>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+        <div ref={headerInViewRef} className="text-center mb-20 relative py-10">
+          <div className="absolute inset-0 flex items-center justify-center -z-10 pointer-events-none select-none overflow-hidden">
+            <span 
+              className="text-[15vw] font-black italic text-white/5 whitespace-nowrap transition-transform duration-500 ease-out"
+              style={{ 
+                transform: `translateX(${(scrollY - 100) * -0.3}px)`,
+                opacity: headerInView ? 0.05 : 0 
+              }}
+            >
+              PREMIUM PRODUCTS PREMIUM PRODUCTS
+            </span>
+          </div>
+          
+          <div className="relative overflow-hidden">
+            <h1 
+              className="text-5xl md:text-7xl font-bold text-white mb-6 transition-all duration-700 ease-out uppercase tracking-tighter"
+              style={{
+                transform: headerInView 
+                  ? `translateY(${(scrollY - 100) * 0.05}px)` 
+                  : 'translateY(50px)',
+                opacity: headerInView ? 1 : 0
+              }}
+            >
+              Our <span className="text-[#F9D976]">Products</span>
+            </h1>
+          </div>
+
+          <p 
+            className="text-xl text-gray-400 max-w-3xl mx-auto transition-all duration-700 delay-100 ease-out uppercase tracking-widest text-sm font-bold"
+            style={{
+              transform: headerInView 
+                ? `translateY(${(scrollY - 100) * 0.02}px)` 
+                : 'translateY(20px)',
+              opacity: headerInView ? 1 : 0
+            }}
+          >
             Explore our complete range of premium electroplated metal stickers
           </p>
-          <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-500 to-transparent mx-auto mt-8" />
+          <div className={`h-px bg-[#F9D976]/30 mx-auto mt-8 transition-all duration-1000 delay-500 ${headerInView ? 'w-40 opacity-100' : 'w-0 opacity-0'}`} />
         </div>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-16">
+        <div className="flex flex-wrap justify-center gap-2 mb-16">
           {categories.map((category) => (
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
-              className={`px-8 py-4 rounded-full text-sm tracking-wider transition-all duration-300 ${selectedCategory === category.id
-                ? 'bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-2xl shadow-amber-500/50'
-                : 'bg-white/5 backdrop-blur-sm border border-white/10 text-gray-300 hover:bg-white/10 hover:border-amber-500/50'
+              className={`px-6 py-2 text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-300 border ${selectedCategory === category.id
+                ? 'bg-[#F9D976] text-[#0A0F1F] border-[#F9D976]'
+                : 'bg-transparent text-gray-400 border-white/10 hover:border-[#F9D976] hover:text-[#F9D976]'
                 }`}
             >
               {category.label}
@@ -194,40 +206,58 @@ export default function ProductsPage() {
           {filteredProducts.map((product) => (
             <div
               key={product.id}
-              className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl overflow-hidden hover:border-amber-500/30 transition-all duration-500 hover:scale-[1.02]"
+              className="bg-[#1A1F2E]/40 backdrop-blur-md border border-white/10 grid grid-cols-2 grid-rows-[auto_1fr_auto] overflow-hidden group transition-all duration-500 hover:border-[#F9D976]/30 hover:shadow-2xl hover:shadow-[#F9D976]/5"
             >
-              <div className="relative h-72 overflow-hidden">
+              {/* Header Cells */}
+              <div className="border-r border-b border-white/10 p-4 flex items-center justify-center bg-white/5">
+                <h3 className="text-2xl md:text-3xl font-black tracking-tighter text-white truncate uppercase">
+                  {product.name ? `${product.name.split(' ')[0]}.` : 'Product.'}
+                </h3>
+              </div>
+              <div className="border-b border-white/10 p-4 flex flex-col justify-center">
+                <span className="text-[9px] uppercase tracking-[0.2em] text-[#F9D976] mb-0.5 font-bold">Category</span>
+                <span className="text-[10px] font-black text-white uppercase tracking-widest">{product.category}</span>
+              </div>
+
+              {/* Main Content Cells */}
+              <div className="border-r border-white/10 p-6 relative overflow-hidden bg-white/5 flex items-center justify-center aspect-square">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent" />
               </div>
-
-              <div className="p-8 space-y-6">
+              <div className="p-6 flex flex-col justify-between">
                 <div>
-                  <h3 className="text-2xl font-light text-white mb-3">
-                    {product.name}
-                  </h3>
-                  <p className="text-gray-400 text-sm leading-relaxed">
+                  <h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-[#F9D976] mb-2">About</h4>
+                  <p className="text-[11px] text-gray-300 leading-snug font-medium line-clamp-3">
                     {product.description}
                   </p>
                 </div>
+                <div className="space-y-1 mt-4">
+                  <h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-[#F9D976]">Specs</h4>
+                  <div className="flex flex-wrap gap-1">
+                    <span className="text-[8px] px-1.5 py-0.5 bg-white/10 text-white font-bold uppercase tracking-tighter">Premium</span>
+                    <span className="text-[8px] px-1.5 py-0.5 bg-white/10 text-white font-bold uppercase tracking-tighter">Durable</span>
+                  </div>
+                </div>
+              </div>
 
-                <div className="flex space-x-3">
+              {/* Footer Cells */}
+              <div className="col-span-2 border-t border-white/10 p-3 flex justify-between items-center bg-white/5">
+                <span className="text-[8px] text-white/20 font-bold tracking-[0.2em] uppercase">www.metalstickers.in</span>
+                <div className="flex gap-4">
                   <button
                     onClick={() => setSelectedProduct(product)}
-                    className="flex-1 px-6 py-3 bg-white/5 border border-white/10 rounded-full text-white text-sm hover:bg-white/10 transition-all duration-300"
+                    className="text-[9px] font-black uppercase tracking-[0.1em] text-white hover:text-[#F9D976] transition-colors"
                   >
-                    View Details
+                    Details
                   </button>
                   <button
-                    onClick={() => handleWhatsAppOrder(product.name ?? '')}
-                    className="px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 rounded-full text-white hover:from-green-600 hover:to-green-700 transition-all duration-300 shadow-lg hover:shadow-green-500/50"
-                    title="WhatsApp to Order"
+                    onClick={() => handleWhatsAppOrder(product)}
+                    className="text-[9px] font-black uppercase tracking-[0.1em] text-[#F9D976] hover:underline underline-offset-4 transition-all"
                   >
-                    <MessageCircle size={20} />
+                    Order
                   </button>
                 </div>
               </div>
@@ -237,59 +267,65 @@ export default function ProductsPage() {
       </div>
 
       {selectedProduct && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-slate-900/95 backdrop-blur-xl">
-          <div className="relative max-w-4xl w-full bg-slate-800/90 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden max-h-[90vh] overflow-y-auto shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-[#0A0F1F]/95 backdrop-blur-xl">
+          <div className="relative max-w-5xl w-full bg-[#0F1724] border border-white/10 rounded-none overflow-hidden max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col md:flex-row">
             <button
               onClick={() => setSelectedProduct(null)}
-              className="absolute top-4 right-4 z-20 p-2 bg-black/40 backdrop-blur-md border border-white/10 rounded-full text-white hover:bg-black/60 transition-all duration-300"
+              className="absolute top-6 right-6 z-20 p-2 hover:bg-white/5 rounded-full text-white transition-all duration-300"
             >
-              <X size={20} />
+              <X size={24} />
             </button>
 
-            <div className="grid md:grid-cols-2">
-              <div className="relative h-64 md:h-auto">
-                <img
-                  src={selectedProduct.image}
-                  alt={selectedProduct.name}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent" />
-              </div>
+            <div className="md:w-1/2 bg-white/5 p-12 flex items-center justify-center border-b md:border-b-0 md:border-r border-white/10">
+              <img
+                src={selectedProduct.image}
+                alt={selectedProduct.name}
+                className="w-full h-auto object-contain"
+              />
+            </div>
 
-              <div className="p-6 md:p-12 space-y-6 md:space-y-8 bg-slate-800/50">
+            <div className="md:w-1/2 p-8 md:p-16 flex flex-col justify-between">
+              <div className="space-y-8">
                 <div>
-                  <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
+                  <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#F9D976] block mb-4">Product Details</span>
+                  <h2 className="text-4xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter">
                     {selectedProduct.name}
                   </h2>
-                  <p className="text-gray-400 leading-relaxed">
+                  <p className="text-gray-300 leading-relaxed font-medium">
                     {selectedProduct.description}
                   </p>
                 </div>
 
-                <div className="space-y-4">
-                  <h3 className="text-xl text-amber-400 font-medium">
+                <div className="space-y-6">
+                  <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-[#F9D976] border-b border-white/10 pb-2">
                     Specifications
                   </h3>
-                  {Object.entries(selectedProduct.specs ?? {}).map(([key, value]) => (
-                    <div
-                      key={key}
-                      className="flex justify-between py-3 border-b border-white/10"
-                    >
-                      <span className="text-gray-400 capitalize">
-                        {key.replace('_', ' ')}
-                      </span>
-                      <span className="text-white text-right">{String(value ?? '')}</span>
-                    </div>
-                  ))}
+                  <div className="grid gap-4">
+                    {Object.entries(selectedProduct.specs ?? {}).map(([key, value]) => (
+                      <div
+                        key={key}
+                        className="flex justify-between items-center text-xs"
+                      >
+                        <span className="text-gray-400 uppercase tracking-widest font-bold">
+                          {key.replace('_', ' ')}
+                        </span>
+                        <span className="text-white font-black uppercase tracking-wider">{String(value ?? '')}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
+              </div>
 
+              <div className="mt-12">
                 <button
-                  onClick={() => handleWhatsAppOrder(selectedProduct.name ?? '')}
-                  className="w-full flex items-center justify-center space-x-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-8 py-4 rounded-full transition-all duration-300 shadow-2xl hover:shadow-green-500/50"
+                  onClick={() => handleWhatsAppOrder(selectedProduct)}
+                  className="w-full bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] text-[10px] font-black uppercase tracking-[0.4em] py-5 hover:brightness-110 transition-all duration-300"
                 >
-                  <MessageCircle size={20} />
-                  <span>Order on WhatsApp</span>
+                  Contact for Order
                 </button>
+                <p className="text-center text-[9px] text-gray-400 mt-4 uppercase tracking-widest">
+                  Custom sizes and bulk pricing available upon request
+                </p>
               </div>
             </div>
           </div>

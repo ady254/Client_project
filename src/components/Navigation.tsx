@@ -1,6 +1,6 @@
-import { useEffect, useState, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 /**
  * Navigation v2.0 — Fully animated premium navbar (Option A: Tall Premium)
@@ -168,14 +168,6 @@ export default function Navigation() {
 
             {/* RIGHT: actions (hidden on mobile) */}
             <div className="hidden md:flex items-center gap-4">
-              <Link
-                to="/contact"
-                className="text-sm text-gray-300 hover:text-white px-3 py-2 rounded-md transition"
-                aria-label="Contact"
-              >
-                Contact
-              </Link>
-
               <a
                 href="https://wa.me/919999865558"
                 target="_blank"
