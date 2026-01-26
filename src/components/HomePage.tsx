@@ -3,12 +3,17 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
-import { useScrollDirection } from "../hooks/useScrollDirection";
 
 // ────────────────────────────────────────────────
 // Expertise Card – flicker-free version
 // ────────────────────────────────────────────────
-function ExpertiseCard({ product, index }: { product: any; index: number }) {
+interface Product {
+  title: string;
+  description: string;
+  image: string;
+}
+
+function ExpertiseCard({ product, index }: { product: Product; index: number }) {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
@@ -71,6 +76,15 @@ function ExpertiseCard({ product, index }: { product: any; index: number }) {
   );
 }
 
+// ────────────────────────────────────────────────
+// Typing Animation Data
+// ────────────────────────────────────────────────
+const typingText = [
+  "Welcome to India’s Best Sticker Company",
+  "Where You Get Premium Electroplated Labels",
+  "Gold • Silver • Chrome • Custom Shapes",
+];
+
 export default function HomePage() {
   // ────────────────────────────────────────────────
   // Data
@@ -91,15 +105,6 @@ export default function HomePage() {
       description: "Brushed steel finish, industrial grade",
       image: "/silver-finish.webp",
     },
-  ];
-
-  const categories = [
-    "Luxury Gold Finish Labels",
-    "Premium Nickel Chrome Stickers",
-    "Stainless Steel Silver Labels",
-    "Rose Gold Premium Stickers",
-    "Matte Black Finish Stickers",
-    "Custom Printed Stickers",
   ];
 
   const process = [
@@ -164,15 +169,6 @@ export default function HomePage() {
     localStorage.setItem("scamAlertSeen", "true");
   };
 
-  // ────────────────────────────────────────────────
-  // Typing Animation
-  // ────────────────────────────────────────────────
-  const typingText = [
-    "Welcome to India’s Best Sticker Company",
-    "Where You Get Premium Electroplated Labels",
-    "Gold • Silver • Chrome • Custom Shapes",
-  ];
-
   const [displayText, setDisplayText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
@@ -199,8 +195,6 @@ export default function HomePage() {
       if (timeout) window.clearTimeout(timeout);
     };
   }, [charIndex, textIndex]);
-
-  const scrollDirection = useScrollDirection();
 
   // ────────────────────────────────────────────────
   // Parallax Scroll for Expertise Header

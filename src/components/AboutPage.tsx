@@ -1,7 +1,15 @@
 import { Award, Users, Zap } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useInView } from 'react-intersection-observer';
+
+interface Stat {
+  icon: React.ElementType;
+  value: number;
+  suffix: string;
+  label: string;
+  start?: number;
+}
 
 function Counter({ start = 0, end, duration = 2000, suffix = "", startAnimation }: { start?: number; end: number; duration?: number; suffix?: string; startAnimation: boolean }) {
   const [count, setCount] = useState(start);
@@ -152,7 +160,7 @@ export default function AboutPage() {
     threshold: 0.4,
   });
 
-  const stats = [
+  const stats: Stat[] = [
     { icon: Award, value: 5, suffix: '+', label: 'Years Experience' },
     { icon: Users, value: 300, suffix: '+', label: 'Business Clients' },
     { icon: Zap, start: 10000, value: 100000, suffix: '+', label: 'Stickers Produced' },
@@ -320,10 +328,12 @@ export default function AboutPage() {
         </div>
       </section>
 
+
+
       <section ref={statsInViewRef} className="py-32 px-6 relative bg-[#0F1724]">
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
-            {stats.map((stat, index) => (
+            {(stats as Stat[]).map((stat, index) => (
               <div
                 key={index}
                 className="text-center space-y-6 p-12 bg-[#1A1F2E]/40 backdrop-blur-md border border-white/10 group hover:border-[#F9D976]/30 transition-all duration-1000 ease-out"
@@ -339,7 +349,7 @@ export default function AboutPage() {
                 <div>
                   <div className="text-5xl font-black text-white mb-2 tracking-tighter transition-all duration-700 group-hover:text-[#F9D976]">
                     <Counter 
-                      start={(stat as any).start || 0} 
+                      start={stat.start || 0} 
                       end={stat.value} 
                       suffix={stat.suffix} 
                       startAnimation={statsInView} 
