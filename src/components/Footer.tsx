@@ -38,8 +38,10 @@ export default function Footer() {
                         </div>
                         <div className="flex items-start space-x-3">
                             <span className="text-[#F9D976] mt-1">✉️</span>
-                            <p className="text-gray-400 text-sm md:text-base font-medium break-all">corporatemetalstickersindia@gmail.com</p>
-                            <p className="text-gray-400 text-sm md:text-base font-medium break-all">Goldsilverplating@gmail.com</p>
+                            <div className="text-gray-400 text-sm md:text-base font-medium space-y-2 overflow-hidden">
+                                <p className="break-all tracking-tight leading-none h-auto py-1">corporatemetalstickersindia@gmail.com</p>
+                                <p className="break-all tracking-tight leading-none h-auto py-1">Goldsilverplating@gmail.com</p>
+                            </div>
                         </div>
                         <div className="flex items-start space-x-3">
                             <span className="text-[#F9D976] mt-1">📍</span>
@@ -57,7 +59,7 @@ export default function Footer() {
                         <h4 className="text-lg font-black text-white uppercase tracking-tight border-b border-[#F9D976]/30 pb-2 inline-block">Our Location</h4>
                         <div className="relative h-40 w-full rounded-none overflow-hidden border border-white/10 shadow-xl group/map">
                             <iframe
-                                src="https://maps.google.com/maps?q=11%2F7%20New%20Anangpur%2C%20Sector%2037%2C%20Badarpur%2C%20Faridabad%2C%20Haryana%20121003%2C%20India&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                src="https://maps.google.com/maps?q=Metal%20Stickers%20India%2C%20Anangpur%20Dairy%2C%20Sector%2037%2C%20Faridabad%2C%20Haryana%20121003&t=&z=15&ie=UTF8&iwloc=&output=embed"
                                 width="100%"
                                 height="100%"
                                 style={{ border: 0 }}
@@ -87,6 +89,12 @@ export default function Footer() {
                             <a href="https://wa.me/919999865558" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-none bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#22C55E] hover:border-[#22C55E]/50 transition-all duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5">
                                     <path d="M20.52 3.48A11.88 11.88 0 0 0 12.005.04C5.694.04.653 5.081.653 11.392c0 2.052.536 4.052 1.552 5.81L.024 24l6.958-2.152a11.34 11.34 0 0 0 5.023 1.2h.002c6.311 0 11.352-5.041 11.352-11.353 0-3.035-1.183-5.892-3.339-8.015Zm-8.513 17.51h-.002a9.74 9.74 0 0 1-4.96-1.37l-.355-.21-4.13 1.278l1.31-4.02l-.23-.369a9.74 9.74 0 0 1-1.472-5.09c0-5.396 4.39-9.786 9.786-9.786a9.72 9.72 0 0 1 6.93 2.875a9.72 9.72 0 0 1 2.857 6.91c0 5.396-4.39 9.775-9.786 9.776Z" />
+                                </svg>
+                            </a>
+
+                            <a href="https://www.youtube.com/@METALSTICKERSFACTORYFARIDABAD" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-none bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#FF0000] hover:border-[#FF0000]/50 transition-all duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16" className="w-5 h-5">
+                                    <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z" />
                                 </svg>
                             </a>
                         </div>

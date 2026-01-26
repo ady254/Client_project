@@ -5,74 +5,161 @@ import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
 
 // ────────────────────────────────────────────────
-// Expertise Card – flicker-free version
+// Service Detail Block - Full width detail view
 // ────────────────────────────────────────────────
 interface Product {
-  title: string;
+  id: number;
+  name: string;
+  category: string;
   description: string;
-  image: string;
+  image: string[];
+  specs: Record<string, unknown>;
+  Application?: string[];
 }
 
-function ExpertiseCard({ product, index }: { product: Product; index: number }) {
+function ServiceDetailBlock({ product, index }: { product: Product; index: number }) {
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const isReversed = index % 2 !== 0;
   const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.2,
-    rootMargin: "-60px 0px -120px 0px",
+    triggerOnce: false,
+    threshold: 0.15,
   });
 
   return (
-    <Link
-      to="/products"
+    <div
       ref={ref}
       className={`
-        group block will-change-transform transition-all duration-[1200ms] ease-out
-        ${inView
-          ? "opacity-100 translate-y-0"
-          : "opacity-0 translate-y-24"}
+        relative w-full mb-20 last:mb-0 transition-all duration-1000 ease-out
+        ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"}
       `}
-      style={{ transitionDelay: `${index * 250}ms` }}
     >
+      {/* Background Decorative Glow */}
       <div
-        className="
-          relative h-full rounded-2xl overflow-hidden
-          bg-gradient-to-b from-white/6 to-white/[0.02]
-          border border-white/10 backdrop-blur-md
-          transition-all duration-500
-          hover:border-[#F9D976]/50 hover:shadow-xl hover:shadow-[#F9D976]/15
-        "
-      >
-        <div className="shine-overlay absolute inset-0 pointer-events-none z-10" />
+        className={`absolute -z-10 w-[500px] h-[500px] bg-[#F9D976]/5 blur-[120px] rounded-full pointer-events-none transition-opacity duration-1000 ${inView ? 'opacity-100' : 'opacity-0'}`}
+        style={{
+          top: '50%',
+          [isReversed ? 'left' : 'right']: '-10%',
+          transform: 'translateY(-50%)'
+        }}
+      />
 
-        <div className="relative h-56 md:h-64 overflow-hidden bg-[#1A1F2E]">
-          <img
-            src={product.image}
-            alt={product.title}
-            loading="lazy"
-            className="
-              w-full h-full object-cover
-              transition-transform duration-700 ease-out transform-gpu
-              group-hover:scale-110
-            "
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1F]/80 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
+      <div className={`
+        flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} 
+        bg-[#1A1F2E]/30 backdrop-blur-2xl border border-white/10 rounded-[2rem] overflow-hidden
+        shadow-2xl shadow-black/50 hover:border-[#F9D976]/30 transition-colors duration-500
+      `}>
+        {/* Left/Right: Image Showcase */}
+        <div className="lg:w-[45%] bg-gradient-to-b from-white/5 to-transparent p-8 md:p-12 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/10">
+          <div className="relative aspect-square flex items-center justify-center p-4 bg-[#0A0F1F]/40 rounded-3xl border border-white/5 overflow-hidden group">
+            {/* Main Image */}
+            <img
+              src={product.image[activeImageIndex]}
+              alt={product.name}
+              className="w-full h-full object-contain transform transition-all duration-700 group-hover:scale-105"
+            />
+            {/* Subtle light effect on hover */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#F9D976]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+          </div>
+
+          {/* Enhanced Thumbnails */}
+          {product.image.length > 1 && (
+            <div className="flex gap-3 mt-8 overflow-x-auto pb-2 justify-center scrollbar-hide">
+              {product.image.map((img: string, idx: number) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveImageIndex(idx)}
+                  className={`
+                    group/thumb relative w-14 h-14 md:w-16 md:h-16 rounded-xl overflow-hidden transition-all duration-300
+                    ${activeImageIndex === idx
+                      ? "ring-2 ring-[#F9D976] ring-offset-4 ring-offset-[#0A0F1F] scale-110"
+                      : "opacity-50 hover:opacity-100 hover:scale-105"
+                    }
+                  `}
+                >
+                  <img src={img} alt="" className="w-full h-full object-cover" />
+                  <div className={`absolute inset-0 bg-[#F9D976]/20 transition-opacity duration-300 ${activeImageIndex === idx ? 'opacity-0' : 'opacity-0 group-hover/thumb:opacity-100'}`} />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
-        <div className="p-6 md:p-8 space-y-4 relative z-20">
-          <h3 className="text-2xl md:text-3xl font-light text-white group-hover:text-[#F9D976] transition-colors duration-300">
-            {product.title}
-          </h3>
+        {/* Right/Left: Detailed Content */}
+        <div className="lg:w-[55%] p-8 md:p-16 flex flex-col justify-between relative overflow-hidden">
+          {/* Subtle gold accent corner */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#F9D976]/5 to-transparent -mr-16 -mt-16 rounded-full blur-2xl" />
 
-          <p className="text-gray-300/90 text-base leading-relaxed">
-            {product.description}
-          </p>
+          <div className="space-y-10 relative z-10">
+            <div>
+              <div className="flex items-center space-x-4 mb-6">
+                <span className="h-px w-8 bg-[#F9D976]/50" />
+                <span className="text-[10px] font-black uppercase tracking-[0.5em] text-[#F9D976]">Premium Service {index + 1}</span>
+              </div>
+              <h2 className="text-4xl md:text-6xl font-black text-white mb-6 uppercase tracking-tighter leading-[0.9] drop-shadow-sm">
+                {product.name}
+              </h2>
+              <p className="text-gray-400 leading-relaxed text-lg md:text-xl font-medium max-w-2xl">
+                {product.description}
+              </p>
+            </div>
 
-          <div className="flex items-center text-[#F9D976] text-sm font-medium pt-3 group-hover:translate-x-3 transition-transform duration-300">
-            <span>View Products</span>
-            <ArrowRight size={18} className="ml-2" />
+            <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
+              {/* Applications */}
+              {product.Application && (
+                <div className="space-y-4">
+                  <h3 className="text-xs font-black uppercase tracking-[0.3em] text-[#F9D976]/80 flex items-center">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#F9D976] mr-2" />
+                    Applications
+                  </h3>
+                  <div className="flex flex-wrap gap-2">
+                    {product.Application.map((app: string, i: number) => (
+                      <span key={i} className="px-3 py-1.5 bg-white/5 border border-white/10 text-[9px] text-gray-300 font-bold uppercase tracking-widest rounded-md hover:bg-[#F9D976]/10 hover:border-[#F9D976]/30 transition-colors duration-300">
+                        {app}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Specifications */}
+              <div className="space-y-4">
+                <h3 className="text-xs font-black uppercase tracking-[0.3em] text-[#F9D976]/80 flex items-center">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#F9D976] mr-2" />
+                  Technical Specs
+                </h3>
+                <div className="space-y-3">
+                  {Object.entries(product.specs ?? {}).map(([key, value]) => (
+                    <div key={key} className="flex flex-col border-b border-white/5 pb-2">
+                      <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1">
+                        {key.replace(/([A-Z])/g, ' $1').replace('_', ' ').trim()}
+                      </span>
+                      <span className="text-white font-black text-sm uppercase tracking-tight">
+                        {Array.isArray(value) ? value.join(', ') : String(value ?? '')}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-12 group/btn">
+            <a
+              href={`https://wa.me/919999865558?text=${encodeURIComponent(`New Order Inquiry\n\nProduct: ${product.name}\n\nI interested in this service. Please provide a quote.`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative inline-flex items-center justify-center w-full md:w-auto px-10 py-5 bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] text-[11px] font-black uppercase tracking-[0.4em] transition-all duration-300 rounded-2xl shadow-xl shadow-[#F9D976]/10 hover:scale-[1.02] hover:shadow-[#F9D976]/20 active:scale-95 overflow-hidden"
+            >
+              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300" />
+              <span className="relative flex items-center">
+                Contact for Quick Quote
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </span>
+            </a>
           </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 
@@ -90,21 +177,56 @@ export default function HomePage() {
   // Data
   // ────────────────────────────────────────────────
   const products = [
+
     {
-      title: "Gold Plating Service",
-      description: "24K gold plating, premium finish, scratch resistant",
-      image: "/gold-finish.webp",
+      id: 1,
+      name: 'Gold Plating Service',
+      category: 'gold',
+      description: 'Luxurious 24K gold electroplated sticker for high-end branding',
+      image: ['/gold-plating-metal-sticker-texture.webp', '/gold-finish.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp', '/gold-plating.webp'],
+      specs: {
+        size: 'A3 or A4 & Custom sizes available',
+        finish: '24K Gold Electroplating',
+        goldPurity: '24 Karat',
+        adhesive: '6010 or 467h adhesive',
+        Benefits: ['Corrosion Resistance', 'High Durability', 'Aesthetic Appeal', 'Cost-Effective'],
+        serviceLocation: 'Pan India',
+        paymentMode: 'Online/Offline',
+      },
+      Application: ['Jewellery', 'Watch Parts', 'Electronic Components', 'Medical Machinery'],
     },
     {
-      title: "Nickel Chrome Plating Service",
-      description: "Mirror finish, corrosion resistant, outdoor life 5+ years",
-      image: "/chrome-finish.webp",
+      id: 2,
+      name: 'Stainless Steel Silver Plating Service',
+      category: 'silver',
+      description: 'Sleek silver finish perfect for modern tech branding',
+      image: ['/silver-finish.webp', '/stainless-steel-silver-plating-connectors.webp', '/silver-plating-surgical.webp', '/silver-plating-pcb.webp'],
+      specs: {
+        platingThickness: 'upto 100 µm',
+        Benefits: ['Electrical Conductivity', 'High Durability', 'Lubricity & Anti-Galling', 'Corrosion Resistance'],
+        adhesive: '6010 or 467h adhesive',
+        serviceLocation: 'Pan India',
+        paymentMode: 'Online/Offline',
+      },
+      Application: ['printed circuit board (PCB)', 'Bus Bar', 'Contacts', 'Medical Equipment'],
     },
     {
-      title: "Stainless Steel Plating Service",
-      description: "Brushed steel finish, industrial grade",
-      image: "/silver-finish.webp",
+      id: 3,
+      name: 'Nickel Chrome Plating Service',
+      category: 'chrome',
+      description: 'Premium raised design with crystal-clear resin coating',
+      image: ['/chrome-finish.webp', '/silver-automobile.webp', '/chrome-plating-taps.webp', '/silver-plating.webp'],
+      specs: {
+        size: 'A3 or A4 & Custom sizes available',
+        Benefits: ['Corrosion Resistance', 'High Durability', 'Aesthetic Appeal', 'Cost-Effective'],
+        finish: 'Polyurethane resin coating',
+        adhesive: '6010 or 467h adhesive',
+        serviceLocation: 'Pan India',
+        paymentMode: 'Online/Offline',
+      },
+      Application: ['Automobile Industry', 'Household and Plumbing', 'Electronics and Connectors', 'Medical Equipment'],
     },
+
   ];
 
   const process = [
@@ -121,6 +243,7 @@ export default function HomePage() {
     { name: "Panasonic", logo: "/panasonic.png" },
     { name: "Liebherr", logo: "/l.webp" },
     { name: "Kelvinator", logo: "/k.webp" },
+
     { name: "Voltas", logo: "/Voltas.webp" },
     { name: "Haier", logo: "/h.webp" },
     { name: "Samsung", logo: "/Samsung.webp" },
@@ -137,6 +260,7 @@ export default function HomePage() {
     "/silver-automobile.webp",
     "/gold-plating.webp",
   ];
+
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -394,14 +518,25 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10">
+          <div className="space-y-2">
             {products.map((product, index) => (
-              <ExpertiseCard
-                key={index}
+              <ServiceDetailBlock
+                key={product.id}
                 product={product}
                 index={index}
               />
             ))}
+          </div>
+
+          {/* Explore More Services Button */}
+          <div className="text-center mt-12">
+            <Link
+              to="/services"
+              className="inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#F9D976]/30 group"
+            >
+              <span>Explore More Services</span>
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </div>
       </section>
@@ -637,6 +772,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
     </div>
   );
 }
