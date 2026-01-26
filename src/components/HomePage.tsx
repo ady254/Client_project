@@ -67,7 +67,7 @@ function ExpertiseCard({ product, index }: { product: Product; index: number }) 
           </p>
 
           <div className="flex items-center text-[#F9D976] text-sm font-medium pt-3 group-hover:translate-x-3 transition-transform duration-300">
-            <span>Discover more</span>
+            <span>View Products</span>
             <ArrowRight size={18} className="ml-2" />
           </div>
         </div>
@@ -91,17 +91,17 @@ export default function HomePage() {
   // ────────────────────────────────────────────────
   const products = [
     {
-      title: "Luxury Gold Finish Labels",
+      title: "Gold Plating Service",
       description: "24K gold plating, premium finish, scratch resistant",
       image: "/gold-finish.webp",
     },
     {
-      title: "Premium Nickel Chrome Stickers",
+      title: "Nickel Chrome Plating Service",
       description: "Mirror finish, corrosion resistant, outdoor life 5+ years",
       image: "/chrome-finish.webp",
     },
     {
-      title: "Stainless Steel Silver Labels",
+      title: "Stainless Steel Plating Service",
       description: "Brushed steel finish, industrial grade",
       image: "/silver-finish.webp",
     },
@@ -117,25 +117,25 @@ export default function HomePage() {
   const gallery = ["/12.webp", "/13.webp", "/11.webp", "/gold-finish.webp", "/rose-gold.webp"];
 
   const brands = [
-    { name: "Cello", logo: "/images.png" },
+    { name: "Cello", logo: "/Cello.webp" },
     { name: "Panasonic", logo: "/panasonic.png" },
-    { name: "Liebherr", logo: "/l.png" },
-    { name: "Kelvinator", logo: "/k.png" },
-    { name: "GEM", logo: "/g.png" },
-    { name: "Voltas", logo: "/v.png" },
-    { name: "Haier", logo: "/h.png" },
-    { name: "Samsung", logo: "/s.png" },
+    { name: "Liebherr", logo: "/l.webp" },
+    { name: "Kelvinator", logo: "/k.webp" },
+    { name: "Voltas", logo: "/Voltas.webp" },
+    { name: "Haier", logo: "/h.webp" },
+    { name: "Samsung", logo: "/Samsung.webp" },
+
   ];
 
   // ────────────────────────────────────────────────
   // Hero Background Carousel
   // ────────────────────────────────────────────────
   const heroImages = [
-    
-    "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1920&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1920&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?q=80&w=1920&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?q=80&w=1920&auto=format&fit=crop",
+
+    "/01.webp",
+    "/02.webp",
+    "/silver-automobile.webp",
+    "/gold-plating.webp",
   ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -302,9 +302,8 @@ export default function HomePage() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 h-full w-full overflow-hidden">
           <div
-            className={`flex h-full w-full transition-transform duration-500 ease-in-out ${
-              isTransitioning ? "" : "duration-0"
-            }`}
+            className={`flex h-full w-full transition-transform duration-500 ease-in-out ${isTransitioning ? "" : "duration-0"
+              }`}
             style={{ transform: `translateX(-${currentSlide * 100}%)` }}
           >
             {heroImages.map((img, index) => (
@@ -372,19 +371,18 @@ export default function HomePage() {
       {/* Our Expertise Section – fixed version */}
       <section className="py-24 px-5 md:px-8 bg-gradient-to-b from-[#0A0F1F] to-[#0A0F1F]/90">
         <div className="max-w-7xl mx-auto">
-          <div 
+          <div
             ref={headerInViewRef}
             className="text-center mb-16 md:mb-20"
           >
             {/* Reveal Wrapper */}
             <div className="inline-block overflow-hidden py-16 -my-16">
-              <div 
-                className={`transition-all duration-700 ease-out transform-gpu ${
-                  headerInView ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
-                }`}
+              <div
+                className={`transition-all duration-700 ease-out transform-gpu ${headerInView ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+                  }`}
                 style={{
-                  transform: headerInView 
-                    ? `translateY(${(scrollY - 100) * 0.05}px)` 
+                  transform: headerInView
+                    ? `translateY(${(scrollY - 100) * 0.05}px)`
                     : "translateY(100%)"
                 }}
               >
@@ -411,19 +409,18 @@ export default function HomePage() {
       {/* Our Process */}
       <section className="py-20 bg-[#0F1724]">
         <div className="max-w-7xl mx-auto px-6">
-          <div 
+          <div
             ref={processInViewRef}
             className="text-center mb-16"
           >
             {/* Reveal Wrapper */}
             <div className="inline-block overflow-hidden py-16 -my-16">
-              <div 
-                className={`transition-all duration-1000 ease-out transform-gpu ${
-                  processInView ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
-                }`}
+              <div
+                className={`transition-all duration-1000 ease-out transform-gpu ${processInView ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+                  }`}
                 style={{
-                  transform: processInView 
-                    ? `translateY(${(scrollY * 0.015) % 20 - 10}px)` 
+                  transform: processInView
+                    ? `translateY(${(scrollY * 0.015) % 20 - 10}px)`
                     : "translateY(100%)"
                 }}
               >
@@ -435,7 +432,7 @@ export default function HomePage() {
           <div className="relative">
             {/* Desktop Connecting Line */}
             <div className="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-0.5 bg-white/10 z-0">
-              <div 
+              <div
                 className="h-full bg-gradient-to-r from-[#F9D976] to-[#F39F23] transition-all duration-[6000ms] ease-in-out"
                 style={{ width: processInView ? "100%" : "0%" }}
               />
@@ -443,7 +440,7 @@ export default function HomePage() {
 
             {/* Mobile Connecting Line */}
             <div className="md:hidden absolute left-8 top-8 bottom-8 w-0.5 bg-white/10 z-0">
-              <div 
+              <div
                 className="w-full bg-gradient-to-b from-[#F9D976] to-[#F39F23] transition-all duration-[6000ms] ease-in-out"
                 style={{ height: processInView ? "100%" : "0%" }}
               />
@@ -455,12 +452,12 @@ export default function HomePage() {
                   <div className={`
                     flex-shrink-0 w-16 h-16 rounded-full bg-[#0A0F1F] border-2 flex items-center justify-center text-[#F9D976] font-bold text-xl mb-0 md:mb-6 relative z-10
                     transition-all duration-1000 ease-in-out
-                    ${processInView 
-                      ? 'border-[#F9D976] shadow-[0_0_20px_rgba(249,217,118,0.4)] scale-110' 
+                    ${processInView
+                      ? 'border-[#F9D976] shadow-[0_0_20px_rgba(249,217,118,0.4)] scale-110'
                       : 'border-[#F9D976]/30 shadow-none scale-100'}
                   `}>
-                    <div 
-                      className={`absolute inset-0 rounded-full bg-gradient-to-br from-[#F9D976] to-[#F39F23] transition-all duration-1000 ease-in-out ${processInView ? 'opacity-100' : 'opacity-0'}`} 
+                    <div
+                      className={`absolute inset-0 rounded-full bg-gradient-to-br from-[#F9D976] to-[#F39F23] transition-all duration-1000 ease-in-out ${processInView ? 'opacity-100' : 'opacity-0'}`}
                       style={{ transitionDelay: `${index * 1200}ms` }}
                     />
                     <span className="relative z-10 text-[#0A0F1F]">{item.step}</span>
@@ -479,18 +476,17 @@ export default function HomePage() {
       {/* Trusted by Brands */}
       <section className="py-24 bg-[#0A0F1F] overflow-hidden border-y border-white/5">
         <div className="max-w-7xl mx-auto px-6 mb-16">
-          <div 
+          <div
             ref={brandsInViewRef}
             className="text-center"
           >
             <div className="inline-block overflow-hidden py-16 -my-16">
-              <div 
-                className={`transition-all duration-1000 ease-out transform-gpu ${
-                  brandsInView ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
-                }`}
+              <div
+                className={`transition-all duration-1000 ease-out transform-gpu ${brandsInView ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+                  }`}
                 style={{
-                  transform: brandsInView 
-                    ? `translateY(${(scrollY * 0.015) % 20 - 10}px)` 
+                  transform: brandsInView
+                    ? `translateY(${(scrollY * 0.015) % 20 - 10}px)`
                     : "translateY(100%)"
                 }}
               >
@@ -504,14 +500,14 @@ export default function HomePage() {
         <div className="relative flex overflow-hidden group">
           <div className="flex space-x-12 animate-marquee whitespace-nowrap py-8">
             {[...brands, ...brands].map((brand, idx) => (
-              <div 
-                key={idx} 
+              <div
+                key={idx}
                 className="flex flex-col items-center justify-center min-w-[180px] sm:min-w-[240px] group/brand"
               >
                 <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden bg-white/5 border-2 border-[#F9D976]/30 flex items-center justify-center mb-4 transition-all duration-500 group-hover/brand:border-[#F9D976] group-hover/brand:bg-[#F9D976]/10 group-hover/brand:shadow-[0_0_30px_rgba(249,217,118,0.4)] relative">
-                  <img 
-                    src={brand.logo} 
-                    alt={brand.name} 
+                  <img
+                    src={brand.logo}
+                    alt={brand.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -519,7 +515,7 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-          
+
           {/* Gradient Masks */}
           <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0A0F1F] to-transparent z-10" />
           <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0A0F1F] to-transparent z-10" />
@@ -529,19 +525,18 @@ export default function HomePage() {
       {/* Gallery */}
       <section className="py-20 bg-[#0A0F1F] px-6">
         <div className="max-w-7xl mx-auto">
-          <div 
+          <div
             ref={galleryInViewRef}
             className="text-center mb-16"
           >
             {/* Reveal Wrapper */}
             <div className="inline-block overflow-hidden py-16 -my-16">
-              <div 
-                className={`transition-all duration-1000 ease-out transform-gpu ${
-                  galleryInView ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
-                }`}
+              <div
+                className={`transition-all duration-1000 ease-out transform-gpu ${galleryInView ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+                  }`}
                 style={{
-                  transform: galleryInView 
-                    ? `translateY(${(scrollY * 0.015) % 20 - 10}px)` 
+                  transform: galleryInView
+                    ? `translateY(${(scrollY * 0.015) % 20 - 10}px)`
                     : "translateY(100%)"
                 }}
               >
@@ -555,22 +550,20 @@ export default function HomePage() {
               <div
                 key={idx}
                 onMouseEnter={() => setActiveGalleryIndex(idx)}
-                className={`relative overflow-hidden rounded-2xl transition-all duration-700 ease-in-out cursor-pointer border border-white/10 ${
-                  activeGalleryIndex === idx 
-                    ? "flex-[4] md:flex-[5]" 
-                    : "flex-[1] md:flex-[1] grayscale opacity-60 hover:opacity-100"
-                }`}
+                className={`relative overflow-hidden rounded-2xl transition-all duration-700 ease-in-out cursor-pointer border border-white/10 ${activeGalleryIndex === idx
+                  ? "flex-[4] md:flex-[5]"
+                  : "flex-[1] md:flex-[1] grayscale opacity-60 hover:opacity-100"
+                  }`}
               >
                 <img
                   src={img}
                   alt="Gallery item"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
-                
+
                 {/* Overlay & Text */}
-                <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent transition-opacity duration-500 ${
-                  activeGalleryIndex === idx ? "opacity-100" : "opacity-0"
-                }`}>
+                <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent transition-opacity duration-500 ${activeGalleryIndex === idx ? "opacity-100" : "opacity-0"
+                  }`}>
                   <div className="absolute bottom-8 left-8 whitespace-nowrap overflow-hidden">
                     <p className="text-[#F9D976] text-xs font-bold tracking-[0.2em] uppercase mb-1">
                       {idx === 0 ? "Chrome Finish" : idx === 1 ? "Gold Plated" : idx === 2 ? "Rose Gold" : idx === 3 ? "Silver Chrome" : "Matte Finish"}
@@ -582,9 +575,8 @@ export default function HomePage() {
                 </div>
 
                 {/* Vertical Text for collapsed items on Desktop */}
-                <div className={`hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 ${
-                  activeGalleryIndex === idx ? "opacity-0" : "opacity-100"
-                }`}>
+                <div className={`hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 ${activeGalleryIndex === idx ? "opacity-0" : "opacity-100"
+                  }`}>
                   <p className="rotate-90 text-white/40 text-xs font-bold tracking-[0.3em] uppercase whitespace-nowrap">
                     EXPLORE MORE
                   </p>
@@ -598,7 +590,7 @@ export default function HomePage() {
       {/* Cinematic Banner */}
       <section className="relative h-[80vh] flex items-center justify-center overflow-hidden bg-[#0A0F1F]">
         {/* Background Image with subtle parallax */}
-        <div 
+        <div
           className="absolute inset-0 z-0 opacity-20 grayscale brightness-50"
           style={{
             backgroundImage: "url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1920&auto=format&fit=crop')",
@@ -608,10 +600,10 @@ export default function HomePage() {
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A0F1F] via-transparent to-[#0A0F1F] z-1" />
-        
+
         <div className="relative z-10 w-full flex flex-col items-center select-none pointer-events-none">
           {/* Top Layer: Precision. (Moves Left) */}
-          <div 
+          <div
             className="text-[20vw] md:text-[15vw] leading-none font-black italic tracking-tighter text-white opacity-20 transition-transform duration-75 ease-out whitespace-nowrap"
             style={{ transform: `translateX(${(scrollY - (typeof window !== 'undefined' && window.innerWidth < 768 ? 3500 : 2000)) * -0.6}px)` }}
           >
@@ -619,9 +611,9 @@ export default function HomePage() {
           </div>
 
           {/* Middle Layer: Durability. (Moves Right, Outline) */}
-          <div 
+          <div
             className="text-[20vw] md:text-[15vw] leading-none font-black italic tracking-tighter text-transparent transition-transform duration-75 ease-out whitespace-nowrap"
-            style={{ 
+            style={{
               transform: `translateX(${(scrollY - (typeof window !== 'undefined' && window.innerWidth < 768 ? 3500 : 2000)) * 0.4}px)`,
               WebkitTextStroke: "1px rgba(249, 217, 118, 0.4)"
             }}
@@ -630,7 +622,7 @@ export default function HomePage() {
           </div>
 
           {/* Bottom Layer: Luxury. (Moves Left, Gold) */}
-          <div 
+          <div
             className="text-[20vw] md:text-[15vw] leading-none font-black italic tracking-tighter text-[#F9D976] opacity-30 transition-transform duration-75 ease-out whitespace-nowrap"
             style={{ transform: `translateX(${(scrollY - (typeof window !== 'undefined' && window.innerWidth < 768 ? 3500 : 2000)) * -0.5}px)` }}
           >

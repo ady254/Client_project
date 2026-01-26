@@ -15,7 +15,7 @@ export default function Navigation() {
 
   const menuItems = [
     { label: "Home", path: "/" },
-    { label: "Products", path: "/products" },
+    { label: "Services", path: "/services" },
     { label: "About Us", path: "/about" },
     // { label: "Careers", path: "/careers" },
     { label: "Contact", path: "/contact" },

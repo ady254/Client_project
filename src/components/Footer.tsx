@@ -32,12 +32,14 @@ export default function Footer() {
                             <span className="text-[#F9D976] mt-1">📞</span>
                             <div className="text-gray-400 text-sm md:text-base font-medium space-y-1">
                                 <p className="text-white font-bold tracking-tight">+91 99998 65558</p>
+                                <p className="text-white font-bold tracking-tight">+91 9811018728</p>
                                 <p className="text-white font-bold tracking-tight">+91 9717163149</p>
                             </div>
                         </div>
                         <div className="flex items-start space-x-3">
                             <span className="text-[#F9D976] mt-1">✉️</span>
                             <p className="text-gray-400 text-sm md:text-base font-medium break-all">corporatemetalstickersindia@gmail.com</p>
+                            <p className="text-gray-400 text-sm md:text-base font-medium break-all">Goldsilverplating@gmail.com</p>
                         </div>
                         <div className="flex items-start space-x-3">
                             <span className="text-[#F9D976] mt-1">📍</span>

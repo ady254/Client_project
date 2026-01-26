@@ -6,7 +6,14 @@ import { useInView } from 'react-intersection-observer';
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    if (selectedProduct) {
+      setActiveImageIndex(0);
+    }
+  }, [selectedProduct]);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -21,97 +28,103 @@ export default function ProductsPage() {
 
   const categories = [
     { id: 'all', label: 'All Products' },
-    { id: 'gold', label: 'Gold Stickers' },
-    { id: 'silver', label: 'Silver Stickers' },
-    { id: 'chrome', label: 'Chrome Stickers' },
-    { id: '3d', label: '3D Stickers' },
-    { id: 'A3 or A4 &custom', label: 'A3 or A4 &Custom Requests' },
+    { id: 'gold', label: 'Gold Plating' },
+    { id: 'silver', label: 'Silver Plating' },
+    { id: 'chrome', label: 'Chrome Plating' },
+
   ];
 
   const products = [
     {
       id: 1,
-      name: 'Luxury Gold Finish Labels',
+      name: 'Gold Plating Service',
       category: 'gold',
       description: 'Luxurious 24K gold electroplated sticker for high-end branding',
-      image: '/gold-finish.webp',
+      image: ['/gold-plating-metal-sticker-texture.webp', '/gold-finish.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp', '/gold-plating.webp'],
       specs: {
         size: 'A3 or A4 & Custom sizes available',
-        MinOrder: '50 Sheets',
         finish: '24K Gold Electroplating',
-        durability: '5+ years outdoor',
+        goldPurity: '24 Karat',
         adhesive: '6010 or 467h adhesive',
+        Benefits: ['Corrosion Resistance', 'High Durability', 'Aesthetic Appeal', 'Cost-Effective'],
+        serviceLocation: 'Pan India',
+        paymentMode: 'Online/Offline',
       },
+      Application: ['Jewellery', 'Watch Parts', 'Electronic Components', 'Medical Machinery'],
     },
     {
       id: 2,
-      name: 'Stainless Steel Silver Labels',
+      name: 'Stainless Steel Silver Plating Service',
       category: 'silver',
       description: 'Sleek silver finish perfect for modern tech branding',
-      image: '/silver-finish.webp',
+      image: ['/silver-finish.webp', '/stainless-steel-silver-plating-connector.webp', '/silver-plating-surgical.webp', '/silver-plating-pcb.webp'],
       specs: {
-        size: 'A3 or A4 & Custom sizes available',
-        Minorder: '50 Sheets',
-        finish: 'Brushed steel finish, industrial grade and Mirror Chrome Silver',
-        durability: '5+ years outdoor',
+        platingThickness: 'upto 100 µm',
+        Benefits: ['Electrical Conductivity', 'High Durability', 'Lubricity & Anti-Galling', 'Corrosion Resistance'],
         adhesive: '6010 or 467h adhesive',
+        serviceLocation: 'Pan India',
+        paymentMode: 'Online/Offline',
       },
+      Application: ['printed circuit board (PCB)', 'Bus Bar', 'Contacts', 'Medical Equipment'],
     },
     {
       id: 3,
-      name: 'Premium Nickel Chrome Stickers',
-      category: 'Nickel Chrome',
+      name: 'Nickel Chrome Plating Service',
+      category: 'chrome',
       description: 'Premium raised design with crystal-clear resin coating',
-      image: '/chrome-finish.webp',
+      image: ['/chrome-finish.webp', '/silver-automobile.webp', '/chrome-plating-taps.webp', '/silver-plating.webp'],
       specs: {
         size: 'A3 or A4 & Custom sizes available',
-        Minorder: '50 Sheets',
+        Benefits: ['Corrosion Resistance', 'High Durability', 'Aesthetic Appeal', 'Cost-Effective'],
         finish: 'Polyurethane resin coating',
-        durability: '7+ years outdoor',
         adhesive: '6010 or 467h adhesive',
+        serviceLocation: 'Pan India',
+        paymentMode: 'Online/Offline',
       },
+      Application: ['Automobile Industry', 'Household and Plumbing', 'Electronics and Connectors', 'Medical Equipment'],
     },
     {
       id: 4,
-      name: 'Rose Gold Premium Stickers',
+      name: 'Rose Gold Plating',
       category: 'gold',
       description: 'Textured gold finish for premium automotive applications',
-      image: 'rose-gold.webp',
+      image: ['/rose-gold.webp'],
       specs: {
         size: 'A3 or A4 & Custom sizes available',
         Minorder: '50 Sheets',
         finish: 'Brushed gold texture',
-        durability: '6+ years outdoor',
+        Benefits: ['Affordability', 'Corrosion Resistance', 'Durability & Protection', 'Aesthetic Appeal', 'High-Quality Finish'],
         adhesive: '6010 or 467h adhesive',
       },
+      Application: ['Jewelry & Accessories', 'Fashion & Decor', 'Electronics & Wearables', 'Fixtures & Fittings'],
     },
     {
       id: 5,
-      name: 'Matte Black Finish Stickers',
+      name: 'Matte Black Finish Plating',
       category: 'Matte Black',
       description: 'High-polish chrome for luxury product branding',
-      image: '/gem-finished.webp',
+      image: ['/gem-finished.webp'],
       specs: {
         size: 'A3 or A4 & Custom sizes available',
-        Minorder: '50 Sheets',
         finish: 'High-gloss chrome',
-        durability: '5+ years outdoor',
+        Benefits: ['Enhanced Durability', 'Aesthetic Appeal', 'Cost-Effective', 'Reduced Glare'],
         adhesive: '6010 or 467h adhesive',
       },
+      Application: ['Jewelry Manufacturing', 'Automotive Industry', 'Consumer Electronics', 'Household and Decor'],
     },
     {
       id: 6,
       name: 'Custom Printed Metal Labels',
       category: 'Printed',
       description: 'Any shape, any design - fully A3 or A4 &customizable metal stickers',
-      image: '/custom-printed.webp',
+      image: ['/custom-printed.webp'],
       specs: {
         size: 'Fully A3 or A4 &customizable',
-        Minorder: '50 Sheets',
         finish: 'Choice of gold, silver, or chrome',
         durability: '5+ years outdoor',
         adhesive: 'Multiple options available',
       },
+
     },
   ];
 
@@ -128,7 +141,7 @@ export default function ProductsPage() {
       `Description: ${product.description}\n\n` +
       `Specifications:\n` +
       `• Size: ${product.specs.size}\n` +
-      `• Min Order: ${product.specs.MinOrder ?? product.specs.Minorder}\n` +
+
       `• Finish: ${product.specs.finish}\n` +
       `• Durability: ${product.specs.durability}\n` +
       `• Adhesive: ${product.specs.adhesive}\n\n` +
@@ -148,36 +161,36 @@ export default function ProductsPage() {
       <div className="max-w-7xl mx-auto">
         <div ref={headerInViewRef} className="text-center mb-20 relative py-10">
           <div className="absolute inset-0 flex items-center justify-center -z-10 pointer-events-none select-none overflow-hidden">
-            <span 
+            <span
               className="text-[15vw] font-black italic text-white/5 whitespace-nowrap transition-transform duration-500 ease-out"
-              style={{ 
+              style={{
                 transform: `translateX(${(scrollY - 100) * -0.3}px)`,
-                opacity: headerInView ? 0.05 : 0 
+                opacity: headerInView ? 0.05 : 0
               }}
             >
               PREMIUM PRODUCTS PREMIUM PRODUCTS
             </span>
           </div>
-          
+
           <div className="relative overflow-hidden">
-            <h1 
+            <h1
               className="text-5xl md:text-7xl font-bold text-white mb-6 transition-all duration-700 ease-out uppercase tracking-tighter"
               style={{
-                transform: headerInView 
-                  ? `translateY(${(scrollY - 100) * 0.05}px)` 
+                transform: headerInView
+                  ? `translateY(${(scrollY - 100) * 0.05}px)`
                   : 'translateY(50px)',
                 opacity: headerInView ? 1 : 0
               }}
             >
-              Our <span className="text-[#F9D976]">Products</span>
+              Our <span className="text-[#F9D976]">Services</span>
             </h1>
           </div>
 
-          <p 
+          <p
             className="text-xl text-gray-400 max-w-3xl mx-auto transition-all duration-700 delay-100 ease-out uppercase tracking-widest text-sm font-bold"
             style={{
-              transform: headerInView 
-                ? `translateY(${(scrollY - 100) * 0.02}px)` 
+              transform: headerInView
+                ? `translateY(${(scrollY - 100) * 0.02}px)`
                 : 'translateY(20px)',
               opacity: headerInView ? 1 : 0
             }}
@@ -222,7 +235,7 @@ export default function ProductsPage() {
               {/* Main Content Cells */}
               <div className="border-r border-white/10 p-6 relative overflow-hidden bg-white/5 flex items-center justify-center aspect-square">
                 <img
-                  src={product.image}
+                  src={product.image[0]}
                   alt={product.name}
                   className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700"
                 />
@@ -245,7 +258,7 @@ export default function ProductsPage() {
 
               {/* Footer Cells */}
               <div className="col-span-2 border-t border-white/10 p-3 flex justify-between items-center bg-white/5">
-                <span className="text-[8px] text-white/20 font-bold tracking-[0.2em] uppercase">www.metalstickers.in</span>
+                <span className="text-[8px] text-white/20 font-bold tracking-[0.2em] uppercase">www.metalstickersindiaofficial.com</span>
                 <div className="flex gap-4">
                   <button
                     onClick={() => setSelectedProduct(product)}
@@ -276,12 +289,35 @@ export default function ProductsPage() {
               <X size={24} />
             </button>
 
-            <div className="md:w-1/2 bg-white/5 p-12 flex items-center justify-center border-b md:border-b-0 md:border-r border-white/10">
-              <img
-                src={selectedProduct.image}
-                alt={selectedProduct.name}
-                className="w-full h-auto object-contain"
-              />
+            <div className="md:w-1/2 bg-white/5 p-8 flex flex-col border-b md:border-b-0 md:border-r border-white/10">
+              <div className="flex-1 flex items-center justify-center p-4">
+                <img
+                  src={selectedProduct.image[activeImageIndex]}
+                  alt={selectedProduct.name}
+                  className="w-full h-full object-contain max-h-[50vh]"
+                />
+              </div>
+              {/* Thumbnails */}
+              {selectedProduct.image.length > 1 && (
+                <div className="flex gap-2 mt-4 overflow-x-auto pb-2 justify-center">
+                  {selectedProduct.image.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveImageIndex(idx)}
+                      className={`relative w-16 h-16 border rounded-md overflow-hidden flex-shrink-0 transition-all ${activeImageIndex === idx
+                        ? 'border-[#F9D976] ring-1 ring-[#F9D976]'
+                        : 'border-white/10 hover:border-white/30'
+                        }`}
+                    >
+                      <img
+                        src={img}
+                        alt={`${selectedProduct.name} view ${idx + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="md:w-1/2 p-8 md:p-16 flex flex-col justify-between">
@@ -297,6 +333,23 @@ export default function ProductsPage() {
                 </div>
 
                 <div className="space-y-6">
+
+                  {/* Applications Section */}
+                  {selectedProduct.Application && (
+                    <div className="mb-6">
+                      <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-[#F9D976] border-b border-white/10 pb-2 mb-3">
+                        Applications
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedProduct.Application.map((app, i) => (
+                          <span key={i} className="px-3 py-1 bg-white/5 border border-white/10 text-[10px] text-gray-300 font-bold uppercase tracking-wider">
+                            {app}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-[#F9D976] border-b border-white/10 pb-2">
                     Specifications
                   </h3>
@@ -304,15 +357,18 @@ export default function ProductsPage() {
                     {Object.entries(selectedProduct.specs ?? {}).map(([key, value]) => (
                       <div
                         key={key}
-                        className="flex justify-between items-center text-xs"
+                        className="flex justify-between items-start text-xs border-b border-white/5 pb-2 last:border-0"
                       >
-                        <span className="text-gray-400 uppercase tracking-widest font-bold">
-                          {key.replace('_', ' ')}
+                        <span className="text-gray-400 uppercase tracking-widest font-bold whitespace-nowrap pt-1">
+                          {key.replace(/([A-Z])/g, ' $1').replace('_', ' ').trim()}
                         </span>
-                        <span className="text-white font-black uppercase tracking-wider">{String(value ?? '')}</span>
+                        <span className="text-white font-black uppercase tracking-wider text-right ml-8 leading-relaxed max-w-[60%]">
+                          {Array.isArray(value) ? value.join(', ') : String(value ?? '')}
+                        </span>
                       </div>
                     ))}
                   </div>
+
                 </div>
               </div>
 
