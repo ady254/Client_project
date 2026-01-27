@@ -180,47 +180,41 @@ export default function HomePage() {
 
     {
       id: 1,
-      name: 'Gold Plating Service',
+      name: 'Gold Plating',
       category: 'gold',
       description: 'Luxurious 24K gold electroplated sticker for high-end branding',
-      image: ['/gold-plating-metal-sticker-texture.webp', '/gold-finish.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp', '/gold-plating.webp'],
+      image: ['/gold-plating-metal-sticker-texture.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp', '/gold-plating.webp'],
       specs: {
-        size: 'A3 or A4 & Custom sizes available',
         finish: '24K Gold Electroplating',
-        goldPurity: '24 Karat',
-        adhesive: '6010 or 467h adhesive',
         Benefits: ['Corrosion Resistance', 'High Durability', 'Aesthetic Appeal', 'Cost-Effective'],
         serviceLocation: 'Pan India',
         paymentMode: 'Online/Offline',
       },
-      Application: ['Jewellery', 'Watch Parts', 'Electronic Components', 'Medical Machinery'],
+      Application: ['Jewellery', 'Watch Parts', 'Electronic Components', 'Medical Equipments'],
     },
     {
       id: 2,
-      name: 'Stainless Steel Silver Plating Service',
+      name: 'Silver Plating',
       category: 'silver',
       description: 'Sleek silver finish perfect for modern tech branding',
-      image: ['/silver-finish.webp', '/stainless-steel-silver-plating-connectors.webp', '/silver-plating-surgical.webp', '/silver-plating-pcb.webp'],
+      image: ['/stainless-steel-silver-plating-connectors.webp', '/silver-plating-surgical.webp', '/silver-plating-pcb.webp'],
       specs: {
-        platingThickness: 'upto 100 µm',
-        Benefits: ['Electrical Conductivity', 'High Durability', 'Lubricity & Anti-Galling', 'Corrosion Resistance'],
-        adhesive: '6010 or 467h adhesive',
+        platingThickness: 'As per the requirement',
+        Benefits: ['Electrical Conductivity', 'High Durability', 'Corrosion Resistance'],
         serviceLocation: 'Pan India',
         paymentMode: 'Online/Offline',
       },
-      Application: ['printed circuit board (PCB)', 'Bus Bar', 'Contacts', 'Medical Equipment'],
+      Application: ['printed circuit board (PCB)', 'Bus Bar', 'Contacts', 'Medical Equipments'],
     },
     {
       id: 3,
-      name: 'Nickel Chrome Plating Service',
+      name: 'Nickel Chrome Plating ',
       category: 'chrome',
       description: 'Premium raised design with crystal-clear resin coating',
-      image: ['/chrome-finish.webp', '/silver-automobile.webp', '/chrome-plating-taps.webp', '/silver-plating.webp'],
+      image: ['/silver-automobile.webp', '/chrome-plating-taps.webp', '/silver-plating.webp'],
       specs: {
-        size: 'A3 or A4 & Custom sizes available',
         Benefits: ['Corrosion Resistance', 'High Durability', 'Aesthetic Appeal', 'Cost-Effective'],
         finish: 'Polyurethane resin coating',
-        adhesive: '6010 or 467h adhesive',
         serviceLocation: 'Pan India',
         paymentMode: 'Online/Offline',
       },
@@ -351,7 +345,7 @@ export default function HomePage() {
   });
 
   return (
-    <div className="bg-[#0A0F1F] text-white min-h-screen">
+    <div className="bg-[#0A0F1F] text-white min-h-screen overflow-x-hidden">
       <Helmet>
         <title>Metal Stickers India | Custom Electroplated Metal Labels</title>
         <meta
@@ -443,8 +437,8 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="relative z-10 text-center px-6 w-full max-w-6xl mx-auto py-20">
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight text-white mb-6 leading-tight animate-fade-up">
+        <div className="relative z-10 text-center px-4 sm:px-6 w-full max-w-6xl mx-auto py-12 sm:py-20">
+          <h1 className="text-3xl sm:text-6xl lg:text-7xl font-light tracking-tight text-white mb-6 leading-tight animate-fade-up">
             Premium Electroplated
             <br />
             <span className="bg-gradient-to-r from-[#F9D976] via-[#F6C453] to-[#F39F23] bg-clip-text text-transparent font-medium drop-shadow-sm">
@@ -493,7 +487,7 @@ export default function HomePage() {
       </section>
 
       {/* Our Expertise Section – fixed version */}
-      <section className="py-24 px-5 md:px-8 bg-gradient-to-b from-[#0A0F1F] to-[#0A0F1F]/90">
+      <section className="py-24 px-5 md:px-8 bg-gradient-to-b from-[#0A0F1F] to-[#0A0F1F]/90 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div
             ref={headerInViewRef}
@@ -739,17 +733,19 @@ export default function HomePage() {
         <div className="relative z-10 w-full flex flex-col items-center select-none pointer-events-none">
           {/* Top Layer: Precision. (Moves Left) */}
           <div
-            className="text-[20vw] md:text-[15vw] leading-none font-black italic tracking-tighter text-white opacity-20 transition-transform duration-75 ease-out whitespace-nowrap"
-            style={{ transform: `translateX(${(scrollY - (typeof window !== 'undefined' && window.innerWidth < 768 ? 3500 : 2000)) * -0.6}px)` }}
+            className="text-[15vw] md:text-[15vw] leading-none font-black italic tracking-tighter text-white opacity-20 transition-transform duration-75 ease-out whitespace-nowrap"
+            style={{
+              transform: `translateX(${(scrollY - (typeof window !== 'undefined' && window.innerWidth < 768 ? 3500 : 2000)) * (typeof window !== 'undefined' && window.innerWidth < 768 ? -0.3 : -0.6)}px)`
+            }}
           >
             PRECISION. PRECISION. PRECISION.
           </div>
 
           {/* Middle Layer: Durability. (Moves Right, Outline) */}
           <div
-            className="text-[20vw] md:text-[15vw] leading-none font-black italic tracking-tighter text-transparent transition-transform duration-75 ease-out whitespace-nowrap"
+            className="text-[15vw] md:text-[15vw] leading-none font-black italic tracking-tighter text-transparent transition-transform duration-75 ease-out whitespace-nowrap"
             style={{
-              transform: `translateX(${(scrollY - (typeof window !== 'undefined' && window.innerWidth < 768 ? 3500 : 2000)) * 0.4}px)`,
+              transform: `translateX(${(scrollY - (typeof window !== 'undefined' && window.innerWidth < 768 ? 3500 : 2000)) * (typeof window !== 'undefined' && window.innerWidth < 768 ? 0.2 : 0.4)}px)`,
               WebkitTextStroke: "1px rgba(249, 217, 118, 0.4)"
             }}
           >
@@ -758,15 +754,15 @@ export default function HomePage() {
 
           {/* Bottom Layer: Luxury. (Moves Left, Gold) */}
           <div
-            className="text-[20vw] md:text-[15vw] leading-none font-black italic tracking-tighter text-[#F9D976] opacity-30 transition-transform duration-75 ease-out whitespace-nowrap"
-            style={{ transform: `translateX(${(scrollY - (typeof window !== 'undefined' && window.innerWidth < 768 ? 3500 : 2000)) * -0.5}px)` }}
+            className="text-[15vw] md:text-[15vw] leading-none font-black italic tracking-tighter text-[#F9D976] opacity-30 transition-transform duration-75 ease-out whitespace-nowrap"
+            style={{ transform: `translateX(${(scrollY - (typeof window !== 'undefined' && window.innerWidth < 768 ? 3500 : 2000)) * (typeof window !== 'undefined' && window.innerWidth < 768 ? -0.25 : -0.5)}px)` }}
           >
             LUXURY. LUXURY. LUXURY.
           </div>
 
           {/* Centered Main Text */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center w-full px-6 pointer-events-auto">
-            <h2 className="text-5xl md:text-8xl font-black italic tracking-tighter text-white drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+            <h2 className="text-3xl sm:text-5xl md:text-8xl font-black italic tracking-tighter text-white drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
               PRECISION. DURABILITY. <span className="text-[#F9D976]">LUXURY.</span>
             </h2>
           </div>

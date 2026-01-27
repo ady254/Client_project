@@ -37,51 +37,46 @@ export default function ProductsPage() {
   const products = [
     {
       id: 1,
-      name: 'Gold Plating Service',
+      name: 'Gold Plating',
       category: 'gold',
       description: 'Luxurious 24K gold electroplated sticker for high-end branding',
-      image: ['/gold-plating-metal-sticker-texture.webp', '/gold-finish.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp', '/gold-plating.webp'],
+      image: ['/gold-plating-metal-sticker-texture.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp', '/gold-plating.webp'],
       specs: {
-        size: 'A3 or A4 & Custom sizes available',
         finish: '24K Gold Electroplating',
-        goldPurity: '24 Karat',
-        adhesive: '6010 or 467h adhesive',
         Benefits: ['Corrosion Resistance', 'High Durability', 'Aesthetic Appeal', 'Cost-Effective'],
         serviceLocation: 'Pan India',
         paymentMode: 'Online/Offline',
       },
-      Application: ['Jewellery', 'Watch Parts', 'Electronic Components', 'Medical Machinery'],
+      Application: ['Jewellery', 'Watch Parts', 'Electronics & Electrical Components', 'Medical Equipments'],
     },
     {
       id: 2,
-      name: 'Stainless Steel Silver Plating Service',
+      name: 'Silver Plating',
       category: 'silver',
       description: 'Sleek silver finish perfect for modern tech branding',
-      image: ['/silver-finish.webp', '/stainless-steel-silver-plating-connectors.webp', '/silver-plating-surgical.webp', '/silver-plating-pcb.webp'],
+      image: ['/stainless-steel-silver-plating-connectors.webp', '/silver-plating-surgical.webp', '/silver-plating-pcb.webp'],
       specs: {
-        platingThickness: 'upto 100 µm',
-        Benefits: ['Electrical Conductivity', 'High Durability', 'Lubricity & Anti-Galling', 'Corrosion Resistance'],
-        adhesive: '6010 or 467h adhesive',
+        platingThickness: 'As per requirements',
+        Benefits: ['Electrical Conductivity', 'High Durability', 'Corrosion Resistance'],
         serviceLocation: 'Pan India',
         paymentMode: 'Online/Offline',
       },
-      Application: ['printed circuit board (PCB)', 'Bus Bar', 'Contacts', 'Medical Equipment'],
+      Application: ['printed circuit board (PCB)', 'Bus Bar', 'Contacts', 'Medical Equipments'],
     },
     {
       id: 3,
-      name: 'Nickel Chrome Plating Service',
+      name: 'Nickel Chrome Plating',
       category: 'chrome',
       description: 'Premium raised design with crystal-clear resin coating',
-      image: ['/chrome-finish.webp', '/silver-automobile.webp', '/chrome-plating-taps.webp', '/silver-plating.webp'],
+      image: ['/silver-automobile.webp', '/chrome-plating-taps.webp', '/silver-plating.webp'],
       specs: {
-        size: 'A3 or A4 & Custom sizes available',
+        platingThickness: 'As per requirements',
         Benefits: ['Corrosion Resistance', 'High Durability', 'Aesthetic Appeal', 'Cost-Effective'],
         finish: 'Polyurethane resin coating',
-        adhesive: '6010 or 467h adhesive',
         serviceLocation: 'Pan India',
         paymentMode: 'Online/Offline',
       },
-      Application: ['Automobile Industry', 'Household and Plumbing', 'Electronics and Connectors', 'Medical Equipment'],
+      Application: ['Automobile Industry', 'Household and Plumbing', 'Electronics & Electrical Components', 'Medical Equipments'],
     },
     {
       id: 4,
@@ -151,7 +146,7 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0F1F] pt-32 pb-20 px-6 font-sans">
+    <div className="min-h-screen bg-[#0A0F1F] pt-32 pb-20 px-6 font-sans overflow-x-hidden">
       <Helmet>
         <title>Our Products | Metal Stickers India</title>
         <meta name="description" content="Browse our collection of 24K Gold, Silver, Nickel Chrome, and 3D metal stickers. Custom shapes and sizes available." />

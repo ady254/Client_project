@@ -28,11 +28,11 @@ function Counter({ start = 0, end, duration = 2000, suffix = "", startAnimation 
       if (!startTimeRef.current) startTimeRef.current = timestamp;
       const progress = timestamp - startTimeRef.current;
       const percentage = Math.min(progress / duration, 1);
-      
+
       // Power4 easeOut formula
       const easeOut = 1 - Math.pow(1 - percentage, 4);
       const currentCount = Math.floor(start + (end - start) * easeOut);
-      
+
       if (currentCount !== countRef.current) {
         countRef.current = currentCount;
         setCount(currentCount);
@@ -64,7 +64,7 @@ function ScatterText({ text, inView, className = "", style = {} }: { text: strin
             const x = (Math.random() - 0.5) * scatterRange;
             const y = (Math.random() - 0.5) * scatterRange;
             const rotate = (Math.random() - 0.5) * (isMobile ? 45 : 90);
-            
+
             return (
               <span
                 key={cIndex}
@@ -73,8 +73,8 @@ function ScatterText({ text, inView, className = "", style = {} }: { text: strin
                   display: 'inline-block',
                   whiteSpace: 'pre',
                   opacity: inView ? 1 : 0,
-                  transform: inView 
-                    ? 'translate(0, 0) rotate(0deg) scale(1)' 
+                  transform: inView
+                    ? 'translate(0, 0) rotate(0deg) scale(1)'
                     : `translate(${x}px, ${y}px) rotate(${rotate}deg) scale(0)`,
                   transitionDelay: `${(wIndex * 5 + cIndex) * 20}ms`,
                   filter: inView ? 'blur(0px)' : 'blur(10px)'
@@ -182,17 +182,17 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0F1F] font-sans">
+    <div className="min-h-screen bg-[#0A0F1F] font-sans overflow-x-hidden">
       <Helmet>
         <title>About Us | Metal Stickers India</title>
         <meta name="description" content="Learn about Metal Stickers India, the leading manufacturer of premium electroplated metal labels since 2014. We deliver excellence in every detail." />
         <meta property="og:title" content="About Us | Metal Stickers India" />
         <meta property="og:description" content="Crafting excellence since 2014. We specialize in high-quality gold, silver, and chrome metal branding solutions." />
       </Helmet>
-      
+
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0A0F1F] pt-20">
         {/* Background with subtle parallax */}
-        <div 
+        <div
           className="absolute inset-0 z-0 opacity-20 grayscale brightness-50"
           style={{
             backgroundImage: "url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1920&auto=format&fit=crop')",
@@ -202,7 +202,7 @@ export default function AboutPage() {
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A0F1F] via-transparent to-[#0A0F1F] z-1" />
-        
+
         <div className="relative z-10 w-full flex flex-col items-center select-none pointer-events-none">
           {/* Vertical Blinds Transition Container */}
           <div ref={headerInViewRef} className="relative py-24 px-6 overflow-hidden pointer-events-auto w-full">
@@ -223,7 +223,7 @@ export default function AboutPage() {
             </div>
 
             <div className="relative z-10 text-center max-w-6xl mx-auto">
-              <h1 
+              <h1
                 className="text-5xl md:text-7xl lg:text-9xl font-black italic tracking-tighter uppercase mb-8 leading-none select-none"
                 style={{
                   ...shadowTextStyle,
@@ -235,7 +235,7 @@ export default function AboutPage() {
                 <span className="text-white" style={{ background: 'none', WebkitBackgroundClip: 'border-box', WebkitTextFillColor: 'white' }}>Our Story.</span> <br className="md:hidden" />
                 <span className="text-[#F9D976] filter-none bg-none" style={{ WebkitTextFillColor: '#F9D976' }}>Our Craft.</span>
               </h1>
-              <p 
+              <p
                 className="text-lg md:text-3xl text-gray-400 leading-relaxed max-w-4xl mx-auto uppercase tracking-[0.2em] font-bold"
                 style={{
                   opacity: headerInView ? 1 : 0,
@@ -253,7 +253,7 @@ export default function AboutPage() {
       <section ref={founderInViewRef} className="py-32 px-6 relative bg-[#0A0F1F] overflow-hidden">
         <div className="relative z-10 max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div 
+            <div
               className="relative transition-all duration-1000 ease-out"
               style={{
                 transform: founderInView ? 'translateX(0)' : 'translateX(-50px)',
@@ -266,14 +266,14 @@ export default function AboutPage() {
                   alt="Founder & CEO"
                   className="w-full h-full object-cover opacity-80 transition-transform duration-[2000ms] ease-out"
                   style={{
-                    transform: founderInView 
-                      ? `scale(1.1) translateY(${(scrollY - 500) * -0.05}px)` 
+                    transform: founderInView
+                      ? `scale(1.1) translateY(${(scrollY - 500) * -0.05}px)`
                       : 'scale(1) translateY(0)'
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1F] via-transparent to-transparent opacity-60" />
               </div>
-              <div 
+              <div
                 className="absolute -bottom-8 -right-8 w-64 h-64 bg-[#F9D976]/10 rounded-full blur-3xl transition-transform duration-1000"
                 style={{
                   transform: `translate(${(scrollY - 500) * 0.1}px, ${(scrollY - 500) * 0.1}px)`
@@ -282,7 +282,7 @@ export default function AboutPage() {
             </div>
 
             <div className="space-y-8">
-              <div 
+              <div
                 className="transition-all duration-1000 delay-300 ease-out"
                 style={{
                   transform: founderInView ? 'translateY(0)' : 'translateY(30px)',
@@ -299,7 +299,7 @@ export default function AboutPage() {
                 </h2>
               </div>
 
-              <div 
+              <div
                 className="space-y-6 text-gray-400 leading-relaxed font-medium transition-all duration-1000 delay-500 ease-out"
                 style={{
                   transform: founderInView ? 'translateY(0)' : 'translateY(30px)',
@@ -348,11 +348,11 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <div className="text-5xl font-black text-white mb-2 tracking-tighter transition-all duration-700 group-hover:text-[#F9D976]">
-                    <Counter 
-                      start={stat.start || 0} 
-                      end={stat.value} 
-                      suffix={stat.suffix} 
-                      startAnimation={statsInView} 
+                    <Counter
+                      start={stat.start || 0}
+                      end={stat.value}
+                      suffix={stat.suffix}
+                      startAnimation={statsInView}
                     />
                   </div>
                   <div className="text-[10px] text-gray-400 tracking-[0.3em] uppercase font-bold group-hover:text-white transition-colors duration-500">{stat.label}</div>
@@ -376,7 +376,7 @@ export default function AboutPage() {
 
         <div className="absolute inset-0 flex items-center justify-center text-center px-6">
           <div className="max-w-4xl mx-auto" ref={precisionRef}>
-            <h2 
+            <h2
               className="text-3xl sm:text-4xl md:text-7xl font-black text-white mb-6 leading-tight uppercase tracking-tighter px-4 flex flex-col items-center justify-center"
               style={{
                 transform: `translateY(${(scrollY - 1500) * -0.05}px)`
@@ -386,14 +386,14 @@ export default function AboutPage() {
               <br className="hidden md:block" />
               <ScatterText text="Perfection" inView={precisionInView} className="text-[#F9D976]" />
             </h2>
-            <p 
+            <p
               className="text-sm sm:text-base md:text-lg text-gray-400 leading-relaxed uppercase tracking-[0.2em] font-bold px-6 max-w-2xl mx-auto"
               style={{
                 transform: `translateY(${(scrollY - 1500) * -0.02}px)`
               }}
             >
-              <TypingText 
-                text="Every sticker tells a story of craftsmanship, dedication, and the pursuit of excellence." 
+              <TypingText
+                text="Every sticker tells a story of craftsmanship, dedication, and the pursuit of excellence."
                 inView={precisionInView}
               />
             </p>
@@ -403,11 +403,11 @@ export default function AboutPage() {
 
       <section ref={valuesInViewRef} className="py-32 px-6 relative bg-[#0A0F1F] overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center -z-0 pointer-events-none select-none overflow-hidden">
-          <span 
+          <span
             className="text-[15vw] font-black italic text-white/5 whitespace-nowrap transition-transform duration-500 ease-out"
-            style={{ 
+            style={{
               transform: `translateX(${(scrollY - 2000) * -0.3}px)`,
-              opacity: valuesInView ? 0.05 : 0 
+              opacity: valuesInView ? 0.05 : 0
             }}
           >
             OUR VALUES OUR VALUES OUR VALUES
@@ -416,19 +416,19 @@ export default function AboutPage() {
 
         <div className="relative z-10 max-w-6xl mx-auto">
           <div className="text-center mb-20 relative">
-            <h2 
+            <h2
               className="text-4xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter transition-all duration-700 ease-out"
               style={{
-                transform: valuesInView 
-                  ? `translateY(${(scrollY - 2000) * 0.05}px)` 
+                transform: valuesInView
+                  ? `translateY(${(scrollY - 2000) * 0.05}px)`
                   : 'translateY(50px)',
                 opacity: valuesInView ? 1 : 0
               }}
             >
               Our <span className="text-[#F9D976]">Values</span>
             </h2>
-            <div 
-              className={`h-px bg-[#F9D976]/30 mx-auto transition-all duration-1000 delay-300 ${valuesInView ? 'w-20 opacity-100' : 'w-0 opacity-0'}`} 
+            <div
+              className={`h-px bg-[#F9D976]/30 mx-auto transition-all duration-1000 delay-300 ${valuesInView ? 'w-20 opacity-100' : 'w-0 opacity-0'}`}
             />
           </div>
 
@@ -456,15 +456,15 @@ export default function AboutPage() {
               // Calculate scroll-linked parallax offset - reduced for mobile
               const multiplier = isMobile ? 0.02 : 0.05;
               const offset = (scrollY - 2200) * multiplier;
-              
+
               return (
                 <div
                   key={index}
                   className="p-6 md:p-10 space-y-4 bg-[#1A1F2E]/40 backdrop-blur-md border border-white/10 group hover:border-[#F9D976]/50 transition-all duration-1000 ease-out hover:-translate-y-2 relative overflow-hidden"
                   style={{
                     opacity: valuesInView ? 1 : 0,
-                    transform: valuesInView 
-                      ? `translate(${value.slideDir * offset}px, ${value.slideDir === 0 ? offset : 0}px)` 
+                    transform: valuesInView
+                      ? `translate(${value.slideDir * offset}px, ${value.slideDir === 0 ? offset : 0}px)`
                       : `translate(${value.slideDir * (isMobile ? 20 : 50)}px, ${isMobile ? 20 : 50}px)`,
                     transitionDelay: `${index * 150}ms`,
                     transitionProperty: valuesInView ? 'opacity, border-color, background-color, transform, box-shadow' : 'all'
@@ -473,7 +473,7 @@ export default function AboutPage() {
                   {/* Background Gold Glow Effect */}
                   <div className="absolute inset-0 bg-gradient-to-br from-[#F9D976]/0 via-[#F9D976]/0 to-[#F9D976]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                   <div className="absolute -inset-full bg-gradient-to-br from-transparent via-[#F9D976]/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
-                  
+
                   <div className="relative z-10 space-y-4">
                     <h3 className="text-xl font-black text-white uppercase tracking-tight group-hover:text-[#F9D976] transition-colors duration-500">{value.title}</h3>
                     <p className="text-sm text-gray-400 leading-relaxed font-medium group-hover:text-gray-300 transition-colors duration-500">{value.description}</p>
