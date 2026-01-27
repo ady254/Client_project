@@ -57,7 +57,7 @@ export default function ProductsPage() {
       name: 'Stainless Steel Silver Plating Service',
       category: 'silver',
       description: 'Sleek silver finish perfect for modern tech branding',
-      image: ['/silver-finish.webp', '/stainless-steel-silver-plating-connector.webp', '/silver-plating-surgical.webp', '/silver-plating-pcb.webp'],
+      image: ['/silver-finish.webp', '/stainless-steel-silver-plating-connectors.webp', '/silver-plating-surgical.webp', '/silver-plating-pcb.webp'],
       specs: {
         platingThickness: 'upto 100 µm',
         Benefits: ['Electrical Conductivity', 'High Durability', 'Lubricity & Anti-Galling', 'Corrosion Resistance'],
