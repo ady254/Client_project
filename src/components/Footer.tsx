@@ -27,27 +27,46 @@ export default function Footer() {
                 {/* Middle: Contact */}
                 <div className="space-y-6">
                     <h4 className="text-lg font-black text-white uppercase tracking-tight border-b border-[#F9D976]/30 pb-2 inline-block">Contact Us</h4>
-                    <div className="space-y-4">
-                        <div className="flex items-start space-x-3 group">
-                            <span className="text-[#F9D976] mt-1">📞</span>
-                            <div className="text-gray-400 text-sm md:text-base font-medium space-y-1">
-                                <p className="text-white font-bold tracking-tight">+91 99998 65558</p>
-                                <p className="text-white font-bold tracking-tight">+91 9811018728</p>
-                                <p className="text-white font-bold tracking-tight">+91 9717163149</p>
+                    <div className="space-y-6">
+                        {/* Metal Stickers Contact */}
+                        <div className="space-y-3">
+                            <p className="text-[10px] font-black text-[#F9D976] uppercase tracking-[0.2em]">Metal Stickers Orders</p>
+                            <div className="flex items-start space-x-3 group">
+                                <span className="text-[#F9D976] mt-1">📞</span>
+                                <div className="text-gray-400 text-sm font-medium space-y-1">
+                                    <p className="text-white font-bold tracking-tight">+91 99998 65558 | +91 9717163149</p>
+                                </div>
+                            </div>
+                            <div className="flex items-start space-x-3">
+                                <span className="text-[#F9D976] mt-1">✉️</span>
+                                <p className="text-gray-400 text-[11px] font-medium break-all tracking-tight leading-relaxed">
+                                    corporatemetalstickersindia@gmail.com
+                                </p>
                             </div>
                         </div>
-                        <div className="flex items-start space-x-3">
-                            <span className="text-[#F9D976] mt-1">✉️</span>
-                            <div className="text-gray-400 text-sm md:text-base font-medium space-y-2 overflow-hidden">
-                                <p className="break-all tracking-tight leading-none h-auto py-1">corporatemetalstickersindia@gmail.com</p>
-                                <p className="break-all tracking-tight leading-none h-auto py-1">Goldsilverplating@gmail.com</p>
+
+                        {/* Precious Plating Contact */}
+                        <div className="space-y-3">
+                            <p className="text-[10px] font-black text-[#F9D976] uppercase tracking-[0.2em]">Precious Plating Orders</p>
+                            <div className="flex items-start space-x-3 group">
+                                <span className="text-[#F9D976] mt-1">📞</span>
+                                <div className="text-gray-400 text-sm font-medium space-y-1">
+                                    <p className="text-white font-bold tracking-tight">+91 9811018728</p>
+                                </div>
+                            </div>
+                            <div className="flex items-start space-x-3">
+                                <span className="text-[#F9D976] mt-1">✉️</span>
+                                <p className="text-gray-400 text-[11px] font-medium break-all tracking-tight leading-relaxed">
+                                    Goldsilverplating@gmail.com
+                                </p>
                             </div>
                         </div>
-                        <div className="flex items-start space-x-3">
+
+                        <div className="flex items-start space-x-3 pt-2 border-t border-white/5">
                             <span className="text-[#F9D976] mt-1">📍</span>
-                            <p className="text-gray-400 text-sm md:text-base font-medium leading-relaxed">
+                            <p className="text-gray-400 text-sm font-medium leading-relaxed">
                                 11/7 New Anangpur, Sector 37<br />
-                                Badarpur, Faridabad, Haryana 121003, India
+                                Badarpur, Faridabad, Haryana 121003
                             </p>
                         </div>
                     </div>

@@ -15,7 +15,8 @@ export default function Navigation() {
 
   const menuItems = [
     { label: "Home", path: "/" },
-    { label: "Services", path: "/services" },
+    { label: "Metal Stickers", path: "/metal-stickers" },
+    { label: "Precious Plating", path: "/precious-plating" },
     { label: "About Us", path: "/about" },
     // { label: "Careers", path: "/careers" },
     { label: "Contact", path: "/contact" },

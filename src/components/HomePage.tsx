@@ -145,7 +145,7 @@ function ServiceDetailBlock({ product, index }: { product: Product; index: numbe
 
           <div className="mt-12 group/btn">
             <a
-              href={`https://wa.me/919999865558?text=${encodeURIComponent(`New Order Inquiry\n\nProduct: ${product.name}\n\nI interested in this service. Please provide a quote.`)}`}
+              href={`https://wa.me/${product.category === 'gold' && product.name.includes('Sticker') || product.id >= 4 ? '919999865558' : '919811018728'}?text=${encodeURIComponent(`New Inquiry\n\nProduct: ${product.name}\n\nI interested in this service. Please provide a quote.`)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="relative inline-flex items-center justify-center w-full md:w-auto px-10 py-5 bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] text-[11px] font-black uppercase tracking-[0.4em] transition-all duration-300 rounded-2xl shadow-xl shadow-[#F9D976]/10 hover:scale-[1.02] hover:shadow-[#F9D976]/20 active:scale-95 overflow-hidden"
@@ -182,7 +182,7 @@ export default function HomePage() {
       id: 1,
       name: 'Gold Plating',
       category: 'gold',
-      description: 'Luxurious 24K gold electroplated sticker for high-end branding',
+      description: 'Luxurious 24K gold electroplated service for high-end branding and industrial excellence',
       image: ['/gold-plating-metal-sticker-texture.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp', '/gold-plating.webp'],
       specs: {
         finish: '24K Gold Electroplating',
@@ -193,18 +193,18 @@ export default function HomePage() {
       Application: ['Jewellery', 'Watch Parts', 'Electronic Components', 'Medical Equipments'],
     },
     {
-      id: 2,
-      name: 'Silver Plating',
-      category: 'silver',
-      description: 'Sleek silver finish perfect for modern tech branding',
-      image: ['/stainless-steel-silver-plating-connectors.webp', '/silver-plating-surgical.webp', '/silver-plating-pcb.webp'],
+      id: 4,
+      name: 'Rose Gold Stickers',
+      category: 'gold-sticker',
+      description: 'Textured rose gold finish for premium automotive and luxury branding',
+      image: ['/rose-gold.webp'],
       specs: {
-        platingThickness: 'As per the requirement',
-        Benefits: ['Electrical Conductivity', 'High Durability', 'Corrosion Resistance'],
-        serviceLocation: 'Pan India',
-        paymentMode: 'Online/Offline',
+        size: 'A3 or A4 & Custom sizes available',
+        finish: 'Brushed gold texture',
+        Benefits: ['Affordability', 'Corrosion Resistance', 'Durability & Protection', 'Aesthetic Appeal'],
+        adhesive: '6010 or 467h adhesive',
       },
-      Application: ['printed circuit board (PCB)', 'Bus Bar', 'Contacts', 'Medical Equipments'],
+      Application: ['Jewelry & Accessories', 'Fashion & Decor', 'Electronics & Wearables', 'Fixtures & Fittings'],
     },
     {
       id: 3,
@@ -439,19 +439,15 @@ export default function HomePage() {
 
         <div className="relative z-10 text-center px-4 sm:px-6 w-full max-w-6xl mx-auto py-12 sm:py-20">
           <h1 className="text-3xl sm:text-6xl lg:text-7xl font-light tracking-tight text-white mb-6 leading-tight animate-fade-up">
-            Premium Electroplated
+            Premium Metal Stickers &
             <br />
             <span className="bg-gradient-to-r from-[#F9D976] via-[#F6C453] to-[#F39F23] bg-clip-text text-transparent font-medium drop-shadow-sm">
-              Metal Stickers
+              Precious Plating Solutions
             </span>
           </h1>
 
           <p className="text-base sm:text-lg text-gray-300 mb-8 max-w-2xl mx-auto font-light leading-relaxed animate-fade-up [animation-delay:200ms] opacity-0">
-            Custom Gold, Silver & Chrome Branding Solutions for Businesses & Products.
-            <span className="hidden sm:inline">
-              {" "}
-              Elevate your brand identity with our exquisite craftsmanship.
-            </span>
+            Two specialized services tailored for branding and industrial excellence.
           </p>
 
           <div className="h-8 mb-10 flex items-center justify-center animate-fade-up [animation-delay:400ms] opacity-0">
@@ -464,24 +460,48 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 animate-fade-up [animation-delay:600ms] opacity-0">
-            <a
-              href="https://wa.me/919999865558?text=Hello"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-[#22C55E] to-[#15803d] text-white px-8 py-4 rounded-full text-base font-medium transition-all duration-300 hover:scale-105 shadow-lg group"
-            >
-              <MessageCircle size={20} className="group-hover:animate-bounce" />
-              <span>Get Quote on WhatsApp</span>
-            </a>
+          <div className="flex flex-col items-center gap-8 animate-fade-up [animation-delay:600ms] opacity-0">
+            {/* Primary CTAs Side by Side */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 w-full">
+              <Link
+                to="/metal-stickers"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] px-8 py-4 rounded-full text-base font-bold transition-all duration-300 hover:scale-105 shadow-lg group"
+              >
+                <span className="text-xl">🟡</span>
+                <span>Explore Metal Stickers</span>
+              </Link>
 
-            <a
-              href="/catalog.pdf"
-              className="w-full sm:w-auto inline-flex items-center justify-center space-x-3 bg-white/5 backdrop-blur-md border border-[#F9D976]/30 text-[#F9D976] px-8 py-4 rounded-full text-base font-medium transition-all duration-300 hover:bg-[#F9D976]/10 hover:border-[#F9D976] shadow-lg"
-            >
-              <ArrowRight size={20} />
-              <span>View Catalogue</span>
-            </a>
+              <Link
+                to="/precious-plating"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-3 bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-full text-base font-bold transition-all duration-300 hover:bg-white/20 hover:scale-105 shadow-lg"
+              >
+                <span className="text-xl">⚪</span>
+                <span>Explore Plating Services</span>
+              </Link>
+            </div>
+
+            {/* Secondary CTAs Below */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm font-medium">
+              <a
+                href="https://wa.me/919999865558"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-[#F9D976] hover:text-white transition-colors"
+              >
+                <MessageCircle size={16} />
+                Order Stickers on WhatsApp: +91 99998 65558
+              </a>
+              <span className="hidden sm:block text-gray-600">|</span>
+              <a
+                href="https://wa.me/919811018728"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-white/80 hover:text-[#F9D976] transition-colors"
+              >
+                <MessageCircle size={16} />
+                Order Plating on WhatsApp: +91 9811018728
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -523,12 +543,19 @@ export default function HomePage() {
           </div>
 
           {/* Explore More Services Button */}
-          <div className="text-center mt-12">
+          <div className="text-center mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
             <Link
-              to="/services"
+              to="/metal-stickers"
               className="inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#F9D976]/30 group"
             >
-              <span>Explore More Services</span>
+              <span>Explore Metal Stickers</span>
+              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link
+              to="/precious-plating"
+              className="inline-flex items-center justify-center space-x-3 bg-white/5 border border-white/20 text-white px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:bg-white/10 hover:scale-105 group"
+            >
+              <span>Explore Plating Services</span>
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

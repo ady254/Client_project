@@ -1,4 +1,4 @@
-import { Mail, MapPin, MessageCircle, Phone, Send } from 'lucide-react';
+import { Mail, MapPin, Phone, Send } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useInView } from 'react-intersection-observer';
@@ -39,6 +39,7 @@ export default function ContactPage() {
     const whatsappMessage = encodeURIComponent(
       `*New Inquiry Received*\n\n*Name:* ${formData.name}\n*Email:* ${formData.email}\n*Company:* ${formData.company}\n*Phone:* ${formData.phone}\n*Inquiry Type:* ${formData.inquiryType}\n*Estimated Quantity:* ${formData.quantity}\n\n*Message:* ${formData.message}`
     );
+    // Use the primary number for general inquiries, or specific ones if logic is added.
     window.open(`https://wa.me/919999865558?text=${whatsappMessage}`, '_blank');
   };
 
@@ -176,60 +177,48 @@ export default function ContactPage() {
                 </div>
 
                 <div className="space-y-4">
-                  <a
-                    href="https://wa.me/919999865558"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 p-4 md:p-5 bg-[#1A1F2E]/40 backdrop-blur-md border border-white/10 rounded-none hover:bg-gradient-to-r hover:from-[#F9D976]/5 hover:to-[#F9D976]/10 hover:border-[#F9D976]/30 transition-all duration-500"
-                  >
-                    <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-none bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center shadow-2xl shadow-green-500/50 group-hover:scale-110 transition-transform duration-300">
-                      <MessageCircle className="w-5 h-5 md:w-6 md:h-6 text-white" />
-                    </div>
-                    <div className="flex-grow w-full">
-                      <div className="flex items-center justify-between">
-                        <h3 className="text-lg font-black text-white uppercase tracking-tight group-hover:text-[#F9D976] transition-colors duration-500">WhatsApp</h3>
-                        <p className="text-green-400 font-bold">+91 9999865558</p>
+                  <div className="p-4 md:p-6 bg-[#1A1F2E]/40 backdrop-blur-md border border-white/10 rounded-none space-y-6">
+                    {/* Metal Stickers Orders */}
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                        <h3 className="text-sm font-black text-[#F9D976] uppercase tracking-[0.2em]">Metal Stickers Orders</h3>
                       </div>
-                      <p className="text-gray-400 text-xs md:text-sm font-medium">Quick response, instant quotes</p>
-                    </div>
-                  </a>
-
-                  <a
-                    href="tel:+919999865558"
-                    className="group flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 p-4 md:p-5 bg-[#1A1F2E]/40 backdrop-blur-md border border-white/10 rounded-none hover:bg-white/10 hover:border-[#F9D976]/30 transition-all duration-500"
-                  >
-                    <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-none bg-gradient-to-br from-[#F9D976] to-amber-600 flex items-center justify-center shadow-2xl shadow-[#F9D976]/50 group-hover:scale-110 transition-transform duration-300">
-                      <Phone className="w-5 h-5 md:w-6 md:h-6 text-white" />
-                    </div>
-                    <div className="flex-grow w-full">
-                      <div className="flex items-center justify-between">
-                        <h3 className="text-lg font-black text-white uppercase tracking-tight group-hover:text-[#F9D976] transition-colors duration-500">Phone</h3>
-                        <div className="text-right">
-                          <p className="text-[#F9D976] font-bold">+91 9999865558</p>
-                          <p className="text-[#F9D976] font-bold">+91 9811018728</p>
-                          <p className="text-[#F9D976] font-bold text-xs md:text-sm">+91 9717163149</p>
+                      <a href="tel:+919999865558" className="flex items-center space-x-4 group/item">
+                        <div className="w-10 h-10 rounded-none bg-green-500/20 flex items-center justify-center border border-green-500/30 group-hover/item:bg-green-500 group-hover/item:text-white transition-all">
+                          <Phone className="w-5 h-5 text-green-500 group-hover/item:text-white" />
                         </div>
-                      </div>
-                      <p className="text-gray-400 text-xs md:text-sm font-medium">Mon - Sat, 10 AM - 6 PM IST</p>
+                        <div>
+                          <p className="text-white font-bold tracking-tight text-lg">+91 99998 65558</p>
+                          <p className="text-white font-bold tracking-tight text-lg">+91 9717163149</p>
+                        </div>
+                      </a>
+                      <a href="mailto:corporatemetalstickersindia@gmail.com" className="flex items-center space-x-4 group/item">
+                        <div className="w-10 h-10 rounded-none bg-blue-500/20 flex items-center justify-center border border-blue-500/30 group-hover/item:bg-blue-500 group-hover/item:text-white transition-all">
+                          <Mail className="w-5 h-5 text-blue-500 group-hover/item:text-white" />
+                        </div>
+                        <p className="text-blue-400 font-bold text-sm break-all">corporatemetalstickersindia@gmail.com</p>
+                      </a>
                     </div>
-                  </a>
 
-                  <a
-                    href="mailto:corporatemetalstickersindia@gmail.com"
-                    className="group flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 p-4 md:p-5 bg-[#1A1F2E]/40 backdrop-blur-md border border-white/10 rounded-none hover:bg-white/10 hover:border-[#F9D976]/30 transition-all duration-500"
-                  >
-                    <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-none bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-2xl shadow-blue-500/50 group-hover:scale-110 transition-transform duration-300">
-                      <Mail className="w-5 h-5 md:w-6 md:h-6 text-white" />
-                    </div>
-                    <div className="flex-grow min-w-0 w-full">
-                      <div className="flex items-center justify-between">
-                        <h3 className="text-lg font-black text-white uppercase tracking-tight group-hover:text-[#F9D976] transition-colors duration-500">Email</h3>
+                    {/* Precious Plating Orders */}
+                    <div className="space-y-4 pt-4 border-t border-white/5">
+                      <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                        <h3 className="text-sm font-black text-[#F9D976] uppercase tracking-[0.2em]">Precious Plating Orders</h3>
                       </div>
-                      <p className="text-blue-400 font-bold truncate text-xs md:text-base">corporatemetalstickersindia@gmail.com</p>
-                      <p className="text-blue-400 font-bold truncate text-xs md:text-base">Goldsilverplating@gmail.com</p>
-                      <p className="text-gray-400 text-xs md:text-sm font-medium">For detailed inquiries</p>
+                      <a href="tel:+919811018728" className="flex items-center space-x-4 group/item">
+                        <div className="w-10 h-10 rounded-none bg-amber-500/20 flex items-center justify-center border border-amber-500/30 group-hover/item:bg-amber-500 group-hover/item:text-white transition-all">
+                          <Phone className="w-5 h-5 text-amber-500 group-hover/item:text-white" />
+                        </div>
+                        <p className="text-white font-bold tracking-tight text-lg">+91 9811018728</p>
+                      </a>
+                      <a href="mailto:Goldsilverplating@gmail.com" className="flex items-center space-x-4 group/item">
+                        <div className="w-10 h-10 rounded-none bg-blue-500/20 flex items-center justify-center border border-blue-500/30 group-hover/item:bg-blue-500 group-hover/item:text-white transition-all">
+                          <Mail className="w-5 h-5 text-blue-500 group-hover/item:text-white" />
+                        </div>
+                        <p className="text-blue-400 font-bold text-sm">Goldsilverplating@gmail.com</p>
+                      </a>
                     </div>
-                  </a>
+                  </div>
 
                   {/* Integrated Workshop Content */}
                   <div className="pt-8 mt-8 border-t border-white/10">
