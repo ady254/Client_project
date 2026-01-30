@@ -1,5 +1,5 @@
-import { ArrowRight, MessageCircle } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowRight, Award, Clock, Headphones, MessageCircle, Smile, Truck, Users } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
@@ -17,145 +17,52 @@ interface Product {
   Application?: string[];
 }
 
-function ServiceDetailBlock({ product, index }: { product: Product; index: number }) {
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const isReversed = index % 2 !== 0;
+function ServiceDetailBlock({ product, index, onClick }: { product: Product; index: number; onClick: (product: Product) => void }) {
   const { ref, inView } = useInView({
-    triggerOnce: false,
-    threshold: 0.15,
+    triggerOnce: true,
+    threshold: 0.1,
   });
 
   return (
     <div
+      onClick={() => onClick(product)}
       ref={ref}
       className={`
-        relative w-full mb-20 last:mb-0 transition-all duration-1000 ease-out
-        ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"}
+        group relative block bg-[#1A1F2E]/40 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 hover:border-[#F9D976]/30 hover:shadow-[0_0_40px_rgba(249,217,118,0.1)]
+        ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
       `}
     >
-      {/* Background Decorative Glow */}
-      <div
-        className={`absolute -z-10 w-[500px] h-[500px] bg-[#F9D976]/5 blur-[120px] rounded-full pointer-events-none transition-opacity duration-1000 ${inView ? 'opacity-100' : 'opacity-0'}`}
-        style={{
-          top: '50%',
-          [isReversed ? 'left' : 'right']: '-10%',
-          transform: 'translateY(-50%)'
-        }}
-      />
+      {/* Image Container */}
+      <div className="aspect-[4/3] overflow-hidden bg-white/5 p-8 flex items-center justify-center relative">
+        <img
+          src={product.image[0]}
+          alt={product.name}
+          className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-110 drop-shadow-2xl"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F1F]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      </div>
 
-      <div className={`
-        flex flex-col ${isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} 
-        bg-[#1A1F2E]/30 backdrop-blur-2xl border border-white/10 rounded-[2rem] overflow-hidden
-        shadow-2xl shadow-black/50 hover:border-[#F9D976]/30 transition-colors duration-500
-      `}>
-        {/* Left/Right: Image Showcase */}
-        <div className="lg:w-[45%] bg-gradient-to-b from-white/5 to-transparent p-8 md:p-12 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-white/10">
-          <div className="relative aspect-square flex items-center justify-center p-4 bg-[#0A0F1F]/40 rounded-3xl border border-white/5 overflow-hidden group">
-            {/* Main Image */}
-            <img
-              src={product.image[activeImageIndex]}
-              alt={product.name}
-              className="w-full h-full object-contain transform transition-all duration-700 group-hover:scale-105"
-            />
-            {/* Subtle light effect on hover */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#F9D976]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-          </div>
-
-          {/* Enhanced Thumbnails */}
-          {product.image.length > 1 && (
-            <div className="flex gap-3 mt-8 overflow-x-auto pb-2 justify-center scrollbar-hide">
-              {product.image.map((img: string, idx: number) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveImageIndex(idx)}
-                  className={`
-                    group/thumb relative w-14 h-14 md:w-16 md:h-16 rounded-xl overflow-hidden transition-all duration-300
-                    ${activeImageIndex === idx
-                      ? "ring-2 ring-[#F9D976] ring-offset-4 ring-offset-[#0A0F1F] scale-110"
-                      : "opacity-50 hover:opacity-100 hover:scale-105"
-                    }
-                  `}
-                >
-                  <img src={img} alt="" className="w-full h-full object-cover" />
-                  <div className={`absolute inset-0 bg-[#F9D976]/20 transition-opacity duration-300 ${activeImageIndex === idx ? 'opacity-0' : 'opacity-0 group-hover/thumb:opacity-100'}`} />
-                </button>
-              ))}
-            </div>
-          )}
+      {/* Content Container */}
+      <div className="p-6 space-y-3">
+        <div className="flex items-center space-x-2">
+          <span className="text-[10px] font-black uppercase tracking-widest text-[#F9D976]">0{index + 1}</span>
+          <div className="h-px w-4 bg-[#F9D976]/30" />
         </div>
-
-        {/* Right/Left: Detailed Content */}
-        <div className="lg:w-[55%] p-8 md:p-16 flex flex-col justify-between relative overflow-hidden">
-          {/* Subtle gold accent corner */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#F9D976]/5 to-transparent -mr-16 -mt-16 rounded-full blur-2xl" />
-
-          <div className="space-y-10 relative z-10">
-            <div>
-              <div className="flex items-center space-x-4 mb-6">
-                <span className="h-px w-8 bg-[#F9D976]/50" />
-                <span className="text-[10px] font-black uppercase tracking-[0.5em] text-[#F9D976]">Premium Service {index + 1}</span>
-              </div>
-              <h2 className="text-4xl md:text-6xl font-black text-white mb-6 uppercase tracking-tighter leading-[0.9] drop-shadow-sm">
-                {product.name}
-              </h2>
-              <p className="text-gray-400 leading-relaxed text-lg md:text-xl font-medium max-w-2xl">
-                {product.description}
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
-              {/* Applications */}
-              {product.Application && (
-                <div className="space-y-4">
-                  <h3 className="text-xs font-black uppercase tracking-[0.3em] text-[#F9D976]/80 flex items-center">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#F9D976] mr-2" />
-                    Applications
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {product.Application.map((app: string, i: number) => (
-                      <span key={i} className="px-3 py-1.5 bg-white/5 border border-white/10 text-[9px] text-gray-300 font-bold uppercase tracking-widest rounded-md hover:bg-[#F9D976]/10 hover:border-[#F9D976]/30 transition-colors duration-300">
-                        {app}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Specifications */}
-              <div className="space-y-4">
-                <h3 className="text-xs font-black uppercase tracking-[0.3em] text-[#F9D976]/80 flex items-center">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#F9D976] mr-2" />
-                  Technical Specs
-                </h3>
-                <div className="space-y-3">
-                  {Object.entries(product.specs ?? {}).map(([key, value]) => (
-                    <div key={key} className="flex flex-col border-b border-white/5 pb-2">
-                      <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1">
-                        {key.replace(/([A-Z])/g, ' $1').replace('_', ' ').trim()}
-                      </span>
-                      <span className="text-white font-black text-sm uppercase tracking-tight">
-                        {Array.isArray(value) ? value.join(', ') : String(value ?? '')}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+        <h3 className="text-xl font-bold text-white leading-tight group-hover:text-[#F9D976] transition-colors">
+          {product.name}
+        </h3>
+        <p className="text-gray-400 text-sm line-clamp-2 leading-relaxed">
+          {product.description}
+        </p>
+        
+        <div className="pt-4 flex items-center justify-between">
+          <div className="px-3 py-1.5 bg-[#F9D976]/10 border border-[#F9D976]/20 rounded-lg text-[9px] font-bold uppercase tracking-widest text-[#F9D976]">
+            View Details
           </div>
-
-          <div className="mt-12 group/btn">
-            <a
-              href={`https://wa.me/${product.category === 'gold' && product.name.includes('Sticker') || product.id >= 4 ? '919999865558' : '919811018728'}?text=${encodeURIComponent(`New Inquiry\n\nProduct: ${product.name}\n\nI interested in this service. Please provide a quote.`)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative inline-flex items-center justify-center w-full md:w-auto px-10 py-5 bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] text-[11px] font-black uppercase tracking-[0.4em] transition-all duration-300 rounded-2xl shadow-xl shadow-[#F9D976]/10 hover:scale-[1.02] hover:shadow-[#F9D976]/20 active:scale-95 overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-white/20 translate-y-full group-hover/btn:translate-y-0 transition-transform duration-300" />
-              <span className="relative flex items-center">
-                Contact for Quick Quote
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </span>
-            </a>
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-500 group-hover:text-[#F9D976] group-hover:border-[#F9D976]/30 transition-all">
+              <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+            </div>
           </div>
         </div>
       </div>
@@ -172,7 +79,43 @@ const typingText = [
   "Gold • Silver • Chrome • Custom Shapes",
 ];
 
+// ────────────────────────────────────────────────
+// Counter Component for animated numbers
+// ────────────────────────────────────────────────
+function Counter({ target, duration = 2000, suffix = "", startAnimation, decimals = 0 }: { target: number, duration?: number, suffix?: string, startAnimation: boolean, decimals?: number }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!startAnimation) {
+      setCount(0);
+      return;
+    }
+
+    let startTime: number | null = null;
+    let animationFrame: number;
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = timestamp - startTime;
+      const percentage = Math.min(progress / duration, 1);
+
+      const currentCount = percentage * target;
+      setCount(currentCount);
+
+      if (percentage < 1) {
+        animationFrame = requestAnimationFrame(animate);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [target, duration, startAnimation]);
+
+  return <span>{decimals > 0 ? count.toFixed(decimals) : Math.floor(count)}{suffix}</span>;
+}
+
 export default function HomePage() {
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   // ────────────────────────────────────────────────
   // Data
   // ────────────────────────────────────────────────
@@ -269,12 +212,6 @@ export default function HomePage() {
     },
   ];
 
-  const process = [
-    { step: "01", title: "Share Your Design", desc: "Send us your logo or artwork" },
-    { step: "02", title: "Electroplating & Molding", desc: "Precision manufacturing process" },
-    { step: "03", title: "Quality Check", desc: "Rigorous inspection standards" },
-    { step: "04", title: "Secure Packaging & Delivery", desc: "Fast and secure shipping" },
-  ];
 
   const gallery = ["/12.webp", "/13.webp", "/11.webp", "/gold-finish.webp", "/rose-gold.webp"];
 
@@ -333,10 +270,53 @@ export default function HomePage() {
     localStorage.setItem("scamAlertSeen", "true");
   };
 
+  const typingText = [
+    "Metal Sticker India",
+    "Precision in Every Detail",
+    "Luxury Metal Branding",
+    "Durability Meets Elegance"
+  ];
+
   const [displayText, setDisplayText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
+
+  const [showSplash, setShowSplash] = useState(true);
+  const [isExiting, setIsExiting] = useState(false);
+  const [splashText, setSplashText] = useState("");
+
+  // Splash Typing Effect
+  useEffect(() => {
+    const fullText = "Metal Sticker India";
+    let currentIdx = 0;
+    
+    // Disable scroll while splash is active
+    document.body.style.overflow = 'hidden';
+    
+    // Fast typing speed
+    const typingInterval = setInterval(() => {
+      if (currentIdx <= fullText.length) {
+        setSplashText(fullText.slice(0, currentIdx));
+        currentIdx++;
+      } else {
+        clearInterval(typingInterval);
+        // Increased pause before exit for a more cinematic feel
+        setTimeout(() => {
+          setIsExiting(true);
+          setTimeout(() => {
+            setShowSplash(false);
+            document.body.style.overflow = 'unset';
+          }, 1500); // Slower, more engaging fade out
+        }, 800); 
+      }
+    }, 75); // Balanced typing speed
+
+    return () => {
+      clearInterval(typingInterval);
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
 
   useEffect(() => {
     let timeout: number | undefined;
@@ -364,34 +344,75 @@ export default function HomePage() {
   // Parallax Scroll for Expertise Header
   // ────────────────────────────────────────────────
   const [scrollY, setScrollY] = useState(0);
+  const [bannerScroll, setBannerScroll] = useState(0);
+  const bannerRef = useRef<HTMLElement>(null);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+      if (bannerRef.current) {
+        const rect = bannerRef.current.getBoundingClientRect();
+        setBannerScroll(window.innerHeight - rect.top);
+      }
+    };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const { ref: headerInViewRef, inView: headerInView } = useInView({
-    triggerOnce: false,
+    triggerOnce: true,
     threshold: 0.1,
   });
 
-  const { ref: processInViewRef, inView: processInView } = useInView({
-    triggerOnce: false,
-    threshold: 0.1,
-  });
 
   const { ref: galleryInViewRef, inView: galleryInView } = useInView({
-    triggerOnce: false,
+    triggerOnce: true,
     threshold: 0.1,
   });
 
   const { ref: brandsInViewRef, inView: brandsInView } = useInView({
-    triggerOnce: false,
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const { ref: testimonialsInViewRef, inView: testimonialsInView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const { ref: whyChooseUsInViewRef, inView: whyChooseUsInView } = useInView({
+    triggerOnce: true,
     threshold: 0.1,
   });
 
   return (
     <div className="bg-[#0A0F1F] text-white min-h-screen overflow-x-hidden">
+      {/* Splash Screen */}
+      {showSplash && (
+        <div className={`fixed inset-0 z-[100000] flex items-center justify-center transition-all duration-[1500ms] ease-in-out ${isExiting ? 'opacity-0 scale-110 blur-md' : 'opacity-100 scale-100 blur-0'}`}>
+          <div className="absolute inset-0 bg-[#0A0F1F] flex items-center justify-center">
+            {/* Optimized Background */}
+            <div className={`absolute inset-0 transition-opacity duration-1000 ${isExiting ? 'opacity-0' : 'opacity-20'} bg-[radial-gradient(circle_at_center,_#F9D976_0%,_transparent_70%)]`} />
+            
+            {/* Text Content */}
+            <div className={`relative z-10 text-center transition-all duration-[1200ms] ${isExiting ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
+              <h1 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tighter italic">
+                <span className="bg-gradient-to-r from-[#F9D976] via-[#F6C453] to-[#F39F23] bg-clip-text text-transparent will-change-transform">
+                  {splashText}
+                </span>
+                {!isExiting && <span className="inline-block w-1 md:w-2 h-8 md:h-14 bg-[#F9D976] ml-2 animate-pulse" />}
+              </h1>
+              <div className={`mt-4 flex items-center justify-center space-x-2 transition-all duration-1000 ${isExiting ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
+                <div className="h-px w-8 md:w-12 bg-gradient-to-r from-transparent to-[#F9D976]/50" />
+                <span className="text-[8px] md:text-[10px] uppercase tracking-[0.3em] md:tracking-[0.5em] text-[#F9D976]/70 font-bold">Excellence in Metal</span>
+                <div className="h-px w-8 md:w-12 bg-gradient-to-l from-transparent to-[#F9D976]/50" />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <Helmet>
         <title>Metal Stickers India | Custom Electroplated Metal Labels</title>
         <meta
@@ -583,12 +604,13 @@ export default function HomePage() {
             <h3 className="text-3xl font-bold text-white mb-12 text-center border-b border-white/10 pb-6">
               <span className="text-[#F9D976]">01.</span> Premium Metal Stickers
             </h3>
-            <div className="space-y-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {stickerProducts.map((product, index) => (
                 <ServiceDetailBlock
                   key={product.id}
                   product={product}
                   index={index}
+                  onClick={setSelectedProduct}
                 />
               ))}
             </div>
@@ -609,12 +631,13 @@ export default function HomePage() {
             <h3 className="text-3xl font-bold text-white mb-12 text-center border-b border-white/10 pb-6">
               <span className="text-[#F9D976]">02.</span> Precious Plating Services
             </h3>
-            <div className="space-y-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {platingProducts.map((product, index) => (
                 <ServiceDetailBlock
                   key={product.id}
                   product={product}
                   index={index}
+                  onClick={setSelectedProduct}
                 />
               ))}
             </div>
@@ -632,72 +655,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Our Process */}
-      <section className="py-20 bg-[#0F1724]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div
-            ref={processInViewRef}
-            className="text-center mb-16"
-          >
-            {/* Reveal Wrapper */}
-            <div className="inline-block overflow-hidden py-16 -my-16">
-              <div
-                className={`transition-all duration-1000 ease-out transform-gpu ${processInView ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
-                  }`}
-                style={{
-                  transform: processInView
-                    ? `translateY(${(scrollY * 0.015) % 20 - 10}px)`
-                    : "translateY(100%)"
-                }}
-              >
-                <h2 className="text-3xl sm:text-5xl font-light">Our Process</h2>
-                <div className="w-20 h-1 bg-gradient-to-r from-[#F9D976] to-[#F39F23] mx-auto rounded-full mt-4" />
-              </div>
-            </div>
-          </div>
-          <div className="relative">
-            {/* Desktop Connecting Line */}
-            <div className="hidden md:block absolute top-8 left-[12.5%] right-[12.5%] h-0.5 bg-white/10 z-0">
-              <div
-                className="h-full bg-gradient-to-r from-[#F9D976] to-[#F39F23] transition-all duration-[6000ms] ease-in-out"
-                style={{ width: processInView ? "100%" : "0%" }}
-              />
-            </div>
-
-            {/* Mobile Connecting Line */}
-            <div className="md:hidden absolute left-8 top-8 bottom-8 w-0.5 bg-white/10 z-0">
-              <div
-                className="w-full bg-gradient-to-b from-[#F9D976] to-[#F39F23] transition-all duration-[6000ms] ease-in-out"
-                style={{ height: processInView ? "100%" : "0%" }}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 relative z-10">
-              {process.map((item, index) => (
-                <div key={index} className="flex flex-row md:flex-col items-center md:text-center group">
-                  <div className={`
-                    flex-shrink-0 w-16 h-16 rounded-full bg-[#0A0F1F] border-2 flex items-center justify-center text-[#F9D976] font-bold text-xl mb-0 md:mb-6 relative z-10
-                    transition-all duration-1000 ease-in-out
-                    ${processInView
-                      ? 'border-[#F9D976] shadow-[0_0_20px_rgba(249,217,118,0.4)] scale-110'
-                      : 'border-[#F9D976]/30 shadow-none scale-100'}
-                  `}>
-                    <div
-                      className={`absolute inset-0 rounded-full bg-gradient-to-br from-[#F9D976] to-[#F39F23] transition-all duration-1000 ease-in-out ${processInView ? 'opacity-100' : 'opacity-0'}`}
-                      style={{ transitionDelay: `${index * 1200}ms` }}
-                    />
-                    <span className="relative z-10 text-[#0A0F1F]">{item.step}</span>
-                  </div>
-                  <div className="ml-6 md:ml-0">
-                    <h4 className="text-white font-medium mb-2 group-hover:text-[#F9D976] transition-colors duration-300">{item.title}</h4>
-                    <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Trusted by Brands */}
       <section className="py-24 bg-[#0A0F1F] overflow-hidden border-y border-white/5">
@@ -745,6 +702,138 @@ export default function HomePage() {
           {/* Gradient Masks */}
           <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0A0F1F] to-transparent z-10" />
           <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0A0F1F] to-transparent z-10" />
+        </div>
+      </section>
+
+      {/* Client Testimonials */}
+      <section className="py-24 bg-[#0A0F1F] border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div
+            ref={testimonialsInViewRef}
+            className="text-center mb-20"
+          >
+            <div className="inline-block overflow-hidden py-16 -my-16">
+              <div
+                className={`transition-all duration-1000 ease-out transform-gpu ${testimonialsInView ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+                  }`}
+                style={{
+                  transform: testimonialsInView
+                    ? `translateY(${(scrollY * 0.015) % 20 - 10}px)`
+                    : "translateY(100%)"
+                }}
+              >
+                <h2 className="text-3xl sm:text-5xl font-light text-white">Client Testimonials</h2>
+                <div className="w-20 h-1 bg-gradient-to-r from-[#F9D976] to-[#F39F23] mx-auto rounded-full mt-4" />
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {/* Client Satisfaction */}
+            <div 
+              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${testimonialsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} 
+              style={{ transitionDelay: testimonialsInView ? '0ms' : '200ms' }}
+            >
+              <div className="w-16 h-16 bg-[#F9D976]/10 rounded-full flex items-center justify-center mb-6 border border-[#F9D976]/20 shadow-[0_0_20px_rgba(249,217,118,0.1)] group-hover:border-[#F9D976]/50 group-hover:shadow-[0_0_30px_rgba(249,217,118,0.3)] transition-all duration-300">
+                <Smile className="text-[#F9D976] w-8 h-8 group-hover:scale-110 transition-transform duration-300" />
+              </div>
+              <h3 className="text-[#F9D976] text-sm font-bold uppercase tracking-widest mb-2">Client Satisfaction</h3>
+              <p className="text-4xl font-black text-white group-hover:text-[#F9D976] transition-colors duration-300">
+                <Counter target={100} suffix="%" startAnimation={testimonialsInView} />
+              </p>
+            </div>
+
+            {/* Clients */}
+            <div 
+              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${testimonialsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} 
+              style={{ transitionDelay: testimonialsInView ? '0ms' : '400ms' }}
+            >
+              <div className="w-16 h-16 bg-[#F9D976]/10 rounded-full flex items-center justify-center mb-6 border border-[#F9D976]/20 shadow-[0_0_20px_rgba(249,217,118,0.1)] group-hover:border-[#F9D976]/50 group-hover:shadow-[0_0_30px_rgba(249,217,118,0.3)] transition-all duration-300">
+                <Users className="text-[#F9D976] w-8 h-8 group-hover:scale-110 transition-transform duration-300" />
+              </div>
+              <h3 className="text-[#F9D976] text-sm font-bold uppercase tracking-widest mb-2">Clients</h3>
+              <p className="text-4xl font-black text-white group-hover:text-[#F9D976] transition-colors duration-300">
+                <Counter target={100} suffix="+" startAnimation={testimonialsInView} />
+              </p>
+            </div>
+
+            {/* Quality Rate */}
+            <div 
+              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${testimonialsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} 
+              style={{ transitionDelay: testimonialsInView ? '0ms' : '600ms' }}
+            >
+              <div className="w-16 h-16 bg-[#F9D976]/10 rounded-full flex items-center justify-center mb-6 border border-[#F9D976]/20 shadow-[0_0_20px_rgba(249,217,118,0.1)] group-hover:border-[#F9D976]/50 group-hover:shadow-[0_0_30px_rgba(249,217,118,0.3)] transition-all duration-300">
+                <Award className="text-[#F9D976] w-8 h-8 group-hover:scale-110 transition-transform duration-300" />
+              </div>
+              <h3 className="text-[#F9D976] text-sm font-bold uppercase tracking-widest mb-2">Quality Rate</h3>
+              <p className="text-4xl font-black text-white group-hover:text-[#F9D976] transition-colors duration-300">
+                <Counter target={99.9} decimals={1} suffix="%" startAnimation={testimonialsInView} />
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us? */}
+      <section className="py-24 bg-[#0A0F1F] border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div
+            ref={whyChooseUsInViewRef}
+            className="text-center mb-20"
+          >
+            <div className="inline-block overflow-hidden py-16 -my-16">
+              <div
+                className={`transition-all duration-1000 ease-out transform-gpu ${whyChooseUsInView ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+                  }`}
+                style={{
+                  transform: whyChooseUsInView
+                    ? `translateY(${(scrollY * 0.015) % 20 - 10}px)`
+                    : "translateY(100%)"
+                }}
+              >
+                <h2 className="text-3xl sm:text-5xl font-light text-white">Why Choose Us?</h2>
+                <div className="w-20 h-1 bg-gradient-to-r from-[#F9D976] to-[#F39F23] mx-auto rounded-full mt-4" />
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Pan-India Delivery */}
+            <div 
+              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${whyChooseUsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} 
+              style={{ transitionDelay: whyChooseUsInView ? '0ms' : '200ms' }}
+            >
+              <div className="w-16 h-16 bg-[#F9D976]/10 rounded-full flex items-center justify-center mb-6 border border-[#F9D976]/20 shadow-[0_0_20px_rgba(249,217,118,0.1)] group-hover:border-[#F9D976]/50 group-hover:shadow-[0_0_30px_rgba(249,217,118,0.3)] transition-all duration-300">
+                <Truck className="text-[#F9D976] w-8 h-8 group-hover:scale-110 transition-transform duration-300" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#F9D976] transition-colors duration-300">Pan-India Delivery</h3>
+              <p className="text-gray-400 text-center text-sm leading-relaxed group-hover:text-gray-300 transition-colors duration-300">Fast, Secure Shipping across all major cities</p>
+            </div>
+
+            {/* 24/7 Support */}
+            <div 
+              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${whyChooseUsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} 
+              style={{ transitionDelay: whyChooseUsInView ? '0ms' : '400ms' }}
+            >
+              <div className="w-16 h-16 bg-[#F9D976]/10 rounded-full flex items-center justify-center mb-6 border border-[#F9D976]/20 shadow-[0_0_20px_rgba(249,217,118,0.1)] group-hover:border-[#F9D976]/50 group-hover:shadow-[0_0_30px_rgba(249,217,118,0.3)] transition-all duration-300">
+                <Headphones className="text-[#F9D976] w-8 h-8 group-hover:scale-110 transition-transform duration-300" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#F9D976] transition-colors duration-300">24/7 Support</h3>
+              <p className="text-gray-400 text-center text-sm leading-relaxed group-hover:text-gray-300 transition-colors duration-300">Always available</p>
+            </div>
+
+            {/* Fast Delivery */}
+            <div 
+              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${whyChooseUsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} 
+              style={{ transitionDelay: whyChooseUsInView ? '0ms' : '600ms' }}
+            >
+              <div className="w-16 h-16 bg-[#F9D976]/10 rounded-full flex items-center justify-center mb-6 border border-[#F9D976]/20 shadow-[0_0_20px_rgba(249,217,118,0.1)] group-hover:border-[#F9D976]/50 group-hover:shadow-[0_0_30px_rgba(249,217,118,0.3)] transition-all duration-300">
+                <Clock className="text-[#F9D976] w-8 h-8 group-hover:scale-110 transition-transform duration-300" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#F9D976] transition-colors duration-300">Fast Delivery</h3>
+              <p className="text-gray-400 text-center text-sm leading-relaxed group-hover:text-gray-300 transition-colors duration-300">Quick turnaround</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -814,7 +903,7 @@ export default function HomePage() {
       </section>
 
       {/* Cinematic Banner */}
-      <section className="relative h-[80vh] flex items-center justify-center overflow-hidden bg-[#0A0F1F]">
+      <section ref={bannerRef} className="relative h-[80vh] flex items-center justify-center overflow-hidden bg-[#0A0F1F]">
         {/* Background Image with subtle parallax */}
         <div
           className="absolute inset-0 z-0 opacity-20 grayscale brightness-50"
@@ -822,37 +911,39 @@ export default function HomePage() {
             backgroundImage: "url('https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1920&auto=format&fit=crop')",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            transform: `translateY(${scrollY * 0.1}px)`
+            transform: `translateY(${bannerScroll * 0.1}px)`
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A0F1F] via-transparent to-[#0A0F1F] z-1" />
 
         <div className="relative z-10 w-full flex flex-col items-center select-none pointer-events-none">
-          {/* Top Layer: Precision. (Moves Left) */}
+          {/* Top Layer: Precision */}
           <div
-            className="text-[15vw] md:text-[15vw] leading-none font-black italic tracking-tighter text-white opacity-20 transition-transform duration-75 ease-out whitespace-nowrap"
+            className="text-[15vw] md:text-[15vw] leading-none font-black italic tracking-tighter text-white opacity-20 whitespace-nowrap transition-transform duration-75 ease-out"
             style={{
-              transform: `translateX(${(scrollY - (typeof window !== 'undefined' && window.innerWidth < 768 ? 3500 : 2000)) * (typeof window !== 'undefined' && window.innerWidth < 768 ? -0.3 : -0.6)}px)`
+              transform: `translateX(${bannerScroll * (isMobile ? -0.2 : -0.4)}px)`
             }}
           >
             PRECISION. PRECISION. PRECISION.
           </div>
 
-          {/* Middle Layer: Durability. (Moves Right, Outline) */}
+          {/* Middle Layer: Durability (Outline) */}
           <div
-            className="text-[15vw] md:text-[15vw] leading-none font-black italic tracking-tighter text-transparent transition-transform duration-75 ease-out whitespace-nowrap"
+            className="text-[15vw] md:text-[15vw] leading-none font-black italic tracking-tighter text-transparent whitespace-nowrap transition-transform duration-75 ease-out"
             style={{
-              transform: `translateX(${(scrollY - (typeof window !== 'undefined' && window.innerWidth < 768 ? 3500 : 2000)) * (typeof window !== 'undefined' && window.innerWidth < 768 ? 0.2 : 0.4)}px)`,
+              transform: `translateX(${(bannerScroll - 200) * (isMobile ? 0.15 : 0.3)}px)`,
               WebkitTextStroke: "1px rgba(249, 217, 118, 0.4)"
             }}
           >
             DURABILITY. DURABILITY. DURABILITY.
           </div>
 
-          {/* Bottom Layer: Luxury. (Moves Left, Gold) */}
+          {/* Bottom Layer: Luxury (Gold) */}
           <div
-            className="text-[15vw] md:text-[15vw] leading-none font-black italic tracking-tighter text-[#F9D976] opacity-30 transition-transform duration-75 ease-out whitespace-nowrap"
-            style={{ transform: `translateX(${(scrollY - (typeof window !== 'undefined' && window.innerWidth < 768 ? 3500 : 2000)) * (typeof window !== 'undefined' && window.innerWidth < 768 ? -0.25 : -0.5)}px)` }}
+            className="text-[15vw] md:text-[15vw] leading-none font-black italic tracking-tighter text-[#F9D976] opacity-30 whitespace-nowrap transition-transform duration-75 ease-out"
+            style={{
+              transform: `translateX(${(bannerScroll - 400) * (isMobile ? -0.25 : -0.5)}px)`
+            }}
           >
             LUXURY. LUXURY. LUXURY.
           </div>
@@ -866,6 +957,116 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Product Detail Modal */}
+      {selectedProduct && (
+        <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 sm:p-6">
+          <div 
+            className="absolute inset-0 bg-[#0A0F1F]/95 backdrop-blur-xl"
+            onClick={() => setSelectedProduct(null)}
+          />
+          <div className="relative bg-[#1A1F2E] border border-white/10 w-full max-w-5xl max-h-[90vh] rounded-[2rem] overflow-hidden shadow-2xl flex flex-col md:flex-row">
+            {/* Close Button */}
+            <button 
+              onClick={() => setSelectedProduct(null)}
+              className="absolute top-6 right-6 z-20 w-10 h-10 bg-white/5 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/10 transition-colors"
+            >
+              ✕
+            </button>
+
+            {/* Left: Image Showcase */}
+            <div className="md:w-1/2 bg-white/5 p-8 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/10 overflow-y-auto">
+              <div className="aspect-square w-full flex items-center justify-center bg-[#0A0F1F]/40 rounded-3xl border border-white/5 p-8 relative group">
+                <img 
+                  src={selectedProduct.image[0]} 
+                  alt={selectedProduct.name}
+                  className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(249,217,118,0.2)]"
+                />
+              </div>
+              {selectedProduct.image.length > 1 && (
+                <div className="flex gap-3 mt-6">
+                  {selectedProduct.image.map((img, idx) => (
+                    <div key={idx} className="w-16 h-16 rounded-xl border border-white/10 overflow-hidden bg-white/5">
+                      <img src={img} alt="" className="w-full h-full object-cover" />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Right: Detailed Info */}
+            <div className="md:w-1/2 p-8 md:p-12 overflow-y-auto custom-scrollbar">
+              <div className="space-y-8">
+                <div>
+                  <div className="flex items-center space-x-3 mb-4">
+                    <span className="h-px w-6 bg-[#F9D976]/50" />
+                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#F9D976]">Premium Product</span>
+                  </div>
+                  <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none mb-4">
+                    {selectedProduct.name}
+                  </h2>
+                  <p className="text-gray-400 leading-relaxed">
+                    {selectedProduct.description}
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 gap-8">
+                  {/* Applications */}
+                  {selectedProduct.Application && (
+                    <div className="space-y-4">
+                      <h3 className="text-xs font-black uppercase tracking-[0.2em] text-[#F9D976] flex items-center">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#F9D976] mr-2" />
+                        Common Applications
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedProduct.Application.map((app, i) => (
+                          <span key={i} className="px-3 py-1.5 bg-white/5 border border-white/10 text-[9px] text-gray-300 font-bold uppercase tracking-widest rounded-md">
+                            {app}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Technical Specs */}
+                  {selectedProduct.specs && (
+                    <div className="space-y-4">
+                      <h3 className="text-xs font-black uppercase tracking-[0.2em] text-[#F9D976] flex items-center">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#F9D976] mr-2" />
+                        Technical Specifications
+                      </h3>
+                      <div className="grid grid-cols-2 gap-4">
+                        {Object.entries(selectedProduct.specs).map(([key, value]) => (
+                          <div key={key} className="flex flex-col border-b border-white/5 pb-2">
+                            <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1">
+                              {key.replace(/([A-Z])/g, ' $1').replace('_', ' ').trim()}
+                            </span>
+                            <span className="text-white font-bold text-sm uppercase tracking-tight">
+                              {Array.isArray(value) ? value.join(', ') : String(value)}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* CTA Button */}
+                <div className="pt-4">
+                  <a
+                    href={`https://wa.me/${selectedProduct.category === 'gold' && selectedProduct.name.includes('Sticker') || selectedProduct.id >= 4 ? '919999865558' : '919811018728'}?text=${encodeURIComponent(`New Inquiry\n\nProduct: ${selectedProduct.name}\n\nI interested in this service. Please provide a quote.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-full px-8 py-5 bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] text-[11px] font-black uppercase tracking-[0.3em] rounded-2xl shadow-xl shadow-[#F9D976]/10 hover:scale-[1.02] transition-all"
+                  >
+                    Contact for Quick Quote
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
