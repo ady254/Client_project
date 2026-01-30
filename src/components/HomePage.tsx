@@ -229,8 +229,8 @@ export default function HomePage() {
       id: 201,
       name: 'Gold Plating',
       category: 'gold',
-      description: 'Luxurious 24K gold electroplated sticker for high-end branding. Ideal for giving products a premium, high-value look.',
-      image: ['/gold-plating-metal-sticker-texture.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp', '/gold-plating.webp'],
+      description: 'Gold plating is a premium electroplating process that coats metal surfaces with a thin layer of 24K gold. It enhances the product’s appearance while improving corrosion resistance, durability, and electrical performance. Ideal for luxury, industrial, and precision components that require both beauty and reliability.',
+      image: ['gold-plating.webp', '/electro.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp',],
       specs: {
         finish: '24K Gold Electroplating',
         serviceLocation: 'Pan India',
@@ -244,7 +244,7 @@ export default function HomePage() {
       name: 'Silver Plating',
       category: 'silver',
       description: 'Sleek silver finish perfect for modern tech branding. Offers excellent conductivity and a clean, professional aesthetic.',
-      image: ['/stainless-steel-silver-plating-connectors.webp', '/silver-plating-surgical.webp', '/silver-plating-pcb.webp'],
+      image: ['/stainless-steel-silver-plating-connectors.webp'],
       specs: {
         platingThickness: 'As per requirements',
         serviceLocation: 'Pan India',
