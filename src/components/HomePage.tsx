@@ -176,51 +176,97 @@ export default function HomePage() {
   // ────────────────────────────────────────────────
   // Data
   // ────────────────────────────────────────────────
-  const products = [
-
+  const stickerProducts = [
     {
-      id: 1,
+      id: 7,
+      name: 'Nickel Chrome Stickers',
+      category: 'chrome',
+      description: 'Nickel chrome stickers are premium metal stickers made using an electroforming process. They have a thin profile, smooth finish, and a modern metallic look. These stickers are very strong, long-lasting, and resistant to wear and tear.',
+      image: ['/chrome-finish.webp'],
+      specs: {
+        priceRange: '₹45-85/piece',
+        minOrder: '50 Sheets',
+        size: 'A3 or A4',
+        adhesive: '6010 or 467',
+        benefits: 'Premium chrome finish | Thin and lightweight design | High durability and long life',
+      },
+      Application: ['Automotive: Emblems, interior trim, and dashboard logos', 'Electronics: Laptop branding, smartphones, and camera labels', 'Luxury Goods: Perfume bottles, wine bottles, and jewelry boxes', 'Appliances: Logos on kitchen appliances, washing machines, and fridges'],
+    },
+    {
+      id: 8,
+      name: 'Gold Finish Labels',
+      category: 'gold',
+      description: 'Gold finish labels are designed to give products a luxurious and premium appearance. Their shiny, reflective surface instantly attracts attention and improves brand value. These labels are widely used for premium packaging, seals, logos, and product branding.',
+      image: ['/gold-finish.webp'],
+      specs: {
+        purity: '24K gold plating',
+        priceRange: '₹65-120/piece',
+        minOrder: '50 Sheets',
+        size: 'A3 or A4',
+        benefits: 'Rich & elegant gold appearance | Waterproof and scratch-resistant | Long-lasting & durable',
+      },
+      Application: ['Luxury goods', 'Electronics', 'Automobile Parts'],
+    },
+    {
+      id: 9,
+      name: 'Stainless Steel Silver Sticker',
+      category: 'silver',
+      description: 'Stainless steel silver stickers offer maximum strength, corrosion resistance, and a clean metallic finish. They are ideal for industrial, commercial, and premium branding applications where durability is essential.',
+      image: ['/silver-finish.webp'],
+      specs: {
+        priceRange: '₹45-85',
+        minOrder: '50 Sheets',
+        size: 'A3 or A4',
+        adhesive: '6010 or 467',
+        benefits: 'Durability & Longevity | Strong stainless steel material | Long-lasting premium silver finish',
+      },
+      Application: ['Branding & Labeling: Electronics, high-end consumer goods, and furniture', 'Industrial Identification: Machinery, equipment, and tools', 'Automotive & Outdoor: Car badges, vehicle branding, or outdoor equipment'],
+    },
+  ];
+
+  const platingProducts = [
+    {
+      id: 201,
       name: 'Gold Plating',
       category: 'gold',
-      description: 'Luxurious 24K gold electroplated service for high-end branding and industrial excellence',
+      description: 'Luxurious 24K gold electroplated sticker for high-end branding. Ideal for giving products a premium, high-value look.',
       image: ['/gold-plating-metal-sticker-texture.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp', '/gold-plating.webp'],
       specs: {
         finish: '24K Gold Electroplating',
-        Benefits: ['Corrosion Resistance', 'High Durability', 'Aesthetic Appeal', 'Cost-Effective'],
         serviceLocation: 'Pan India',
         paymentMode: 'Online/Offline',
+        benefits: 'Corrosion Resistance | High Durability | Aesthetic Appeal | Cost-Effective',
       },
-      Application: ['Jewellery', 'Watch Parts', 'Electronic Components', 'Medical Equipments'],
+      Application: ['Jewellery', 'Watch Parts', 'Electronics & Electrical Components', 'Medical Equipments'],
     },
     {
-      id: 4,
-      name: 'Rose Gold Stickers',
-      category: 'gold-sticker',
-      description: 'Textured rose gold finish for premium automotive and luxury branding',
-      image: ['/rose-gold.webp'],
+      id: 202,
+      name: 'Silver Plating',
+      category: 'silver',
+      description: 'Sleek silver finish perfect for modern tech branding. Offers excellent conductivity and a clean, professional aesthetic.',
+      image: ['/stainless-steel-silver-plating-connectors.webp', '/silver-plating-surgical.webp', '/silver-plating-pcb.webp'],
       specs: {
-        size: 'A3 or A4 & Custom sizes available',
-        finish: 'Brushed gold texture',
-        Benefits: ['Affordability', 'Corrosion Resistance', 'Durability & Protection', 'Aesthetic Appeal'],
-        adhesive: '6010 or 467h adhesive',
+        platingThickness: 'As per requirements',
+        serviceLocation: 'Pan India',
+        paymentMode: 'Online/Offline',
+        benefits: 'Electrical Conductivity | High Durability | Corrosion Resistance',
       },
-      Application: ['Jewelry & Accessories', 'Fashion & Decor', 'Electronics & Wearables', 'Fixtures & Fittings'],
+      Application: ['printed circuit board (PCB)', 'Bus Bar', 'Contacts', 'Medical Equipments'],
     },
     {
-      id: 3,
-      name: 'Nickel Chrome Plating ',
+      id: 203,
+      name: 'Nickel Chrome Plating',
       category: 'chrome',
-      description: 'Premium raised design with crystal-clear resin coating',
+      description: 'Premium raised design with crystal-clear resin coating. Creates a durable, high-gloss finish that stands out.',
       image: ['/silver-automobile.webp', '/chrome-plating-taps.webp', '/silver-plating.webp'],
       specs: {
-        Benefits: ['Corrosion Resistance', 'High Durability', 'Aesthetic Appeal', 'Cost-Effective'],
+        platingThickness: 'As per requirements',
         finish: 'Polyurethane resin coating',
         serviceLocation: 'Pan India',
-        paymentMode: 'Online/Offline',
+        benefits: 'Corrosion Resistance | High Durability | Aesthetic Appeal | Cost-Effective',
       },
-      Application: ['Automobile Industry', 'Household and Plumbing', 'Electronics and Connectors', 'Medical Equipment'],
+      Application: ['Automobile Industry', 'Household and Plumbing', 'Electronics & Electrical Components', 'Medical Equipments'],
     },
-
   ];
 
   const process = [
@@ -532,32 +578,56 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="space-y-2">
-            {products.map((product, index) => (
-              <ServiceDetailBlock
-                key={product.id}
-                product={product}
-                index={index}
-              />
-            ))}
+          {/* Section 1: Metal Stickers */}
+          <div className="mb-32">
+            <h3 className="text-3xl font-bold text-white mb-12 text-center border-b border-white/10 pb-6">
+              <span className="text-[#F9D976]">01.</span> Premium Metal Stickers
+            </h3>
+            <div className="space-y-20">
+              {stickerProducts.map((product, index) => (
+                <ServiceDetailBlock
+                  key={product.id}
+                  product={product}
+                  index={index}
+                />
+              ))}
+            </div>
+            {/* Explore More Services Button */}
+            <div className="text-center mt-12 flex justify-center">
+              <Link
+                to="/metal-stickers"
+                className="inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] px-10 py-5 rounded-full text-lg font-bold transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#F9D976]/30 group"
+              >
+                <span>Explore All Metal Stickers</span>
+                <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
           </div>
 
-          {/* Explore More Services Button */}
-          <div className="text-center mt-12 flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Link
-              to="/metal-stickers"
-              className="inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#F9D976]/30 group"
-            >
-              <span>Explore Metal Stickers</span>
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              to="/precious-plating"
-              className="inline-flex items-center justify-center space-x-3 bg-white/5 border border-white/20 text-white px-8 py-4 rounded-full text-base font-semibold transition-all duration-300 hover:bg-white/10 hover:scale-105 group"
-            >
-              <span>Explore Plating Services</span>
-              <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
+          {/* Section 2: Precious Plating */}
+          <div>
+            <h3 className="text-3xl font-bold text-white mb-12 text-center border-b border-white/10 pb-6">
+              <span className="text-[#F9D976]">02.</span> Precious Plating Services
+            </h3>
+            <div className="space-y-20">
+              {platingProducts.map((product, index) => (
+                <ServiceDetailBlock
+                  key={product.id}
+                  product={product}
+                  index={index}
+                />
+              ))}
+            </div>
+            {/* Explore More Services Button */}
+            <div className="text-center mt-12 flex justify-center">
+              <Link
+                to="/precious-plating"
+                className="inline-flex items-center justify-center space-x-3 bg-white/5 border border-white/20 text-white px-10 py-5 rounded-full text-lg font-bold transition-all duration-300 hover:bg-white/10 hover:scale-105 group"
+              >
+                <span>Explore All Plating Services</span>
+                <ArrowRight size={22} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
