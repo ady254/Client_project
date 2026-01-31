@@ -54,7 +54,7 @@ function ServiceDetailBlock({ product, index, onClick }: { product: Product; ind
         <p className="text-gray-400 text-sm line-clamp-2 leading-relaxed">
           {product.description}
         </p>
-        
+
         <div className="pt-4 flex items-center justify-between">
           <div className="px-3 py-1.5 bg-[#F9D976]/10 border border-[#F9D976]/20 rounded-lg text-[9px] font-bold uppercase tracking-widest text-[#F9D976]">
             View Details
@@ -186,8 +186,8 @@ export default function HomePage() {
       id: 202,
       name: 'Silver Plating',
       category: 'silver',
-      description: 'Sleek silver finish perfect for modern tech branding. Offers excellent conductivity and a clean, professional aesthetic.',
-      image: ['/stainless-steel-silver-plating-connectors.webp'],
+      description: 'Silver plating is a metal finishing process where a thin layer of silver is applied to a surface to improve conductivity, corrosion resistance, and appearance. It provides a clean, bright finish and is widely used in electronics, industrial components, decorative items, and precision parts where performance and reliability are important.',
+      image: ['/silver-connector.webp'],
       specs: {
         platingThickness: 'As per requirements',
         serviceLocation: 'Pan India',
@@ -200,7 +200,7 @@ export default function HomePage() {
       id: 203,
       name: 'Nickel Chrome Plating',
       category: 'chrome',
-      description: 'Premium raised design with crystal-clear resin coating. Creates a durable, high-gloss finish that stands out.',
+      description: 'Nickel chrome plating is a protective metal finishing process that gives surfaces a bright, mirror-like finish along with excellent corrosion resistance and durability. It is widely used for products that require a strong surface, long life, and a premium metallic appearance.',
       image: ['/silver-automobile.webp', '/chrome-plating-taps.webp', '/silver-plating.webp'],
       specs: {
         platingThickness: 'As per requirements',
@@ -290,10 +290,10 @@ export default function HomePage() {
   useEffect(() => {
     const fullText = "Metal Sticker India";
     let currentIdx = 0;
-    
+
     // Disable scroll while splash is active
     document.body.style.overflow = 'hidden';
-    
+
     // Fast typing speed
     const typingInterval = setInterval(() => {
       if (currentIdx <= fullText.length) {
@@ -308,7 +308,7 @@ export default function HomePage() {
             setShowSplash(false);
             document.body.style.overflow = 'unset';
           }, 1500); // Slower, more engaging fade out
-        }, 800); 
+        }, 800);
       }
     }, 75); // Balanced typing speed
 
@@ -394,7 +394,7 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-[#0A0F1F] flex items-center justify-center">
             {/* Optimized Background */}
             <div className={`absolute inset-0 transition-opacity duration-1000 ${isExiting ? 'opacity-0' : 'opacity-20'} bg-[radial-gradient(circle_at_center,_#F9D976_0%,_transparent_70%)]`} />
-            
+
             {/* Text Content */}
             <div className={`relative z-10 text-center transition-all duration-[1200ms] ${isExiting ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'}`}>
               <h1 className="text-3xl sm:text-5xl md:text-7xl font-black tracking-tighter italic">
@@ -730,8 +730,8 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {/* Client Satisfaction */}
-            <div 
-              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${testimonialsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} 
+            <div
+              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${testimonialsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
               style={{ transitionDelay: testimonialsInView ? '0ms' : '200ms' }}
             >
               <div className="w-16 h-16 bg-[#F9D976]/10 rounded-full flex items-center justify-center mb-6 border border-[#F9D976]/20 shadow-[0_0_20px_rgba(249,217,118,0.1)] group-hover:border-[#F9D976]/50 group-hover:shadow-[0_0_30px_rgba(249,217,118,0.3)] transition-all duration-300">
@@ -744,8 +744,8 @@ export default function HomePage() {
             </div>
 
             {/* Clients */}
-            <div 
-              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${testimonialsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} 
+            <div
+              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${testimonialsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
               style={{ transitionDelay: testimonialsInView ? '0ms' : '400ms' }}
             >
               <div className="w-16 h-16 bg-[#F9D976]/10 rounded-full flex items-center justify-center mb-6 border border-[#F9D976]/20 shadow-[0_0_20px_rgba(249,217,118,0.1)] group-hover:border-[#F9D976]/50 group-hover:shadow-[0_0_30px_rgba(249,217,118,0.3)] transition-all duration-300">
@@ -758,8 +758,8 @@ export default function HomePage() {
             </div>
 
             {/* Quality Rate */}
-            <div 
-              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${testimonialsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} 
+            <div
+              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${testimonialsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
               style={{ transitionDelay: testimonialsInView ? '0ms' : '600ms' }}
             >
               <div className="w-16 h-16 bg-[#F9D976]/10 rounded-full flex items-center justify-center mb-6 border border-[#F9D976]/20 shadow-[0_0_20px_rgba(249,217,118,0.1)] group-hover:border-[#F9D976]/50 group-hover:shadow-[0_0_30px_rgba(249,217,118,0.3)] transition-all duration-300">
@@ -799,8 +799,8 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Pan-India Delivery */}
-            <div 
-              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${whyChooseUsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} 
+            <div
+              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${whyChooseUsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
               style={{ transitionDelay: whyChooseUsInView ? '0ms' : '200ms' }}
             >
               <div className="w-16 h-16 bg-[#F9D976]/10 rounded-full flex items-center justify-center mb-6 border border-[#F9D976]/20 shadow-[0_0_20px_rgba(249,217,118,0.1)] group-hover:border-[#F9D976]/50 group-hover:shadow-[0_0_30px_rgba(249,217,118,0.3)] transition-all duration-300">
@@ -811,8 +811,8 @@ export default function HomePage() {
             </div>
 
             {/* 24/7 Support */}
-            <div 
-              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${whyChooseUsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} 
+            <div
+              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${whyChooseUsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
               style={{ transitionDelay: whyChooseUsInView ? '0ms' : '400ms' }}
             >
               <div className="w-16 h-16 bg-[#F9D976]/10 rounded-full flex items-center justify-center mb-6 border border-[#F9D976]/20 shadow-[0_0_20px_rgba(249,217,118,0.1)] group-hover:border-[#F9D976]/50 group-hover:shadow-[0_0_30px_rgba(249,217,118,0.3)] transition-all duration-300">
@@ -823,8 +823,8 @@ export default function HomePage() {
             </div>
 
             {/* Fast Delivery */}
-            <div 
-              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${whyChooseUsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`} 
+            <div
+              className={`group flex flex-col items-center p-8 bg-white/5 border border-white/10 rounded-2xl transition-all duration-700 hover:duration-300 hover:border-[#F9D976]/40 hover:shadow-[0_0_40px_rgba(249,217,118,0.15)] hover:bg-white/10 hover:-translate-y-1 ${whyChooseUsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
               style={{ transitionDelay: whyChooseUsInView ? '0ms' : '600ms' }}
             >
               <div className="w-16 h-16 bg-[#F9D976]/10 rounded-full flex items-center justify-center mb-6 border border-[#F9D976]/20 shadow-[0_0_20px_rgba(249,217,118,0.1)] group-hover:border-[#F9D976]/50 group-hover:shadow-[0_0_30px_rgba(249,217,118,0.3)] transition-all duration-300">
@@ -960,13 +960,13 @@ export default function HomePage() {
       {/* Product Detail Modal */}
       {selectedProduct && (
         <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 sm:p-6">
-          <div 
+          <div
             className="absolute inset-0 bg-[#0A0F1F]/95 backdrop-blur-xl"
             onClick={() => setSelectedProduct(null)}
           />
           <div className="relative bg-[#1A1F2E] border border-white/10 w-full max-w-5xl max-h-[90vh] rounded-[2rem] overflow-hidden shadow-2xl flex flex-col md:flex-row">
             {/* Close Button */}
-            <button 
+            <button
               onClick={() => setSelectedProduct(null)}
               className="absolute top-6 right-6 z-20 w-10 h-10 bg-white/5 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/10 transition-colors"
             >
@@ -976,8 +976,8 @@ export default function HomePage() {
             {/* Left: Image Showcase */}
             <div className="md:w-1/2 bg-white/5 p-8 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/10 overflow-y-auto">
               <div className="aspect-square w-full flex items-center justify-center bg-[#0A0F1F]/40 rounded-3xl border border-white/5 p-8 relative group">
-                <img 
-                  src={selectedProduct.image[0]} 
+                <img
+                  src={selectedProduct.image[0]}
                   alt={selectedProduct.name}
                   className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(249,217,118,0.2)]"
                 />

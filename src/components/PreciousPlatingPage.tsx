@@ -52,8 +52,8 @@ export default function PreciousPlatingPage() {
             id: 2,
             name: 'Silver Plating',
             category: 'silver',
-            description: 'Sleek silver finish perfect for modern tech branding',
-            image: ['/stainless-steel-silver-plating-connectors.webp'],
+            description: 'Silver plating is a metal finishing process where a thin layer of silver is applied to a surface to improve conductivity, corrosion resistance, and appearance. It provides a clean, bright finish and is widely used in electronics, industrial components, decorative items, and precision parts where performance and reliability are important.',
+            image: ['/silver-connector.webp'],
             specs: {
                 platingThickness: 'As per requirements',
                 Benefits: ['Electrical Conductivity', 'High Durability', 'Corrosion Resistance'],
@@ -66,7 +66,7 @@ export default function PreciousPlatingPage() {
             id: 3,
             name: 'Nickel Chrome Plating',
             category: 'chrome',
-            description: 'Premium raised design with crystal-clear resin coating',
+            description: 'Nickel chrome plating is a protective metal finishing process that gives surfaces a bright, mirror-like finish along with excellent corrosion resistance and durability. It is widely used for products that require a strong surface, long life, and a premium metallic appearance.',
             image: ['/silver-automobile.webp', '/chrome-plating-taps.webp', '/silver-plating.webp'],
             specs: {
                 platingThickness: 'As per requirements',
