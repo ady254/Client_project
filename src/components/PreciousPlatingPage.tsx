@@ -39,7 +39,7 @@ export default function PreciousPlatingPage() {
             name: 'Gold Plating',
             category: 'gold',
             description: 'Luxurious 24K gold electroplated sticker for high-end branding',
-            image: ['/gold-plating-metal-sticker-texture.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp', '/gold-plating.webp'],
+            image: ['/gold-plating.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp', '/electro.webp'],
             specs: {
                 finish: '24K Gold Electroplating',
                 Benefits: ['Corrosion Resistance', 'High Durability', 'Aesthetic Appeal', 'Cost-Effective'],
@@ -53,7 +53,7 @@ export default function PreciousPlatingPage() {
             name: 'Silver Plating',
             category: 'silver',
             description: 'Sleek silver finish perfect for modern tech branding',
-            image: ['/stainless-steel-silver-plating-connectors.webp', '/silver-plating-surgical.webp', '/silver-plating-pcb.webp'],
+            image: ['/stainless-steel-silver-plating-connectors.webp'],
             specs: {
                 platingThickness: 'As per requirements',
                 Benefits: ['Electrical Conductivity', 'High Durability', 'Corrosion Resistance'],

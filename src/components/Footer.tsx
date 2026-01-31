@@ -49,8 +49,8 @@ export default function Footer() {
                                 { name: 'Contact', path: '/contact' }
                             ].map((link) => (
                                 <li key={link.name}>
-                                    <Link 
-                                        to={link.path} 
+                                    <Link
+                                        to={link.path}
                                         className="text-gray-400 hover:text-[#F9D976] text-[12px] font-bold uppercase tracking-widest transition-all duration-300 flex items-center group"
                                     >
                                         <ArrowRight size={10} className="mr-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
@@ -123,12 +123,12 @@ export default function Footer() {
                                     style={{ border: 0 }}
                                     allowFullScreen
                                     loading="lazy"
-                                    className="grayscale opacity-60 group-hover/map:grayscale-0 group-hover/map:opacity-100 transition-all duration-700"
+                                    className="grayscale-0 opacity-100"
                                 />
                                 <div className="absolute bottom-1.5 right-1.5">
-                                    <a 
-                                        href="https://maps.google.com/maps?q=Metal%20Stickers%20India%2C%20Anangpur%20Dairy%2C%20Sector%2037%2C%20Faridabad%2C%20Haryana%20121003" 
-                                        target="_blank" 
+                                    <a
+                                        href="https://maps.google.com/maps?q=Metal%20Stickers%20India%2C%20Anangpur%20Dairy%2C%20Sector%2037%2C%20Faridabad%2C%20Haryana%20121003"
+                                        target="_blank"
                                         rel="noreferrer"
                                         className="p-1 bg-[#0A0F1F]/80 backdrop-blur-md border border-white/10 rounded-lg text-[#F9D976] hover:bg-[#F9D976] hover:text-[#0A0F1F] transition-all"
                                     >
@@ -147,17 +147,17 @@ export default function Footer() {
 
                             <div className="flex items-center gap-2 pt-0.5">
                                 {[
-                                    { icon: <Instagram size={14} />, url: "https://www.instagram.com/metalstickersindia/", color: "hover:text-[#E4405F]" },
-                                    { icon: <Linkedin size={14} />, url: "https://linkedin.com", color: "hover:text-[#0077B5]" },
-                                    { icon: <MessageCircle size={14} />, url: "https://wa.me/919999865558", color: "hover:text-[#25D366]" },
-                                    { icon: <Youtube size={14} />, url: "https://www.youtube.com/@METALSTICKERSFACTORYFARIDABAD", color: "hover:text-[#FF0000]" }
+                                    { icon: <Instagram size={14} />, url: "https://www.instagram.com/metalstickersindia/", color: "text-[#E4405F]" },
+                                    { icon: <Linkedin size={14} />, url: "https://linkedin.com", color: "text-[#0077B5]" },
+                                    { icon: <MessageCircle size={14} />, url: "https://wa.me/919999865558", color: "text-[#25D366]" },
+                                    { icon: <Youtube size={14} />, url: "https://www.youtube.com/@METALSTICKERSFACTORYFARIDABAD", color: "text-[#FF0000]" }
                                 ].map((social, i) => (
-                                    <a 
+                                    <a
                                         key={i}
-                                        href={social.url} 
-                                        target="_blank" 
-                                        rel="noreferrer" 
-                                        className={`w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 ${social.color} hover:bg-white/10 hover:border-white/20 transition-all duration-300`}
+                                        href={social.url}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className={`w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center ${social.color} hover:bg-white/10 hover:border-white/20 transition-all duration-300`}
                                     >
                                         {social.icon}
                                     </a>
