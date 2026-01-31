@@ -38,7 +38,7 @@ export default function PreciousPlatingPage() {
             id: 1,
             name: 'Gold Plating',
             category: 'gold',
-            description: 'Luxurious 24K gold electroplated sticker for high-end branding',
+            description: 'Gold plating is a premium electroplating process that coats metal surfaces with a thin layer of 24K gold. It enhances the product’s appearance while improving corrosion resistance, durability, and electrical performance. Ideal for luxury, industrial, and precision components that require both beauty and reliability.',
             image: ['/gold-plating.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp', '/electro.webp'],
             specs: {
                 finish: '24K Gold Electroplating',
