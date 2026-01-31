@@ -92,7 +92,7 @@ export default function MetalStickersPage() {
                 size: 'A3 or A4 & Custom sizes available',
                 minOrder: '50 Sheets',
                 finish: 'Brushed gold texture',
-                benefits: ['Affordability', 'Corrosion Resistance', 'Durability & Protection', 'Aesthetic Appeal', 'High-Quality Finish'],
+                benefits: 'Affordability|Corrosion Resistance|Durability & Protection|Aesthetic Appeal|High-Quality Finish',
                 adhesive: '6010 or 467h adhesive',
             },
             Application: ['Jewelry & Accessories', 'Fashion & Decor', 'Electronics & Wearables', 'Fixtures & Fittings'],
@@ -106,7 +106,7 @@ export default function MetalStickersPage() {
             specs: {
                 size: 'A3 or A4 & Custom sizes available',
                 finish: 'High-gloss chrome',
-                benefits: ['Enhanced Durability', 'Aesthetic Appeal', 'Cost-Effective', 'Reduced Glare'],
+                benefits: 'Enhanced Durability|Aesthetic Appeal|Cost-Effective|Reduced Glare',
                 adhesive: '6010 or 467h adhesive',
             },
             Application: ['Jewelry Manufacturing', 'Automotive Industry', 'Consumer Electronics', 'Household and Decor'],

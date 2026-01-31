@@ -46,7 +46,7 @@ export default function PreciousPlatingPage() {
                 serviceLocation: 'Pan India',
                 paymentMode: 'Online/Offline',
             },
-            Application: ['Jewellery', 'Watch Parts', 'Electronics & Electrical Components', 'Medical Equipments'],
+            Application: ['Jewellery', 'Artificial Jewellery', 'Automobile Industry', 'Watch Parts', 'Electronics & Electrical Components', 'PTH', 'PCBs', 'Medical Equipments'],
         },
         {
             id: 2,
