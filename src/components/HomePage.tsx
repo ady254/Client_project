@@ -201,10 +201,10 @@ export default function HomePage() {
       name: 'Nickel Chrome Plating',
       category: 'chrome',
       description: 'Nickel chrome plating is a protective metal finishing process that gives surfaces a bright, mirror-like finish along with excellent corrosion resistance and durability. It is widely used for products that require a strong surface, long life, and a premium metallic appearance.',
-      image: ['/silver-automobile.webp', '/chrome-plating-taps.webp', '/silver-plating.webp'],
+      image: ['/nickel-chrome-coating.webp'],
       specs: {
         platingThickness: 'As per requirements',
-        finish: 'Polyurethane resin coating',
+        finish: 'Nickel Chrome Plating',
         serviceLocation: 'Pan India',
         benefits: 'Corrosion Resistance | High Durability | Aesthetic Appeal | Cost-Effective',
       },
