@@ -201,7 +201,7 @@ export default function HomePage() {
       name: 'Nickel Chrome Plating',
       category: 'chrome',
       description: 'Nickel chrome plating is a protective metal finishing process that gives surfaces a bright, mirror-like finish along with excellent corrosion resistance and durability. It is widely used for products that require a strong surface, long life, and a premium metallic appearance.',
-      image: ['/nickel-chrome-coating.webp'],
+      image: ['/nickel-chrome.webp'],
       specs: {
         platingThickness: 'As per requirements',
         finish: 'Nickel Chrome Plating',
