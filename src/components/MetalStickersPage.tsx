@@ -268,101 +268,103 @@ export default function MetalStickersPage() {
             </div>
 
             {selectedProduct && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-[#0A0F1F]/95 backdrop-blur-xl">
-                    <div className="relative max-w-5xl w-full bg-[#0F1724] border border-white/10 rounded-none overflow-hidden max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col md:flex-row">
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#0A0F1F]/95 backdrop-blur-xl">
+                    <div className="relative max-w-5xl w-full bg-[#0F1724] border border-white/10 rounded-[2rem] overflow-hidden max-h-[85vh] md:max-h-[90vh] shadow-2xl flex flex-col md:flex-row">
                         <button
                             onClick={() => setSelectedProduct(null)}
-                            className="absolute top-6 right-6 z-20 p-2 hover:bg-white/5 rounded-full text-white transition-all duration-300"
+                            className="absolute top-4 right-4 z-[60] w-10 h-10 bg-black/40 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/10 transition-colors"
                         >
-                            <X size={24} />
+                            <X size={20} />
                         </button>
 
-                        <div className="md:w-1/2 bg-white/5 p-8 flex flex-col border-b md:border-b-0 md:border-r border-white/10">
-                            <div className="flex-1 flex items-center justify-center p-4">
-                                <img
-                                    src={selectedProduct.image[activeImageIndex]}
-                                    alt={selectedProduct.name}
-                                    className="w-full h-full object-contain max-h-[50vh]"
-                                />
-                            </div>
-                            {selectedProduct.image.length > 1 && (
-                                <div className="flex gap-2 mt-4 overflow-x-auto pb-2 justify-center">
-                                    {selectedProduct.image.map((img, idx) => (
-                                        <button
-                                            key={idx}
-                                            onClick={() => setActiveImageIndex(idx)}
-                                            className={`relative w-16 h-16 border rounded-md overflow-hidden flex-shrink-0 transition-all ${activeImageIndex === idx
-                                                ? 'border-[#F9D976] ring-1 ring-[#F9D976]'
-                                                : 'border-white/10 hover:border-white/30'
-                                                }`}
-                                        >
-                                            <img
-                                                src={img}
-                                                alt={`${selectedProduct.name} view ${idx + 1}`}
-                                                className="w-full h-full object-cover"
-                                            />
-                                        </button>
-                                    ))}
+                        <div className="flex flex-col md:flex-row w-full h-full overflow-y-auto md:overflow-hidden">
+                            <div className="w-full md:w-1/2 bg-white/5 p-8 flex flex-col md:h-full md:overflow-y-auto border-b md:border-b-0 md:border-r border-white/10">
+                                <div className="flex-1 flex items-center justify-center p-4 min-h-[300px]">
+                                    <img
+                                        src={selectedProduct.image[activeImageIndex]}
+                                        alt={selectedProduct.name}
+                                        className="w-full h-full object-contain max-h-[40vh] md:max-h-[50vh]"
+                                    />
                                 </div>
-                            )}
-                        </div>
-
-                        <div className="md:w-1/2 p-8 md:p-16 flex flex-col justify-between">
-                            <div className="space-y-8">
-                                <div>
-                                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#F9D976] block mb-4">Product Details</span>
-                                    <h2 className="text-4xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter">
-                                        {selectedProduct.name}
-                                    </h2>
-                                    <p className="text-gray-300 leading-relaxed font-medium">
-                                        {selectedProduct.description}
-                                    </p>
-                                </div>
-
-                                <div className="space-y-6">
-                                    {selectedProduct.Application && (
-                                        <div className="mb-6">
-                                            <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-[#F9D976] border-b border-white/10 pb-2 mb-3">
-                                                Applications
-                                            </h3>
-                                            <div className="flex flex-wrap gap-2">
-                                                {selectedProduct.Application.map((app, i) => (
-                                                    <span key={i} className="px-3 py-1 bg-white/5 border border-white/10 text-[10px] text-gray-300 font-bold uppercase tracking-wider">
-                                                        {app}
-                                                    </span>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-[#F9D976] border-b border-white/10 pb-2">
-                                        Specifications
-                                    </h3>
-                                    <div className="grid gap-4">
-                                        {Object.entries(selectedProduct.specs ?? {}).map(([key, value]) => (
-                                            <div
-                                                key={key}
-                                                className="flex justify-between items-start text-xs border-b border-white/5 pb-2 last:border-0"
+                                {selectedProduct.image.length > 1 && (
+                                    <div className="flex gap-2 mt-4 overflow-x-auto pb-2 justify-center w-full">
+                                        {selectedProduct.image.map((img, idx) => (
+                                            <button
+                                                key={idx}
+                                                onClick={() => setActiveImageIndex(idx)}
+                                                className={`relative w-16 h-16 border rounded-md overflow-hidden flex-shrink-0 transition-all ${activeImageIndex === idx
+                                                    ? 'border-[#F9D976] ring-1 ring-[#F9D976]'
+                                                    : 'border-white/10 hover:border-white/30'
+                                                    }`}
                                             >
-                                                <span className="text-gray-400 uppercase tracking-widest font-bold whitespace-nowrap pt-1">
-                                                    {key.replace(/([A-Z])/g, ' $1').replace('_', ' ').trim()}
-                                                </span>
-                                                <span className="text-white font-black uppercase tracking-wider text-right ml-8 leading-relaxed max-w-[60%]">
-                                                    {Array.isArray(value) ? value.join(', ') : String(value ?? '')}
-                                                </span>
-                                            </div>
+                                                <img
+                                                    src={img}
+                                                    alt={`${selectedProduct.name} view ${idx + 1}`}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            </button>
                                         ))}
                                     </div>
-                                </div>
+                                )}
                             </div>
 
-                            <div className="mt-12">
-                                <button
-                                    onClick={() => handleWhatsAppOrder(selectedProduct)}
-                                    className="w-full bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] text-[10px] font-black uppercase tracking-[0.4em] py-5 hover:brightness-110 transition-all duration-300"
-                                >
-                                    Contact for Order
-                                </button>
+                            <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-start md:h-full md:overflow-y-auto">
+                                <div className="space-y-8 pb-8">
+                                    <div>
+                                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#F9D976] block mb-4">Product Details</span>
+                                        <h2 className="text-3xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter">
+                                            {selectedProduct.name}
+                                        </h2>
+                                        <p className="text-gray-300 leading-relaxed font-medium text-sm md:text-base">
+                                            {selectedProduct.description}
+                                        </p>
+                                    </div>
+
+                                    <div className="space-y-6">
+                                        {selectedProduct.Application && (
+                                            <div className="mb-6">
+                                                <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-[#F9D976] border-b border-white/10 pb-2 mb-3">
+                                                    Applications
+                                                </h3>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {selectedProduct.Application.map((app, i) => (
+                                                        <span key={i} className="px-3 py-1 bg-white/5 border border-white/10 text-[10px] text-gray-300 font-bold uppercase tracking-wider">
+                                                            {app}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        <h3 className="text-[10px] font-black uppercase tracking-[0.4em] text-[#F9D976] border-b border-white/10 pb-2">
+                                            Specifications
+                                        </h3>
+                                        <div className="grid gap-4">
+                                            {Object.entries(selectedProduct.specs ?? {}).map(([key, value]) => (
+                                                <div
+                                                    key={key}
+                                                    className="flex flex-col sm:flex-row sm:justify-between items-start text-xs border-b border-white/5 pb-2 last:border-0"
+                                                >
+                                                    <span className="text-gray-400 uppercase tracking-widest font-bold whitespace-nowrap pt-1">
+                                                        {key.replace(/([A-Z])/g, ' $1').replace('_', ' ').trim()}
+                                                    </span>
+                                                    <span className="text-white font-black uppercase tracking-wider text-left sm:text-right mt-1 sm:mt-0 sm:ml-8 leading-relaxed max-w-full sm:max-w-[60%]">
+                                                        {Array.isArray(value) ? value.join(' | ') : String(value ?? '')}
+                                                    </span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="mt-8 sticky bottom-0 bg-[#0F1724] pb-4 md:relative md:bg-transparent md:pb-0">
+                                    <button
+                                        onClick={() => handleWhatsAppOrder(selectedProduct)}
+                                        className="w-full bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] text-[10px] font-black uppercase tracking-[0.4em] py-5 hover:brightness-110 transition-all duration-300 rounded-xl md:rounded-none"
+                                    >
+                                        Contact for Order
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

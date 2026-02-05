@@ -73,11 +73,7 @@ function ServiceDetailBlock({ product, index, onClick }: { product: Product; ind
 // ────────────────────────────────────────────────
 // Typing Animation Data
 // ────────────────────────────────────────────────
-const typingText = [
-  "Welcome to India’s Best Sticker Company",
-  "Where You Get Premium Electroplated Labels",
-  "Gold • Silver • Chrome • Custom Shapes",
-];
+
 
 // ────────────────────────────────────────────────
 // Counter Component for animated numbers
@@ -172,29 +168,29 @@ export default function HomePage() {
       id: 201,
       name: 'Gold Plating',
       category: 'gold',
-      description: 'Gold plating is a premium electroplating process that coats metal surfaces with a thin layer of 24K gold. It enhances the product’s appearance while improving corrosion resistance, durability, and electrical performance. Ideal for luxury, industrial, and precision components that require both beauty and reliability.',
-      image: ['gold-plating.webp', '/electro.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp',],
+      description: 'Gold plating is a premium electroplating process that coats metal surfaces with any number of layers of 24K gold. It enhances the product’s appearance while improving corrosion resistance, durability, and electrical performance. Ideal for luxury, industrial, and precision components that require both beauty and reliability.',
+      image: ['gold-plating.webp', '/gold-pcb-plating.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp'],
       specs: {
         finish: '24K Gold Electroplating',
         serviceLocation: 'Pan India',
         paymentMode: 'Online/Offline',
         benefits: 'Corrosion Resistance | High Durability | Aesthetic Appeal | Cost-Effective',
       },
-      Application: ['Jewellery', 'Watch Parts', 'Electronics & Electrical Components', 'Medical Equipments'],
+      Application: ['Jewellery', 'Artificial Jewellery', 'Automobile Industry', 'Watch Parts', 'Electronics & Electrical Components', 'PTH', 'Printed Circuit Boards (PCBs)', 'Medical Equipments'],
     },
     {
       id: 202,
       name: 'Silver Plating',
       category: 'silver',
       description: 'Silver plating is a metal finishing process where a thin layer of silver is applied to a surface to improve conductivity, corrosion resistance, and appearance. It provides a clean, bright finish and is widely used in electronics, industrial components, decorative items, and precision parts where performance and reliability are important.',
-      image: ['/silver-connector.webp'],
+      image: ['/silver_plating1.webp', '/silver_plating.webp'],
       specs: {
         platingThickness: 'As per requirements',
         serviceLocation: 'Pan India',
         paymentMode: 'Online/Offline',
         benefits: 'Electrical Conductivity | High Durability | Corrosion Resistance',
       },
-      Application: ['printed circuit board (PCB)', 'Bus Bar', 'Contacts', 'Medical Equipments'],
+      Application: ['Bus Bar', 'Contacts', 'Medical Equipments'],
     },
     {
       id: 203,
@@ -231,11 +227,12 @@ export default function HomePage() {
   // Hero Background Carousel
   // ────────────────────────────────────────────────
   const heroImages = [
-
     "/01.webp",
     "/02.webp",
-    "/silver-automobile.webp",
+    "/silver_plating1.webp",
     "/gold-plating.webp",
+    "/gem-finished.webp",
+    "/chrome-finish.webp",
   ];
 
 
@@ -422,34 +419,7 @@ export default function HomePage() {
       </Helmet>
 
       {/* Custom Styles */}
-      <style>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(40px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes shine {
-          0%   { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        .animate-marquee {
-          animation: marquee 30s linear infinite;
-        }
-        .animate-fade-up {
-          animation: fadeInUp 1s ease-out forwards;
-        }
-        .shine-overlay {
-          background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%);
-          background-size: 200% 100%;
-          animation: shine 6s infinite linear;
-          opacity: 0;
-          transition: opacity 0.6s ease;
-        }
-        .group:hover .shine-overlay { opacity: 0.18; }
-      `}</style>
+
 
       {/* Scam Alert */}
       {showAlert && (
@@ -958,115 +928,138 @@ export default function HomePage() {
       </section>
 
       {/* Product Detail Modal */}
+      {/* Product Detail Modal */}
       {selectedProduct && (
-        <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 sm:p-6">
-          <div
-            className="absolute inset-0 bg-[#0A0F1F]/95 backdrop-blur-xl"
-            onClick={() => setSelectedProduct(null)}
-          />
-          <div className="relative bg-[#1A1F2E] border border-white/10 w-full max-w-5xl max-h-[90vh] rounded-[2rem] overflow-hidden shadow-2xl flex flex-col md:flex-row">
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedProduct(null)}
-              className="absolute top-6 right-6 z-20 w-10 h-10 bg-white/5 border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/10 transition-colors"
-            >
-              ✕
-            </button>
+        <ProductModal
+          selectedProduct={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
+      )}
+    </div>
+  );
+}
 
-            {/* Left: Image Showcase */}
-            <div className="md:w-1/2 bg-white/5 p-8 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-white/10 overflow-y-auto">
-              <div className="aspect-square w-full flex items-center justify-center bg-[#0A0F1F]/40 rounded-3xl border border-white/5 p-8 relative group">
-                <img
-                  src={selectedProduct.image[0]}
-                  alt={selectedProduct.name}
-                  className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(249,217,118,0.2)]"
-                />
-              </div>
-              {selectedProduct.image.length > 1 && (
-                <div className="flex gap-3 mt-6">
-                  {selectedProduct.image.map((img, idx) => (
-                    <div key={idx} className="w-16 h-16 rounded-xl border border-white/10 overflow-hidden bg-white/5">
-                      <img src={img} alt="" className="w-full h-full object-cover" />
-                    </div>
-                  ))}
-                </div>
-              )}
+function ProductModal({ selectedProduct, onClose }: { selectedProduct: any; onClose: () => void }) {
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  return (
+    <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 sm:p-6">
+      <div
+        className="absolute inset-0 bg-[#0A0F1F]/95 backdrop-blur-xl"
+        onClick={onClose}
+      />
+      <div className="relative bg-[#1A1F2E] border border-white/10 w-full max-w-5xl h-[85vh] md:h-[90vh] rounded-[2rem] overflow-hidden shadow-2xl flex flex-col">
+        {/* Close Button - Fixed relative to container */}
+        <div className="absolute top-4 right-4 z-50">
+          <button
+            onClick={onClose}
+            className="w-10 h-10 bg-black/40 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/10 transition-colors"
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Scrollable Content Wrapper */}
+        <div className="flex flex-col md:flex-row w-full h-full overflow-y-auto md:overflow-hidden">
+
+          {/* Left: Image Showcase */}
+          <div className="w-full md:w-1/2 p-4 sm:p-8 flex flex-col items-center justify-start md:justify-center border-b md:border-b-0 md:border-r border-white/10 bg-white/5 md:overflow-y-auto">
+            <div className="aspect-square w-full max-w-[300px] md:max-w-none flex items-center justify-center bg-[#0A0F1F]/40 rounded-3xl border border-white/5 p-8 relative group">
+              <img
+                src={selectedProduct.image[activeImageIndex]}
+                alt={selectedProduct.name}
+                className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(249,217,118,0.2)]"
+              />
             </div>
-
-            {/* Right: Detailed Info */}
-            <div className="md:w-1/2 p-8 md:p-12 overflow-y-auto custom-scrollbar">
-              <div className="space-y-8">
-                <div>
-                  <div className="flex items-center space-x-3 mb-4">
-                    <span className="h-px w-6 bg-[#F9D976]/50" />
-                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#F9D976]">Premium Product</span>
-                  </div>
-                  <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none mb-4">
-                    {selectedProduct.name}
-                  </h2>
-                  <p className="text-gray-400 leading-relaxed">
-                    {selectedProduct.description}
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 gap-8">
-                  {/* Applications */}
-                  {selectedProduct.Application && (
-                    <div className="space-y-4">
-                      <h3 className="text-xs font-black uppercase tracking-[0.2em] text-[#F9D976] flex items-center">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#F9D976] mr-2" />
-                        Common Applications
-                      </h3>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedProduct.Application.map((app, i) => (
-                          <span key={i} className="px-3 py-1.5 bg-white/5 border border-white/10 text-[9px] text-gray-300 font-bold uppercase tracking-widest rounded-md">
-                            {app}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Technical Specs */}
-                  {selectedProduct.specs && (
-                    <div className="space-y-4">
-                      <h3 className="text-xs font-black uppercase tracking-[0.2em] text-[#F9D976] flex items-center">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#F9D976] mr-2" />
-                        Technical Specifications
-                      </h3>
-                      <div className="grid grid-cols-2 gap-4">
-                        {Object.entries(selectedProduct.specs).map(([key, value]) => (
-                          <div key={key} className="flex flex-col border-b border-white/5 pb-2">
-                            <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1">
-                              {key.replace(/([A-Z])/g, ' $1').replace('_', ' ').trim()}
-                            </span>
-                            <span className="text-white font-bold text-sm uppercase tracking-tight">
-                              {Array.isArray(value) ? value.join(', ') : String(value)}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* CTA Button */}
-                <div className="pt-4">
-                  <a
-                    href={`https://wa.me/${selectedProduct.category === 'gold' && selectedProduct.name.includes('Sticker') || selectedProduct.id >= 4 ? '919999865558' : '919811018728'}?text=${encodeURIComponent(`New Inquiry\n\nProduct: ${selectedProduct.name}\n\nI interested in this service. Please provide a quote.`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center w-full px-8 py-5 bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] text-[11px] font-black uppercase tracking-[0.3em] rounded-2xl shadow-xl shadow-[#F9D976]/10 hover:scale-[1.02] transition-all"
+            {selectedProduct.image.length > 1 && (
+              <div className="flex gap-3 mt-6 overflow-x-auto w-full justify-center pb-2">
+                {selectedProduct.image.map((img: string, idx: number) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveImageIndex(idx)}
+                    className={`w-16 h-16 flex-shrink-0 rounded-xl border overflow-hidden bg-white/5 transition-all ${activeImageIndex === idx ? 'border-[#F9D976] ring-1 ring-[#F9D976]' : 'border-white/10 hover:border-white/30'}`}
                   >
-                    Contact for Quick Quote
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </a>
+                    <img src={img} alt="" className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Right: Detailed Info */}
+          <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-12 md:overflow-y-auto custom-scrollbar">
+            <div className="space-y-8 pb-10">
+              <div>
+                <div className="flex items-center space-x-3 mb-4">
+                  <span className="h-px w-6 bg-[#F9D976]/50" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#F9D976]">Premium Product</span>
                 </div>
+                <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none mb-4">
+                  {selectedProduct.name}
+                </h2>
+                <p className="text-gray-400 leading-relaxed text-sm sm:text-base">
+                  {selectedProduct.description}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 gap-8">
+                {/* Applications */}
+                {selectedProduct.Application && (
+                  <div className="space-y-4">
+                    <h3 className="text-xs font-black uppercase tracking-[0.2em] text-[#F9D976] flex items-center">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#F9D976] mr-2" />
+                      Common Applications
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProduct.Application.map((app: string, i: number) => (
+                        <span key={i} className="px-3 py-1.5 bg-white/5 border border-white/10 text-[9px] text-gray-300 font-bold uppercase tracking-widest rounded-md">
+                          {app}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Technical Specs */}
+                {selectedProduct.specs && (
+                  <div className="space-y-4">
+                    <h3 className="text-xs font-black uppercase tracking-[0.2em] text-[#F9D976] flex items-center">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#F9D976] mr-2" />
+                      Technical Specifications
+                    </h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {Object.entries(selectedProduct.specs).map(([key, value]) => (
+                        <div key={key} className="flex flex-col border-b border-white/5 pb-2">
+                          <span className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1">
+                            {key.replace(/([A-Z])/g, ' $1').replace('_', ' ').trim()}
+                          </span>
+                          <span className="text-white font-bold text-sm uppercase tracking-tight">
+                            {Array.isArray(value) ? value.join(' | ') : String(value)}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+
+              {/* CTA Button */}
+              <div className="pt-4 sticky bottom-0 bg-[#1A1F2E] md:relative md:bg-transparent pb-4 md:pb-0">
+                <a
+                  href={`https://wa.me/${selectedProduct.category === 'gold' && selectedProduct.name.includes('Sticker') || selectedProduct.id >= 4 ? '919999865558' : '919811018728'}?text=${encodeURIComponent(`New Inquiry\n\nProduct: ${selectedProduct.name}\n\nI interested in this service. Please provide a quote.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-full px-8 py-5 bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] text-[11px] font-black uppercase tracking-[0.3em] rounded-2xl shadow-xl shadow-[#F9D976]/10 hover:scale-[1.02] transition-all"
+                >
+                  Contact for Quick Quote
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </a>
               </div>
             </div>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }

@@ -24,7 +24,7 @@ export default function Footer() {
                                     </div>
                                     <div className="flex items-center gap-2 mt-1.5 px-2 py-0.5 bg-white/5 border border-white/10 rounded-md w-fit">
                                         <ShieldCheck size={9} className="text-[#F9D976]" />
-                                        <span className="text-[8px] tracking-[0.1em] uppercase font-bold text-gray-400">GSTIN: <span className="text-gray-100">06ABZFM3928P1Z7</span></span>
+                                        <span className="text-[10px] tracking-[0.1em] uppercase font-bold text-gray-400">GSTIN: <span className="text-gray-100">06ABZFM3928P1Z7</span></span>
                                     </div>
                                 </div>
                             </Link>
@@ -70,7 +70,7 @@ export default function Footer() {
                         <div className="space-y-3">
                             {/* Stickers Contact */}
                             <div className="p-3 rounded-xl bg-white/5 border border-white/10 hover:border-[#F9D976]/30 transition-colors group">
-                                <p className="text-[8px] font-black text-[#F9D976] uppercase tracking-[0.2em] mb-1.5">Metal Stickers</p>
+                                <p className="text-[10px] font-black text-[#F9D976] uppercase tracking-[0.2em] mb-1.5">Metal Stickers</p>
                                 <div className="space-y-1.5">
                                     <a href="tel:+919999865558" className="flex items-center gap-2.5 text-gray-300 hover:text-white transition-colors">
                                         <div className="w-6 h-6 rounded-full bg-[#F9D976]/10 flex items-center justify-center text-[#F9D976] group-hover:bg-[#F9D976] group-hover:text-[#0A0F1F] transition-all">
@@ -82,14 +82,14 @@ export default function Footer() {
                                         <div className="w-6 h-6 rounded-full bg-[#F9D976]/10 flex items-center justify-center text-[#F9D976] group-hover:bg-[#F9D976] group-hover:text-[#0A0F1F] transition-all">
                                             <Mail size={10} />
                                         </div>
-                                        <span className="text-[9px] font-bold break-all">corporatemetalstickersindia@gmail.com</span>
+                                        <span className="text-[10px] font-bold break-all">corporatemetalstickersindia@gmail.com</span>
                                     </a>
                                 </div>
                             </div>
 
                             {/* Plating Contact */}
                             <div className="p-3 rounded-xl bg-white/5 border border-white/10 hover:border-[#F9D976]/30 transition-colors group">
-                                <p className="text-[8px] font-black text-[#F9D976] uppercase tracking-[0.2em] mb-1.5">Precious Plating</p>
+                                <p className="text-[10px] font-black text-[#F9D976] uppercase tracking-[0.2em] mb-1.5">Precious Plating</p>
                                 <div className="space-y-1.5">
                                     <a href="tel:+919811018728" className="flex items-center gap-2.5 text-gray-300 hover:text-white transition-colors">
                                         <div className="w-6 h-6 rounded-full bg-[#F9D976]/10 flex items-center justify-center text-[#F9D976] group-hover:bg-[#F9D976] group-hover:text-[#0A0F1F] transition-all">
@@ -101,7 +101,7 @@ export default function Footer() {
                                         <div className="w-6 h-6 rounded-full bg-[#F9D976]/10 flex items-center justify-center text-[#F9D976] group-hover:bg-[#F9D976] group-hover:text-[#0A0F1F] transition-all">
                                             <Mail size={10} />
                                         </div>
-                                        <span className="text-[9px] font-bold break-all">Goldsilverplating@gmail.com</span>
+                                        <span className="text-[10px] font-bold break-all">Goldsilverplating@gmail.com</span>
                                     </a>
                                 </div>
                             </div>

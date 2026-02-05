@@ -46,35 +46,7 @@ export default function Navigation() {
   return (
     <>
       {/* Embedded styles for shimmer, slide, and logo tilt */}
-      <style>{`
-        /* shimmer underline animation */
-        @keyframes shimmer-x {
-          0% { background-position: -200% 0; }
-          100% { background-position: 200% 0; }
-        }
 
-        /* mobile slide down */
-        @keyframes slideDown {
-          from { transform: translateY(-12px); opacity: 0; }
-          to { transform: translateY(0); opacity: 1; }
-        }
-
-        /* logo metallic shine on hover */
-        .logo-shine {
-          background: linear-gradient(90deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.12) 45%, rgba(255,255,255,0.0) 80%);
-          transform: translateZ(0);
-        }
-
-        .shimmer-underline {
-          background-size: 300% 100%;
-          background-image: linear-gradient(90deg, rgba(249,217,118,0.0) 0%, rgba(249,217,118,0.8) 50%, rgba(249,217,118,0.0) 100%);
-          animation: shimmer-x 2.2s linear infinite;
-        }
-
-        .mobile-slide {
-          animation: slideDown 260ms cubic-bezier(.2,.9,.2,1) both;
-        }
-      `}</style>
 
       <nav
         ref={navRef}
@@ -135,7 +107,7 @@ export default function Navigation() {
             </div>
 
             {/* CENTER / RIGHT: Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-10 lg:space-x-12">
+            <div className="hidden md:flex items-center space-x-6 lg:space-x-12">
               {menuItems.map((item) => {
                 const active = isActive(item.path);
                 return (
