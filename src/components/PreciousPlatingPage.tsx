@@ -235,7 +235,7 @@ export default function PreciousPlatingPage() {
                                     <img
                                         src={selectedProduct.image[activeImageIndex]}
                                         alt={selectedProduct.name}
-                                        className="w-full h-full object-contain max-h-[40vh] md:max-h-[50vh]"
+                                        className="w-auto h-auto max-w-full max-h-[60vh] md:max-h-[70vh] object-contain mx-auto"
                                     />
                                 </div>
                                 {selectedProduct.image.length > 1 && (

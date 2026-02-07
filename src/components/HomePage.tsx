@@ -229,7 +229,7 @@ export default function HomePage() {
   const heroImages = [
     "/01.webp",
     "/02.webp",
-    "/silver_plating1.webp",
+    "/silver_plating.webp",
     "/gold-plating.webp",
     "/gem-finished.webp",
     "/chrome-finish.webp",
@@ -968,7 +968,7 @@ function ProductModal({ selectedProduct, onClose }: { selectedProduct: any; onCl
               <img
                 src={selectedProduct.image[activeImageIndex]}
                 alt={selectedProduct.name}
-                className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(249,217,118,0.2)]"
+                className="w-auto h-auto max-w-full max-h-[60vh] md:max-h-[70vh] object-contain mx-auto drop-shadow-[0_0_30px_rgba(249,217,118,0.2)]"
               />
             </div>
             {selectedProduct.image.length > 1 && (
