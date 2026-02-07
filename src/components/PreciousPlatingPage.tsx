@@ -8,6 +8,21 @@ export default function PreciousPlatingPage() {
     const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
     const [activeImageIndex, setActiveImageIndex] = useState(0);
     const [scrollY, setScrollY] = useState(0);
+    const [heroSlide, setHeroSlide] = useState(0);
+
+    const heroImages = [
+        "/gold-plating.webp",
+        "/silver_plating.webp",
+        "/nickel-chrome.webp",
+        "/gold-finish.webp"
+    ];
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setHeroSlide((prev) => (prev + 1) % heroImages.length);
+        }, 5000);
+        return () => clearInterval(interval);
+    }, []);
 
     useEffect(() => {
         if (selectedProduct) {
@@ -102,7 +117,19 @@ export default function PreciousPlatingPage() {
                 <meta name="description" content="Premium gold, silver, and nickel chrome electroplating services for industrial and retail excellence." />
             </Helmet>
             <div className="max-w-7xl mx-auto">
-                <div ref={headerInViewRef} className="text-center mb-20 relative py-10">
+                <div className="absolute inset-0 -z-20 overflow-hidden">
+                    {heroImages.map((img, idx) => (
+                        <div
+                            key={idx}
+                            className={`absolute inset-0 transition-opacity duration-1000 ${heroSlide === idx ? 'opacity-20' : 'opacity-0'}`}
+                        >
+                            <img src={img} alt="" className="w-full h-full object-cover scale-110 active:scale-100 transition-transform duration-[10000ms]" style={{ transform: `scale(${1.1 + scrollY * 0.0002}) translateY(${scrollY * 0.1}px)` }} />
+                        </div>
+                    ))}
+                    <div className="absolute inset-0 bg-gradient-to-b from-[#0A0F1F] via-transparent to-[#0A0F1F]" />
+                </div>
+
+                <div ref={headerInViewRef} className="text-center mb-20 relative py-20">
                     <div className="absolute inset-0 flex items-center justify-center -z-10 pointer-events-none select-none overflow-hidden">
                         <span
                             className="text-[15vw] font-black italic text-white/5 whitespace-nowrap transition-transform duration-500 ease-out"
@@ -117,7 +144,7 @@ export default function PreciousPlatingPage() {
 
                     <div className="relative overflow-hidden">
                         <h1
-                            className="text-5xl md:text-7xl font-bold text-white mb-6 transition-all duration-700 ease-out uppercase tracking-tighter"
+                            className="text-6xl md:text-8xl font-black text-white mb-6 transition-all duration-700 ease-out uppercase tracking-tighter"
                             style={{
                                 transform: headerInView
                                     ? `translateY(${(scrollY - 100) * 0.05}px)`
@@ -125,12 +152,12 @@ export default function PreciousPlatingPage() {
                                 opacity: headerInView ? 1 : 0
                             }}
                         >
-                            Precious Metal <span className="text-[#F9D976]">Plating</span>
+                            Precious Metal <span className="text-[#F9D976] bg-gradient-to-r from-[#F9D976] to-[#F39F23] bg-clip-text text-transparent">Plating</span>
                         </h1>
                     </div>
 
                     <p
-                        className="text-xl text-gray-400 max-w-3xl mx-auto transition-all duration-700 delay-100 ease-out uppercase tracking-widest text-sm font-bold"
+                        className="text-xl text-gray-400 max-w-3xl mx-auto transition-all duration-700 delay-100 ease-out uppercase tracking-[0.3em] text-xs font-black"
                         style={{
                             transform: headerInView
                                 ? `translateY(${(scrollY - 100) * 0.02}px)`
@@ -140,7 +167,7 @@ export default function PreciousPlatingPage() {
                     >
                         Specialized electroplating solutions tailored for luxury and industrial durability
                     </p>
-                    <div className={`h-px bg-[#F9D976]/30 mx-auto mt-8 transition-all duration-1000 delay-500 ${headerInView ? 'w-40 opacity-100' : 'w-0 opacity-0'}`} />
+                    <div className={`h-1 bg-gradient-to-r from-transparent via-[#F9D976] to-transparent mx-auto mt-10 transition-all duration-1000 delay-500 ${headerInView ? 'w-60 opacity-100' : 'w-0 opacity-0'}`} />
                 </div>
 
                 <div className="flex flex-wrap justify-center gap-2 mb-16">
@@ -159,10 +186,11 @@ export default function PreciousPlatingPage() {
                 </div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {filteredProducts.map((product) => (
+                    {filteredProducts.map((product, idx) => (
                         <div
                             key={product.id}
-                            className="bg-[#1A1F2E]/40 backdrop-blur-md border border-white/10 grid grid-cols-2 grid-rows-[auto_1fr_auto] overflow-hidden group transition-all duration-500 hover:border-[#F9D976]/30 hover:shadow-2xl hover:shadow-[#F9D976]/5"
+                            className={`bg-[#1A1F2E]/40 backdrop-blur-md border border-white/10 grid grid-cols-2 grid-rows-[auto_1fr_auto] overflow-hidden group transition-all duration-700 hover:border-[#F9D976]/30 hover:shadow-2xl hover:shadow-[#F9D976]/5 translate-y-0 opacity-100 animate-in fade-in slide-in-from-bottom-8`}
+                            style={{ transitionDelay: `${idx * 150}ms` }}
                         >
                             <div className="border-r border-b border-white/10 p-4 flex items-center justify-center bg-white/5">
                                 <h3 className="text-2xl md:text-3xl font-black tracking-tighter text-white truncate uppercase">
@@ -221,50 +249,86 @@ export default function PreciousPlatingPage() {
 
             {selectedProduct && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#0A0F1F]/95 backdrop-blur-xl">
-                    <div className="relative max-w-5xl w-full bg-[#0F1724] border border-white/10 rounded-[2rem] overflow-hidden max-h-[85vh] md:max-h-[90vh] shadow-2xl flex flex-col md:flex-row">
+                    <div className="relative bg-[#0A0F1F] border border-white/5 w-full max-w-7xl h-[100dvh] md:h-[90vh] rounded-none md:rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col md:flex-row animate-in fade-in zoom-in duration-300">
+                        {/* Close Button - More visible and positioned better */}
                         <button
                             onClick={() => setSelectedProduct(null)}
-                            className="absolute top-4 right-4 z-[60] w-10 h-10 bg-black/40 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/10 transition-colors"
+                            className="absolute top-4 right-4 z-[110] w-10 h-10 bg-black/40 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all"
                         >
-                            <X size={20} />
+                            ✕
                         </button>
 
-                        <div className="flex flex-col md:flex-row w-full h-full overflow-y-auto md:overflow-hidden">
-                            <div className="w-full md:w-1/2 bg-white/5 p-8 flex flex-col md:h-full md:overflow-y-auto border-b md:border-b-0 md:border-r border-white/10">
-                                <div className="flex-1 flex items-center justify-center p-4 min-h-[300px] w-full">
-                                    <img
-                                        src={selectedProduct.image[activeImageIndex]}
-                                        alt={selectedProduct.name}
-                                        className="w-auto h-auto max-w-full max-h-[50vh] md:max-h-[80vh] object-contain mx-auto"
-                                    />
-                                </div>
+                        <div className="flex flex-col md:flex-row w-full h-full overflow-y-auto custom-scrollbar md:overflow-hidden">
+                            {/* Left: Image Showcase */}
+                            <div className="w-full md:w-1/2 p-4 sm:p-8 flex flex-col md:flex-row gap-6 items-center justify-center border-b md:border-b-0 md:border-r border-white/10 bg-white/5 md:overflow-hidden shrink-0">
+                                {/* Thumbnails */}
                                 {selectedProduct.image.length > 1 && (
-                                    <div className="flex gap-2 mt-4 overflow-x-auto pb-2 justify-center w-full">
+                                    <div className="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-y-auto w-full md:w-24 md:h-full scrollbar-hide flex-shrink-0 justify-center md:justify-start py-2 md:py-4 px-1 z-10">
                                         {selectedProduct.image.map((img, idx) => (
                                             <button
                                                 key={idx}
+                                                onMouseEnter={() => setActiveImageIndex(idx)}
                                                 onClick={() => setActiveImageIndex(idx)}
-                                                className={`relative w-16 h-16 border rounded-md overflow-hidden flex-shrink-0 transition-all ${activeImageIndex === idx
-                                                    ? 'border-[#F9D976] ring-1 ring-[#F9D976]'
-                                                    : 'border-white/10 hover:border-white/30'
+                                                className={`relative w-14 h-14 md:w-20 md:h-20 flex-shrink-0 rounded-lg border overflow-hidden bg-white/5 transition-all duration-200 ${activeImageIndex === idx
+                                                    ? 'border-[#F9D976] ring-2 ring-[#F9D976] opacity-100'
+                                                    : 'border-white/10 hover:border-[#F9D976]/50 opacity-70 hover:opacity-100'
                                                     }`}
                                             >
-                                                <img
-                                                    src={img}
-                                                    alt={`${selectedProduct.name} view ${idx + 1}`}
-                                                    className="w-full h-full object-cover"
-                                                />
+                                                <img src={img} alt={`View ${idx + 1}`} className="w-full h-full object-cover" />
                                             </button>
                                         ))}
                                     </div>
                                 )}
+
+                                {/* Main Image */}
+                                <div className="order-1 md:order-2 relative flex-1 w-full flex items-center justify-center bg-[#0A0F1F]/40 rounded-2xl border border-white/5 p-4 overflow-hidden aspect-square md:aspect-auto md:h-full group/main">
+                                    {selectedProduct.image.length > 1 && (
+                                        <div className="absolute top-4 right-4 bg-black/60 text-white text-xs font-bold px-3 py-1.5 rounded-full backdrop-blur-md z-10 border border-white/10 shadow-lg">
+                                            {activeImageIndex + 1} / {selectedProduct.image.length}
+                                        </div>
+                                    )}
+                                    <div className="w-full h-full relative overflow-hidden flex items-center justify-center">
+                                        <img
+                                            src={selectedProduct.image[activeImageIndex]}
+                                            alt={selectedProduct.name}
+                                            className="w-auto h-auto max-w-full max-h-[50vh] md:max-h-full object-contain mx-auto transition-all duration-500 cursor-zoom-in group-hover/main:scale-150"
+                                            onMouseMove={(e) => {
+                                                const target = e.currentTarget;
+                                                const rect = target.getBoundingClientRect();
+                                                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                                                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                                                target.style.transformOrigin = `${x}% ${y}%`;
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.style.transformOrigin = 'center';
+                                            }}
+                                        />
+                                    </div>
+
+                                    {/* Navigation Arrows for Mobile Gallery */}
+                                    <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-4 pointer-events-none md:hidden">
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); setActiveImageIndex(prev => (prev - 1 + selectedProduct.image.length) % selectedProduct.image.length) }}
+                                            className="w-10 h-10 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/10 pointer-events-auto"
+                                        >
+                                            ←
+                                        </button>
+                                        <button
+                                            onClick={(e) => { e.stopPropagation(); setActiveImageIndex(prev => (prev + 1) % selectedProduct.image.length) }}
+                                            className="w-10 h-10 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/10 pointer-events-auto"
+                                        >
+                                            →
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-start md:h-full md:overflow-y-auto">
-                                <div className="space-y-8 pb-8">
+                            {/* Right: Detailed Info */}
+                            <div className="w-full md:w-1/2 p-6 md:p-12 flex flex-col md:h-full md:overflow-y-auto custom-scrollbar bg-[#0A0F1F]">
+                                <div className="flex-1 space-y-10 pb-32">
                                     <div>
                                         <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#F9D976] block mb-4">Service Details</span>
-                                        <h2 className="text-3xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter">
+                                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white mb-6 uppercase tracking-tighter leading-none">
                                             {selectedProduct.name}
                                         </h2>
                                         <p className="text-gray-300 leading-relaxed font-medium text-sm md:text-base">
@@ -309,12 +373,13 @@ export default function PreciousPlatingPage() {
                                     </div>
                                 </div>
 
-                                <div className="mt-8 sticky bottom-0 bg-[#0F1724] pb-4 md:relative md:bg-transparent md:pb-0">
+                                {/* Floating Footer for CTA on Mobile/Desktop */}
+                                <div className="sticky bottom-0 left-0 right-0 pt-6 pb-2 bg-[#0A0F1F] border-t border-white/5 mt-auto">
                                     <button
                                         onClick={() => handleWhatsAppOrder(selectedProduct)}
-                                        className="w-full bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] text-[10px] font-black uppercase tracking-[0.4em] py-5 hover:brightness-110 transition-all duration-300 rounded-xl md:rounded-none"
+                                        className="w-full bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] text-[11px] font-black uppercase tracking-[0.4em] py-5 hover:brightness-110 active:scale-[0.98] transition-all duration-300 rounded-2xl shadow-lg shadow-[#F9D976]/10"
                                     >
-                                        Contact for Inquiry
+                                        Contact for Business Inquiry
                                     </button>
                                 </div>
                             </div>

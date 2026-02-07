@@ -948,47 +948,79 @@ function ProductModal({ selectedProduct, onClose }: { selectedProduct: any; onCl
         className="absolute inset-0 bg-[#0A0F1F]/95 backdrop-blur-xl"
         onClick={onClose}
       />
-      <div className="relative bg-[#1A1F2E] border border-white/10 w-full max-w-5xl h-[85vh] md:h-[90vh] rounded-[2rem] overflow-hidden shadow-2xl flex flex-col">
-        {/* Close Button - Fixed relative to container */}
-        <div className="absolute top-4 right-4 z-50">
+      <div className="relative bg-[#0A0F1F] border border-white/5 w-full max-w-5xl h-[100dvh] md:h-[90vh] rounded-none md:rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col">
+        {/* Close Button - More visible and positioned better */}
+        <div className="absolute top-4 right-4 z-[110]">
           <button
             onClick={onClose}
-            className="w-10 h-10 bg-black/40 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/10 transition-colors"
+            className="w-10 h-10 bg-black/40 backdrop-blur-md border border-white/10 rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-all"
           >
             ✕
           </button>
         </div>
 
         {/* Scrollable Content Wrapper */}
-        <div className="flex flex-col md:flex-row w-full h-full overflow-y-auto md:overflow-hidden">
+        <div className="flex flex-col md:flex-row w-full h-full overflow-y-auto custom-scrollbar md:overflow-hidden">
 
           {/* Left: Image Showcase */}
-          <div className="w-full md:w-1/2 p-4 sm:p-8 flex flex-col items-center justify-start md:justify-center border-b md:border-b-0 md:border-r border-white/10 bg-white/5 md:overflow-y-auto">
-            <div className="w-full h-full flex items-center justify-center bg-[#0A0F1F]/40 rounded-3xl border border-white/5 p-4 sm:p-8 relative group min-h-[300px]">
-              <img
-                src={selectedProduct.image[activeImageIndex]}
-                alt={selectedProduct.name}
-                className="w-auto h-auto max-w-full max-h-[50vh] md:max-h-[80vh] object-contain mx-auto drop-shadow-[0_0_30px_rgba(249,217,118,0.2)]"
-              />
-            </div>
+          <div className="w-full md:w-1/2 p-4 sm:p-8 flex flex-col md:flex-row gap-6 items-center justify-center border-b md:border-b-0 md:border-r border-white/10 bg-white/5 md:overflow-hidden min-h-[40vh] md:min-h-0">
+            {/* Thumbnails - Order 2 on Mobile (Bottom), Order 1 on Desktop (Left) */}
             {selectedProduct.image.length > 1 && (
-              <div className="flex gap-3 mt-6 overflow-x-auto w-full justify-center pb-2">
+              <div className="order-2 md:order-1 flex md:flex-col gap-3 overflow-x-auto md:overflow-y-auto w-full md:w-24 md:h-full scrollbar-hide flex-shrink-0 justify-center md:justify-start py-2 md:py-4 px-1">
                 {selectedProduct.image.map((img: string, idx: number) => (
                   <button
                     key={idx}
+                    onMouseEnter={() => setActiveImageIndex(idx)}
                     onClick={() => setActiveImageIndex(idx)}
-                    className={`w-16 h-16 flex-shrink-0 rounded-xl border overflow-hidden bg-white/5 transition-all ${activeImageIndex === idx ? 'border-[#F9D976] ring-1 ring-[#F9D976]' : 'border-white/10 hover:border-white/30'}`}
+                    className={`relative w-16 h-16 md:w-20 md:h-20 flex-shrink-0 rounded-lg border overflow-hidden bg-white/5 transition-all duration-200 ${activeImageIndex === idx
+                      ? 'border-[#F9D976] ring-2 ring-[#F9D976] opacity-100'
+                      : 'border-white/10 hover:border-[#F9D976]/50 opacity-70 hover:opacity-100'
+                      }`}
                   >
                     <img src={img} alt="" className="w-full h-full object-cover" />
                   </button>
                 ))}
               </div>
             )}
+
+            {/* Main Image - Order 1 on Mobile, Order 2 on Desktop */}
+            <div className="w-full h-full relative overflow-hidden flex items-center justify-center">
+              <img
+                src={selectedProduct.image[activeImageIndex]}
+                alt={selectedProduct.name}
+                className="w-auto h-auto max-w-full max-h-[50vh] md:max-h-full object-contain mx-auto drop-shadow-[0_0_30px_rgba(249,217,118,0.2)] transition-all duration-500 cursor-zoom-in group-hover:scale-150"
+                onMouseMove={(e) => {
+                  const target = e.currentTarget;
+                  const rect = target.getBoundingClientRect();
+                  const x = ((e.clientX - rect.left) / rect.width) * 100;
+                  const y = ((e.clientY - rect.top) / rect.height) * 100;
+                  target.style.transformOrigin = `${x}% ${y}%`;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transformOrigin = 'center';
+                }}
+              />
+              {/* Navigation Arrows for Mobile Gallery */}
+              <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-4 pointer-events-none md:hidden">
+                <button
+                  onClick={(e) => { e.stopPropagation(); setActiveImageIndex(prev => (prev - 1 + selectedProduct.image.length) % selectedProduct.image.length) }}
+                  className="w-10 h-10 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/10 pointer-events-auto"
+                >
+                  ←
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setActiveImageIndex(prev => (prev + 1) % selectedProduct.image.length) }}
+                  className="w-10 h-10 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/10 pointer-events-auto"
+                >
+                  →
+                </button>
+              </div>
+            </div>
           </div>
 
           {/* Right: Detailed Info */}
-          <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-12 md:overflow-y-auto custom-scrollbar">
-            <div className="space-y-8 pb-10">
+          <div className="w-full md:w-1/2 p-6 sm:p-8 md:p-12 md:h-full md:overflow-y-auto custom-scrollbar bg-[#0A0F1F]">
+            <div className="flex-1 space-y-10 pb-32">
               <div>
                 <div className="flex items-center space-x-3 mb-4">
                   <span className="h-px w-6 bg-[#F9D976]/50" />
@@ -1044,18 +1076,19 @@ function ProductModal({ selectedProduct, onClose }: { selectedProduct: any; onCl
               </div>
 
 
-              {/* CTA Button */}
-              <div className="pt-4 sticky bottom-0 bg-[#1A1F2E] md:relative md:bg-transparent pb-4 md:pb-0">
-                <a
-                  href={`https://wa.me/${selectedProduct.category === 'gold' && selectedProduct.name.includes('Sticker') || selectedProduct.id >= 4 ? '919999865558' : '919811018728'}?text=${encodeURIComponent(`New Inquiry\n\nProduct: ${selectedProduct.name}\n\nI interested in this service. Please provide a quote.`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center w-full px-8 py-5 bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] text-[11px] font-black uppercase tracking-[0.3em] rounded-2xl shadow-xl shadow-[#F9D976]/10 hover:scale-[1.02] transition-all"
-                >
-                  Contact for Quick Quote
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </a>
-              </div>
+            </div>
+
+            {/* Floating Footer for CTA */}
+            <div className="sticky bottom-0 left-0 right-0 pt-6 pb-2 bg-[#0A0F1F] border-t border-white/5 mt-auto">
+              <a
+                href={`https://wa.me/${selectedProduct.category === 'gold' && selectedProduct.name.includes('Sticker') || selectedProduct.id >= 4 ? '919999865558' : '919811018728'}?text=${encodeURIComponent(`New Inquiry\n\nProduct: ${selectedProduct.name}\n\nI interested in this service. Please provide a quote.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-full px-8 py-5 bg-gradient-to-r from-[#F9D976] to-[#F39F23] text-[#0A0F1F] text-[11px] font-black uppercase tracking-[0.3em] rounded-2xl shadow-lg shadow-[#F9D976]/10 hover:brightness-110 active:scale-[0.98] transition-all"
+              >
+                Contact for Quick Quote
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </a>
             </div>
           </div>
         </div>
