@@ -38,7 +38,7 @@ export default function PreciousPlatingPage() {
             id: 1,
             name: 'Gold Plating',
             category: 'gold',
-            description: 'Gold plating is a premium electroplating process that coats metal surfaces with any number of layers of 24K gold. It enhances the product’s appearance while improving corrosion resistance, durability, and electrical performance. Ideal for luxury, industrial, and precision components that require both beauty and reliability.',
+            description: 'Gold plating is a premium electroplating process that coats metal surfaces with any number of microns of 24K gold. It enhances the product’s appearance while improving corrosion resistance, durability, and electrical performance. Ideal for luxury, industrial, and precision components that require both beauty and reliability.',
             image: ['/gold-plating.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp', '/gold-pcb-plating.webp'],
             specs: {
                 finish: '24K Gold Electroplating',
@@ -46,7 +46,7 @@ export default function PreciousPlatingPage() {
                 serviceLocation: 'Pan India',
                 paymentMode: 'Online/Offline',
             },
-            Application: ['Jewellery', 'Artificial Jewellery', 'Automobile Industry', 'Watch Parts', 'Electronics & Electrical Components', 'PTH', 'Printed Circuit Boards (PCBs)', 'Medical Equipments'],
+            Application: ['Electronics & Electrical Components', 'PTH', 'Printed Circuit Boards (PCBs)', 'Watch Industry', 'Medical Equipments', 'Automobile Industry', 'Jewellery', 'Artificial Jewellery',],
         },
         {
             id: 2,
@@ -86,7 +86,7 @@ export default function PreciousPlatingPage() {
 
     const handleWhatsAppOrder = (product: typeof products[0]) => {
         const message = encodeURIComponent(
-            `New Inquiry for Precious Plating\n\n` +
+            `New Inquiry for Precious Metal Plating\n\n` +
             `Service: ${product.name}\n` +
             `Category: ${product.category}\n` +
             `Description: ${product.description}\n\n` +
@@ -98,7 +98,7 @@ export default function PreciousPlatingPage() {
     return (
         <div className="min-h-screen bg-[#0A0F1F] pt-32 pb-20 px-6 font-sans overflow-x-hidden">
             <Helmet>
-                <title>Precious Plating Services | Metal Stickers India</title>
+                <title>Precious Metal Plating Services | Metal Stickers India</title>
                 <meta name="description" content="Premium gold, silver, and nickel chrome electroplating services for industrial and retail excellence." />
             </Helmet>
             <div className="max-w-7xl mx-auto">
@@ -111,7 +111,7 @@ export default function PreciousPlatingPage() {
                                 opacity: headerInView ? 0.05 : 0
                             }}
                         >
-                            PRECIOUS PLATING PRECIOUS PLATING
+                            PRECIOUS METAL PLATING PRECIOUS METAL PLATING
                         </span>
                     </div>
 
@@ -125,7 +125,7 @@ export default function PreciousPlatingPage() {
                                 opacity: headerInView ? 1 : 0
                             }}
                         >
-                            Precious <span className="text-[#F9D976]">Plating</span>
+                            Precious Metal <span className="text-[#F9D976]">Plating</span>
                         </h1>
                     </div>
 

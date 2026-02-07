@@ -200,10 +200,10 @@ export default function ContactPage() {
                       </a>
                     </div>
 
-                    {/* Precious Plating Orders */}
+                    {/* Precious Metal Plating Orders */}
                     <div className="space-y-4 pt-4 border-t border-white/5">
                       <div className="flex items-center justify-between border-b border-white/5 pb-2">
-                        <h3 className="text-sm font-black text-[#F9D976] uppercase tracking-[0.2em]">Precious Plating Orders</h3>
+                        <h3 className="text-sm font-black text-[#F9D976] uppercase tracking-[0.2em]">Precious Metal Plating Orders</h3>
                       </div>
                       <a href="tel:+919811018728" className="flex items-center space-x-4 group/item">
                         <div className="w-10 h-10 rounded-none bg-amber-500/20 flex items-center justify-center border border-amber-500/30 group-hover/item:bg-amber-500 group-hover/item:text-white transition-all">

@@ -168,7 +168,7 @@ export default function HomePage() {
       id: 201,
       name: 'Gold Plating',
       category: 'gold',
-      description: 'Gold plating is a premium electroplating process that coats metal surfaces with any number of layers of 24K gold. It enhances the product’s appearance while improving corrosion resistance, durability, and electrical performance. Ideal for luxury, industrial, and precision components that require both beauty and reliability.',
+      description: 'Gold plating is a premium electroplating process that coats metal surfaces with any number of micronsof 24K gold. It enhances the product’s appearance while improving corrosion resistance, durability, and electrical performance. Ideal for luxury, industrial, and precision components that require both beauty and reliability.',
       image: ['gold-plating.webp', '/gold-pcb-plating.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp'],
       specs: {
         finish: '24K Gold Electroplating',
@@ -176,7 +176,7 @@ export default function HomePage() {
         paymentMode: 'Online/Offline',
         benefits: 'Corrosion Resistance | High Durability | Aesthetic Appeal | Cost-Effective',
       },
-      Application: ['Jewellery', 'Artificial Jewellery', 'Automobile Industry', 'Watch Parts', 'Electronics & Electrical Components', 'PTH', 'Printed Circuit Boards (PCBs)', 'Medical Equipments'],
+      Application: ['Electronics & Electrical Components', 'PTH', 'Printed Circuit Boards (PCBs)', 'Watch Industry', 'Medical Equipments', 'Automobile Industry', 'Jewellery', 'Artificial Jewellery'],
     },
     {
       id: 202,
@@ -479,7 +479,7 @@ export default function HomePage() {
             Premium Metal Stickers &
             <br />
             <span className="bg-gradient-to-r from-[#F9D976] via-[#F6C453] to-[#F39F23] bg-clip-text text-transparent font-medium drop-shadow-sm">
-              Precious Plating Solutions
+              Precious Metal Plating
             </span>
           </h1>
 
@@ -596,10 +596,10 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Section 2: Precious Plating */}
+          {/* Section 2: Precious Metal Plating */}
           <div>
             <h3 className="text-3xl font-bold text-white mb-12 text-center border-b border-white/10 pb-6">
-              <span className="text-[#F9D976]">02.</span> Precious Plating Services
+              <span className="text-[#F9D976]">02.</span> Precious Metal Plating Services
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {platingProducts.map((product, index) => (

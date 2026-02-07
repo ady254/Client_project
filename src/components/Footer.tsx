@@ -29,7 +29,7 @@ export default function Footer() {
                                 </div>
                             </Link>
                             <p className="text-[13px] text-gray-400 font-medium leading-relaxed">
-                                India's premier manufacturer of high-end electroplated metal stickers and precious plating solutions.
+                                India's premier manufacturer of high-end electroplated metal stickers and precious metal plating solutions.
                             </p>
                         </div>
                     </div>
@@ -44,7 +44,7 @@ export default function Footer() {
                             {[
                                 { name: 'Home', path: '/' },
                                 { name: 'Metal Stickers', path: '/metal-stickers' },
-                                { name: 'Precious Plating', path: '/precious-plating' },
+                                { name: 'Precious Metal Plating', path: '/precious-plating' },
                                 { name: 'About Us', path: '/about' },
                                 { name: 'Contact', path: '/contact' }
                             ].map((link) => (
@@ -89,7 +89,7 @@ export default function Footer() {
 
                             {/* Plating Contact */}
                             <div className="p-3 rounded-xl bg-white/5 border border-white/10 hover:border-[#F9D976]/30 transition-colors group">
-                                <p className="text-[10px] font-black text-[#F9D976] uppercase tracking-[0.2em] mb-1.5">Precious Plating</p>
+                                <p className="text-[10px] font-black text-[#F9D976] uppercase tracking-[0.2em] mb-1.5">Precious Metal Plating</p>
                                 <div className="space-y-1.5">
                                     <a href="tel:+919811018728" className="flex items-center gap-2.5 text-gray-300 hover:text-white transition-colors">
                                         <div className="w-6 h-6 rounded-full bg-[#F9D976]/10 flex items-center justify-center text-[#F9D976] group-hover:bg-[#F9D976] group-hover:text-[#0A0F1F] transition-all">
