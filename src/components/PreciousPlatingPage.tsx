@@ -53,7 +53,7 @@ export default function PreciousPlatingPage() {
             name: 'Silver Plating',
             category: 'silver',
             description: 'Silver plating is a metal finishing process where a thin layer of silver is applied to a surface to improve conductivity, corrosion resistance, and appearance. It provides a clean, bright finish and is widely used in electronics, industrial components, decorative items, and precision parts where performance and reliability are important.',
-            image: ['/silver_plating1.webp', '/silver_plating.webp'],
+            image: ['/silver_plating1.webp', '/silver_plating.webp', '/silver-plating-contact.webp'],
             specs: {
                 platingThickness: 'As per requirements',
                 Benefits: ['Electrical Conductivity', 'High Durability', 'Corrosion Resistance'],
