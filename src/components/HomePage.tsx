@@ -168,7 +168,7 @@ export default function HomePage() {
       id: 201,
       name: 'Gold Plating',
       category: 'gold',
-      description: 'Gold plating is a premium electroplating process that coats metal surfaces with any number of micronsof 24K gold. It enhances the product’s appearance while improving corrosion resistance, durability, and electrical performance. Ideal for luxury, industrial, and precision components that require both beauty and reliability.',
+      description: 'Gold plating is a premium electroplating process that coats metal surfaces with any number of microns of 24K gold. It enhances the product’s appearance while improving corrosion resistance, durability, and electrical performance. Ideal for luxury, industrial, and precision components that require both beauty and reliability.',
       image: ['gold-plating.webp', '/gold-pcb-plating.webp', '/24k-gold-plating-jewellery-ring-sticker.webp', '/24k-gold-plating-watch-branding-sticker.webp'],
       specs: {
         finish: '24K Gold Electroplating',
@@ -964,11 +964,11 @@ function ProductModal({ selectedProduct, onClose }: { selectedProduct: any; onCl
 
           {/* Left: Image Showcase */}
           <div className="w-full md:w-1/2 p-4 sm:p-8 flex flex-col items-center justify-start md:justify-center border-b md:border-b-0 md:border-r border-white/10 bg-white/5 md:overflow-y-auto">
-            <div className="aspect-square w-full max-w-[300px] md:max-w-none flex items-center justify-center bg-[#0A0F1F]/40 rounded-3xl border border-white/5 p-8 relative group">
+            <div className="w-full h-full flex items-center justify-center bg-[#0A0F1F]/40 rounded-3xl border border-white/5 p-4 sm:p-8 relative group min-h-[300px]">
               <img
                 src={selectedProduct.image[activeImageIndex]}
                 alt={selectedProduct.name}
-                className="w-auto h-auto max-w-full max-h-[60vh] md:max-h-[70vh] object-contain mx-auto drop-shadow-[0_0_30px_rgba(249,217,118,0.2)]"
+                className="w-auto h-auto max-w-full max-h-[50vh] md:max-h-[80vh] object-contain mx-auto drop-shadow-[0_0_30px_rgba(249,217,118,0.2)]"
               />
             </div>
             {selectedProduct.image.length > 1 && (

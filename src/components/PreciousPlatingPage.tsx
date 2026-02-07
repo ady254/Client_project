@@ -231,11 +231,11 @@ export default function PreciousPlatingPage() {
 
                         <div className="flex flex-col md:flex-row w-full h-full overflow-y-auto md:overflow-hidden">
                             <div className="w-full md:w-1/2 bg-white/5 p-8 flex flex-col md:h-full md:overflow-y-auto border-b md:border-b-0 md:border-r border-white/10">
-                                <div className="flex-1 flex items-center justify-center p-4 min-h-[300px]">
+                                <div className="flex-1 flex items-center justify-center p-4 min-h-[300px] w-full">
                                     <img
                                         src={selectedProduct.image[activeImageIndex]}
                                         alt={selectedProduct.name}
-                                        className="w-auto h-auto max-w-full max-h-[60vh] md:max-h-[70vh] object-contain mx-auto"
+                                        className="w-auto h-auto max-w-full max-h-[50vh] md:max-h-[80vh] object-contain mx-auto"
                                     />
                                 </div>
                                 {selectedProduct.image.length > 1 && (
