@@ -61,7 +61,7 @@ export default function PreciousPlatingPage() {
                 serviceLocation: 'Pan India',
                 paymentMode: 'Online/Offline',
             },
-            Application: ['Electronics & Electrical Components', 'PTH', 'Printed Circuit Boards (PCBs)', 'Watch Industry', 'Medical Equipments', 'Automobile Industry', 'Jewellery', 'Artificial Jewellery',],
+            Application: ['Electronics & Electrical Components', 'PTH Boards', 'Printed Circuit Boards (PCBs)', 'Watch Industry', 'Medical Equipments', 'Automobile Industry', 'Jewellery', 'Artificial Jewellery',],
         },
         {
             id: 2,

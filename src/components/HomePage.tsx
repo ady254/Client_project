@@ -176,7 +176,7 @@ export default function HomePage() {
         paymentMode: 'Online/Offline',
         benefits: 'Corrosion Resistance | High Durability | Aesthetic Appeal | Cost-Effective',
       },
-      Application: ['Electronics & Electrical Components', 'PTH', 'Printed Circuit Boards (PCBs)', 'Watch Industry', 'Medical Equipments', 'Automobile Industry', 'Jewellery', 'Artificial Jewellery'],
+      Application: ['Electronics & Electrical Components', 'PTH Boards', 'Printed Circuit Boards (PCBs)', 'Watch Industry', 'Medical Equipments', 'Automobile Industry', 'Jewellery', 'Artificial Jewellery'],
     },
     {
       id: 202,
