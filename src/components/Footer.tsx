@@ -1,6 +1,6 @@
 
 
-import { ArrowRight, ExternalLink, Instagram, Linkedin, Mail, MapPin, MessageCircle, Phone, ShieldCheck, Youtube } from "lucide-react";
+import { ArrowRight, ExternalLink, Instagram, Mail, MapPin, MessageCircle, Phone, ShieldCheck, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Footer() {
@@ -148,7 +148,7 @@ export default function Footer() {
                             <div className="flex items-center gap-2 pt-0.5">
                                 {[
                                     { icon: <Instagram size={14} />, url: "https://www.instagram.com/metalstickersindia/", color: "text-[#E4405F]" },
-                                    { icon: <Linkedin size={14} />, url: "https://linkedin.com", color: "text-[#0077B5]" },
+                                    // { icon: <Linkedin size={14} />, url: "https://linkedin.com", color: "text-[#0077B5]" },
                                     { icon: <MessageCircle size={14} />, url: "https://wa.me/919999865558", color: "text-[#25D366]" },
                                     { icon: <Youtube size={14} />, url: "https://www.youtube.com/@METALSTICKERSFACTORYFARIDABAD", color: "text-[#FF0000]" }
                                 ].map((social, i) => (
