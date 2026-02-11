@@ -150,7 +150,7 @@ export default function Footer() {
                                     { icon: <Instagram size={14} />, url: "https://www.instagram.com/metalstickersindia/", color: "text-[#E4405F]" },
                                     // { icon: <Linkedin size={14} />, url: "https://linkedin.com", color: "text-[#0077B5]" },
                                     { icon: <MessageCircle size={14} />, url: "https://wa.me/919999865558", color: "text-[#25D366]" },
-                                    { icon: <Youtube size={14} />, url: "https://www.youtube.com/@METALSTICKERSFACTORYFARIDABAD", color: "text-[#FF0000]" }
+                                    { icon: <Youtube size={14} />, url: "https://www.youtube.com/@MetalStickersIndiaOfficial", color: "text-[#FF0000]" }
                                 ].map((social, i) => (
                                     <a
                                         key={i}
