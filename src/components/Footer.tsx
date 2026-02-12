@@ -141,7 +141,7 @@ export default function Footer() {
                                 <MapPin size={14} className="text-[#F9D976] shrink-0" />
                                 <p className="text-gray-400 text-[11px] font-medium leading-tight">
                                     11/7 New Anangpur, Sector 37<br />
-                                    Badarpur, Faridabad, Haryana 121003
+                                    Badarpur, Faridabad, Haryana 121003, India
                                 </p>
                             </div>
 
